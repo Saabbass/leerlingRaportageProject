@@ -1,5 +1,5 @@
 <head>
-  <title>NovaCollege</title>
+  <title>EduTrack</title>
 </head>
 
 <x-app-layout>
