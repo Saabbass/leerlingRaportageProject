@@ -19,7 +19,7 @@
     @vite(['public/css/styles.css', 'public/assets/js/themeSwitch.js'])
   </head>
 
-  <body class="font-sans antialiased dark">
+  <body class="font-sans antialiased light">
       <div class="">
       @include('layouts.navigation')
 
