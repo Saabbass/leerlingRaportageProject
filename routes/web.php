@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\AttendanceController;
+use App\Http\Controllers\GradesController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SubjectController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -17,4 +20,12 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+Route::middleware('auth')->group(function () {
+    Route::get('/attendance', [AttendanceController::class, 'index'])->name('attendance.index');
+});
+
+Route::middleware('auth')->group(function () {
+    Route::get('/subject', [SubjectController::class, 'index'])->name('subject.index');
+});
+
+require __DIR__ . '/auth.php';
