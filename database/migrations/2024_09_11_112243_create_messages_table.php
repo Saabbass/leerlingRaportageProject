@@ -11,9 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('messages', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+        Schema::create('announcements', function (Blueprint $table) {
+            $table->id(); // Primary key for the announcements table
+            $table->unsignedBigInteger('user_id'); // ID of the user who created the announcement
+            $table->string('title'); // Title of the announcement
+            $table->text('content'); // Content of the announcement
+            $table->timestamp('announcement_date'); // Date and time when the announcement was made
+            $table->timestamps(); // Created at and updated at timestamps
+
+            // Foreign key constraint
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
@@ -22,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('messages');
+        Schema::dropIfExists('announcements');
     }
 };

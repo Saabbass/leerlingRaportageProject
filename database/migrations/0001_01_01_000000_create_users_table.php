@@ -11,6 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
+        // Create the 'users' table first
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
@@ -21,12 +22,28 @@ return new class extends Migration
             $table->timestamps();
         });
 
+       
+
+        // Modify the existing 'users' table to include additional fields
+        Schema::table('users', function (Blueprint $table) {
+            $table->string('first_name')->after('name');
+            $table->string('last_name')->after('first_name');
+            $table->date('date_of_birth')->nullable()->after('password');
+            $table->string('address')->nullable()->after('date_of_birth');
+            $table->unsignedBigInteger('role_id')->after('address');
+
+            // Foreign key constraint for role_id
+            $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
+        });
+
+        // Create the 'password_reset_tokens' table
         Schema::create('password_reset_tokens', function (Blueprint $table) {
             $table->string('email')->primary();
             $table->string('token');
             $table->timestamp('created_at')->nullable();
         });
 
+        // Create the 'sessions' table
         Schema::create('sessions', function (Blueprint $table) {
             $table->string('id')->primary();
             $table->foreignId('user_id')->nullable()->index();
@@ -42,8 +59,22 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
-        Schema::dropIfExists('password_reset_tokens');
+        // Drop the 'sessions' table first
         Schema::dropIfExists('sessions');
+
+        // Drop the 'password_reset_tokens' table
+        Schema::dropIfExists('password_reset_tokens');
+
+        // Drop the 'roles' table
+        Schema::dropIfExists('roles');
+
+        // Revert changes to the 'users' table
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropForeign(['role_id']);
+            $table->dropColumn(['first_name', 'last_name', 'date_of_birth', 'address', 'role_id']);
+        });
+
+        // Drop the 'users' table
+        Schema::dropIfExists('users');
     }
 };

@@ -13,12 +13,13 @@ return new class extends Migration
     {
         Schema::create('class_schools', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade'); // Foreign key to 'users' table
-            $table->foreignId('grade_id')->constrained()->onDelete('cascade'); // Foreign key to 'grades' table
+            $table->foreignId('teacher_id')->constrained('users')->onDelete('cascade'); // Foreign key to 'users' table (teachers)
             $table->string('class_name');
             $table->date('start_date');
             $table->timestamps();
         });
+
+        // You may want to define additional tables like 'grades' here if they don't already exist.
     }
 
     /**
