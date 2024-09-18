@@ -14,7 +14,7 @@ return new class extends Migration
         // Create the 'users' table first
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name'); // Ensure this line is not duplicated
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
@@ -24,17 +24,7 @@ return new class extends Migration
 
        
 
-        // Modify the existing 'users' table to include additional fields
-        Schema::table('users', function (Blueprint $table) {
-            $table->string('first_name')->after('name');
-            $table->string('last_name')->after('first_name');
-            $table->date('date_of_birth')->nullable()->after('password');
-            $table->string('address')->nullable()->after('date_of_birth');
-            $table->unsignedBigInteger('role_id')->after('address');
-
-            // Foreign key constraint for role_id
-            $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
-        });
+   
 
         // Create the 'password_reset_tokens' table
         Schema::create('password_reset_tokens', function (Blueprint $table) {
