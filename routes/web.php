@@ -26,6 +26,11 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('/subject', [SubjectController::class, 'index'])->name('subject.index');
+    Route::get('/subject/create', [SubjectController::class, 'create'])->name('subject.create');
+    Route::post('/subject', [SubjectController::class, 'store'])->name('subject.store');
+    Route::get('/subject/{id}/edit', [SubjectController::class, 'edit'])->name('subject.edit');
+    Route::patch('/subject/{id}', [SubjectController::class, 'update'])->name('subject.update');
+    Route::delete('/subject/{id}', [SubjectController::class, 'destroy'])->name('subject.destroy');
 });
 
 require __DIR__ . '/auth.php';
