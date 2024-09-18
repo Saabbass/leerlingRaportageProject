@@ -23,6 +23,14 @@ Route::middleware('auth')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::get('/attendance', [AttendanceController::class, 'index'])->name('attendance.index');
 });
+Route::middleware('auth')->group(function () {
+    Route::get('/grades', [GradesController::class, 'index'])->name('grades.index');
+    Route::get('/grades/create', [GradesController::class, 'create'])->name('grades.create');
+    Route::post('/grades', [GradesController::class, 'store'])->name('grades.store');
+    Route::get('/grades/{id}/edit', [GradesController::class, 'edit'])->name('grades.edit');
+    Route::patch('/grades/{id}', [GradesController::class, 'update'])->name('grades.update');
+    Route::delete('/grades/{id}', [GradesController::class, 'destroy'])->name('grades.destroy');
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/subject', [SubjectController::class, 'index'])->name('subject.index');

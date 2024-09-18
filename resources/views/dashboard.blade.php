@@ -13,7 +13,10 @@
                 </div>
             </div>
             <div class="mt-6">
-                <a href="{{ route('subject.index') }}" class="text-blue-500 hover:underline">Subjects</a>
+                <ul class="list-disc list-inside">
+                    <li><a href="{{ route('subject.index') }}" class="text-blue-500 hover:underline">Subjects</a></li>
+                    <li><a href="{{ route('grades.index') }}" class="text-blue-500 hover:underline">Grades</a></li>
+                </ul>
             </div>
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg mt-6">
                 <div class="p-6 text-gray-900">
