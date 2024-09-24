@@ -13,6 +13,7 @@ class CreateGradesTable extends Migration
             $table->unsignedBigInteger('user_id'); // Foreign key to users table
             $table->unsignedBigInteger('subject_id'); // Foreign key to subjects table
             $table->string('assignment_name', 100);
+            $table->text('description'); // Added description field
             $table->string('grade', 10);
             $table->date('date');
 

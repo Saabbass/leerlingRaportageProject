@@ -12,14 +12,16 @@ class GradesController extends Controller
     public function index()
     {
         $grades = Grades::all();
-        return view('grades.index', compact('grades'));
+        $subjects = Subject::select('id', 'subject_name')->get(); // Fetch all subjects
+        $users = User::select('id', 'name')->get(); // Fetch all users
+        return view('grades.index', compact('grades', 'subjects', 'users'));
     }
 
     public function create()
     {
-        $subjects = Subject::select('id', 'subject_name')->get(); // Fetch all subjects with id and subject_name
-        $users = User::select('id', 'name')->get(); // Fetch all users with id and name
-        return view('grades.create', compact('subjects', 'users')); // Pass subjects and users to the view
+        $subjects = Subject::select('id', 'subject_name')->get(); // Fetch all subjects
+        $users = User::select('id', 'name')->get(); // Fetch all users
+        return view('grades.create', compact('subjects', 'users'));
     }
 
     public function store(Request $request)
@@ -28,19 +30,19 @@ class GradesController extends Controller
             'user_id' => 'required|exists:users,id',
             'subject_id' => 'required|exists:subjects,id',
             'assignment_name' => 'required|string|max:255',
-            'grade' => 'required|numeric|min:0|max:100', // Ensure 'grade' is required and numeric between 0 and 100
-            'date' => 'required|date', // Ensure 'date' is required and a valid date
+            'grade' => 'required|numeric|min:0|max:100',
+            'date' => 'required|date',
             'description' => 'nullable|string',
         ]);
 
-        Grades::create([
-            'user_id' => $request->user_id,
-            'subject_id' => $request->subject_id,
-            'assignment_name' => $request->assignment_name,
-            'grade' => $request->grade, // Store the 'grade'
-            'date' => $request->date, // Store the 'date'
-            'description' => $request->description,
-        ]);
+        $grade = new Grades();
+        $grade->user_id = $request->input('user_id');
+        $grade->subject_id = $request->input('subject_id');
+        $grade->assignment_name = $request->input('assignment_name');
+        $grade->grade = $request->input('grade');
+        $grade->date = $request->input('date');
+        $grade->description = $request->input('description');
+        $grade->save();
 
         return redirect()->route('grades.index')->with('success', 'Grade created successfully.');
     }

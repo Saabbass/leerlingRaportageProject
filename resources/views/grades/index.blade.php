@@ -19,8 +19,10 @@
                         @foreach ($grades as $grade)
                             <div class="flex justify-between items-center border-b py-2">
                                 <div>
-                                    <span>{{ $grade->grade_name }}</span>
-                                    <p>{{ $grade->description }}</p>
+                                    <span>{{ $grade->assignment_name }}</span>
+                                    <p>{{ $subjects->firstWhere('id', $grade->subject_id)->subject_name }}</p>
+                                    <p>{{ __('Grade: ') }}{{ $grade->grade }}</p>
+                                    <p>{{ __('Date: ') }}{{ $grade->date }}</p>
                                 </div>
                                 <div class="flex space-x-4">
                                     <a href="{{ route('grades.edit', $grade->id) }}" class="text-blue-500 hover:underline">

@@ -14,17 +14,15 @@ return new class extends Migration
         // Create the 'users' table first
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name'); // Ensure this line is not duplicated
+            $table->string('first_name'); // Ensure this line is present
+            $table->string('last_name');  // Ensure this line is present
+            $table->integer('age');       // Ensure this line is present
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
         });
-
-       
-
-   
 
         // Create the 'password_reset_tokens' table
         Schema::create('password_reset_tokens', function (Blueprint $table) {
@@ -54,15 +52,6 @@ return new class extends Migration
 
         // Drop the 'password_reset_tokens' table
         Schema::dropIfExists('password_reset_tokens');
-
-        // Drop the 'roles' table
-        Schema::dropIfExists('roles');
-
-        // Revert changes to the 'users' table
-        Schema::table('users', function (Blueprint $table) {
-            $table->dropForeign(['role_id']);
-            $table->dropColumn(['first_name', 'last_name', 'date_of_birth', 'address', 'role_id']);
-        });
 
         // Drop the 'users' table
         Schema::dropIfExists('users');
