@@ -11,9 +11,26 @@ use Illuminate\View\View;
 
 class ProfileController extends Controller
 {
+    
     /**
-     * Display the user's profile form.
+     * Update the user's role.
      */
+    public function updateRole(Request $request): RedirectResponse
+    {
+        $request->validate([
+            'role' => ['required', 'string', 'max:255'],
+        ]);
+
+        $user = $request->user();
+        $user->role = $request->input('role');
+        $user->save();
+
+        return Redirect::route('profile.edit')->with('status', 'role-updated');
+    }
+
+
+
+    
     public function edit(Request $request): View
     {
         return view('profile.edit', [
