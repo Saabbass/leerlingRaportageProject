@@ -16,7 +16,7 @@ class CreateAttendancesTable extends Migration
             $table->unsignedBigInteger('user_id'); // Foreign key to users table
             $table->unsignedBigInteger('subject_id'); // Foreign key to subjects table
             $table->date('date');
-            $table->string('status', 10); // Status can be "present" or "absent"
+            $table->string('status', 10); // Status can be "present", "absent", or "late"
             $table->string('reason', 255)->nullable(); // Reason for attendance status
 
             // Define foreign key constraints

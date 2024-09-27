@@ -27,7 +27,7 @@ class SubjectSeeder extends Seeder
         foreach ($subjects as $subject) {
             DB::table('subjects')->insert([
                 'subject_name' => $subject,
-                'description' => 'Random description for ' . $subject,
+                'description' => 'het vak ' . $subject,
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);

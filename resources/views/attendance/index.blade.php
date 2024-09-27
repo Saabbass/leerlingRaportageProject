@@ -31,6 +31,9 @@
                                 <th scope="col" class="px-4 py-2 bg-gray-50 text-left text-sm font-medium text-gray-600">
                                     {{ __('Status') }}
                                 </th>
+                                <th scope="col" class="px-4 py-2 bg-gray-50 text-left text-sm font-medium text-gray-600">
+                                    {{ __('Acties') }}
+                                </th>
                             </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200">
@@ -47,6 +50,18 @@
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                                         {{ $attendance->status }}
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                        <a href="{{ route('attendance.edit', $attendance->id) }}" class="text-indigo-600 hover:text-indigo-900">
+                                            {{ __('Edit') }}
+                                        </a>
+                                        <form action="{{ route('attendance.destroy', $attendance->id) }}" method="POST" class="inline">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="text-red-600 hover:text-red-900 ml-2">
+                                                {{ __('Delete') }}
+                                            </button>
+                                        </form>
                                     </td>
                                 </tr>
                             @endforeach

@@ -18,8 +18,10 @@
                                     <option value="{{ $user->id }}">{{ $user->first_name }} {{ $user->last_name }}</option>
                                 @endforeach
                             </select>
+                        </div>
 
-                            <label for="subject_id" class="block text-sm font-medium text-gray-700 mt-4">{{ __('Subject') }}</label>
+                        <div class="mb-4">
+                            <label for="subject_id" class="block text-sm font-medium text-gray-700">{{ __('Subject') }}</label>
                             <select id="subject_id" name="subject_id" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
                                 @foreach($subjects as $subject)
                                     <option value="{{ $subject->id }}">{{ $subject->subject_name }}</option>
@@ -34,7 +36,7 @@
 
                         <div class="mb-4">
                             <label for="reason" class="block text-sm font-medium text-gray-700">{{ __('Reason') }}</label>
-                            <input type="text" id="reason" name="reason" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                            <textarea id="reason" name="reason" rows="3" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"></textarea>
                         </div>
 
                         <div class="mb-4">
@@ -42,6 +44,7 @@
                             <select id="status" name="status" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
                                 <option value="present">{{ __('Present') }}</option>
                                 <option value="absent">{{ __('Absent') }}</option>
+                                <option value="late">{{ __('Late') }}</option>
                             </select>
                         </div>
 

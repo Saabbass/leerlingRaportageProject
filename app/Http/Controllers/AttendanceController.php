@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 
 
+
 class AttendanceController extends Controller
 {
     public function index()
@@ -45,6 +46,12 @@ class AttendanceController extends Controller
     }
     public function edit($id)
     {
+        $attendance = Attendance::findOrFail($id);
+        $users = User::select('id', 'first_name', 'last_name')->get(); // Fetch all users for editing
+        $subjects = Subject::select('id', 'subject_name')->get(); // Fetch all subjects for editing
+        return view('attendance.edit', compact('attendance', 'users', 'subjects'));
+    
+    
         $attendance = Attendance::findOrFail($id);
         $users = User::select('id', 'name')->get(); // Fetch all users for editing
         return view('attendance.edit', compact('attendance', 'users'));
