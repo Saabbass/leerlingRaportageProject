@@ -25,13 +25,22 @@ class DatabaseSeeder extends Seeder
             'role' => 'teacher'
         ]);
 
-        User::factory()->create([
+        $student = User::factory()->create([
             'first_name' => 'Jane',
             'last_name' => 'Smith',
             'age' => 22,
             'email' => 'student@example.com',
             'password' => Hash::make('password'),
             'role' => 'student'
+        ]);
+
+        User::factory()->create([
+            'first_name' => 'Mary',
+            'last_name' => 'Smith',
+            'age' => 45,
+            'email' => 'parent@example.com',
+            'password' => Hash::make('password'),
+            'role' => 'parent'
         ]);
 
         $this->call(SubjectSeeder::class);
