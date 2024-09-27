@@ -1,14 +1,19 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h2 class="font-semibold text-xl text-[#333333] dark:text-[#E0E0E0] leading-tight">
             {{ __('Grades') }}
         </h2>
     </x-slot>
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
+            <div class="bg-[#79b5ff] dark:bg-[#263238] overflow-hidden shadow-sm sm:rounded-lg mt-6">
+                <div class="p-6 flex flex-wrap justify-evenly gap-1 text-[#333333] dark:text-[#FFC107] bg-[#C8E6C9] dark:bg-[#2E3B4E]">
+                  <a href="{{ route('subject.index') }}" class="hover:underline rounded-xl">Subjects</a>
+                  <a href="{{ route('grades.index') }}" class="hover:underline rounded-xl">Grades</a>
+                  <a href="{{ route('attendance.index') }}" class="hover:underline rounded-xl">attendance</a>
+                </div>
+                <div class="p-6 text-[#333333] dark:text-[#E0E0E0]">
                     <div class="flex justify-between items-center mb-6">
                         <h3 class="text-lg font-semibold">{{ __('Grade List') }}</h3>
                         <a href="{{ route('grades.create') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">

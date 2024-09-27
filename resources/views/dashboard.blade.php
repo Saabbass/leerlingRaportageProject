@@ -1,36 +1,59 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
-    </x-slot>
+  <x-slot name="header">
+    <h2 class="font-semibold text-xl text-[#333333] dark:text-[#E0E0E0] leading-tight">
+      {{ __('Dashboard') }}
+    </h2>
+  </x-slot>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
-                    {{ __("You're logged in!") }}
-                </div>
-            </div>
-            <div class="mt-6">
-                <ul class="list-disc list-inside">
-                    <li><a href="{{ route('subject.index') }}" class="text-blue-500 hover:underline">Subjects</a></li>
-                    <li><a href="{{ route('grades.index') }}" class="text-blue-500 hover:underline">Grades</a></li>
-                    <li><a href="{{ route('attendance.index') }}" class="text-blue-500 hover:underline">attendance</a></li>
-                </ul>
-            </div>
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg mt-6">
-                <div class="p-6 text-gray-900">
-                    <h3 class="font-semibold text-lg text-gray-800 leading-tight">
-                        {{ __('Agenda') }}
-                    </h3>
-                    <ul class="mt-4">
-                        <li>{{ __('Event 1: Meeting with team at 10 AM') }}</li>
-                        <li>{{ __('Event 2: Project deadline at 3 PM') }}</li>
-                        <li>{{ __('Event 3: Call with client at 5 PM') }}</li>
-                    </ul>
-                </div>
-            </div>
+  <div class="py-12">
+    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+      <div class="bg-[#79b5ff] dark:bg-[#263238] overflow-hidden shadow-sm sm:rounded-lg">
+        <div class="p-6 text-[#333333] dark:text-[#E0E0E0]">
+          {{ __("You're logged in!") }}
         </div>
+      </div>
+      <div class="bg-[#79b5ff] dark:bg-[#263238] overflow-hidden shadow-sm sm:rounded-lg mt-6">
+        <div class="p-6 flex flex-wrap justify-evenly gap-1 text-[#333333] dark:text-[#FFC107] bg-[#C8E6C9] dark:bg-[#2E3B4E]">
+          <a href="{{ route('subject.index') }}" class="hover:underline rounded-xl">Subjects</a>
+          <a href="{{ route('grades.index') }}" class="hover:underline rounded-xl">Grades</a>
+          <a href="{{ route('attendance.index') }}" class="hover:underline rounded-xl">attendance</a>
+        </div>
+
+
+        <div class="p-6 text-[#333333] dark:text-[#E0E0E0]">
+          <h3 class="font-semibold text-lg text-[#333333] dark:text-[#E0E0E0] leading-tight">
+            {{ __('Agenda') }}
+          </h3>
+          <ul class="mt-4">
+            <li>{{ __('Event 1: Meeting with team at 10 AM') }}</li>
+            <li>{{ __('Event 2: Project deadline at 3 PM') }}</li>
+            <li>{{ __('Event 3: Call with client at 5 PM') }}</li>
+          </ul>
+        </div>
+
+        <div class="p-6 text-[#333333] dark:text-[#E0E0E0]">
+          <div id='calendar'></div>
+        </div>
+      </div>
     </div>
+  </div>
+  @push('scripts')
+    {{-- <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script> --}}
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js'></script>
+    {{-- <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/main.min.js"></script> --}}
+    <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.15/index.global.min.js'></script>
+    <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@6.1.15/index.global.min.js'></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('calendar');
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+          initialView: 'dayGridWeek',
+          slotMinTime: '1:00:00',
+          slotMaxTime: '23:00:00',
+          events: @json($events),
+        });
+        calendar.render();
+      });
+    </script>
+  @endpush
 </x-app-layout>
