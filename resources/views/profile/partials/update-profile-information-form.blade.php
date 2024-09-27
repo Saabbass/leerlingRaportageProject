@@ -34,11 +34,7 @@
         </div>
     </form>
 
-    <div>
-        <x-input-label for="role" :value="__('Current Role')" />
-        <x-text-input id="role" name="role" type="text" class="mt-1 block w-full" :value="old('role', $user->role)" required autofocus autocomplete="role" />
-        <x-input-error class="mt-2" :messages="$errors->get('role')" />
-    </div>
+   
 
     <form id="send-verification" method="post" action="{{ route('verification.send') }}">
         @csrf
