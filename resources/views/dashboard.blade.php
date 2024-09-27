@@ -20,7 +20,7 @@
         </div>
 
 
-        <div class="p-6 text-[#333333] dark:text-[#E0E0E0]">
+        {{-- <div class="p-6 text-[#333333] dark:text-[#E0E0E0]">
           <h3 class="font-semibold text-lg text-[#333333] dark:text-[#E0E0E0] leading-tight">
             {{ __('Agenda') }}
           </h3>
@@ -29,7 +29,7 @@
             <li>{{ __('Event 2: Project deadline at 3 PM') }}</li>
             <li>{{ __('Event 3: Call with client at 5 PM') }}</li>
           </ul>
-        </div>
+        </div> --}}
 
         <div class="p-6 text-[#333333] dark:text-[#E0E0E0]">
           <div id='calendar'></div>
