@@ -31,6 +31,14 @@ Route::middleware('auth')->group(function () {
     Route::patch('/grades/{id}', [GradesController::class, 'update'])->name('grades.update');
     Route::delete('/grades/{id}', [GradesController::class, 'destroy'])->name('grades.destroy');
 });
+Route::middleware('auth')->group(function () {
+    Route::get('/attendance', [AttendanceController::class, 'index'])->name('attendance.index');
+    Route::get('/attendance/create', [AttendanceController::class, 'create'])->name('attendance.create');
+    Route::post('/attendance', [AttendanceController::class, 'store'])->name('attendance.store');
+    Route::get('/attendance/{id}/edit', [AttendanceController::class, 'edit'])->name('attendance.edit');
+    Route::patch('/attendance/{id}', [AttendanceController::class, 'update'])->name('attendance.update');
+    Route::delete('/attendance/{id}', [AttendanceController::class, 'destroy'])->name('attendance.destroy');
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/subject', [SubjectController::class, 'index'])->name('subject.index');

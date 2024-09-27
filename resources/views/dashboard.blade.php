@@ -16,6 +16,7 @@
                 <ul class="list-disc list-inside">
                     <li><a href="{{ route('subject.index') }}" class="text-blue-500 hover:underline">Subjects</a></li>
                     <li><a href="{{ route('grades.index') }}" class="text-blue-500 hover:underline">Grades</a></li>
+                    <li><a href="{{ route('attendance.index') }}" class="text-blue-500 hover:underline">attendance</a></li>
                 </ul>
             </div>
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg mt-6">
