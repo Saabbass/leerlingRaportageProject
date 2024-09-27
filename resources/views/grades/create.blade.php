@@ -18,9 +18,12 @@
                                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                 required>
                                 @foreach ($users as $user)
-                                    <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                    <option value="{{ $user->id }}">{{ $user->first_name }} {{ $user->last_name }}</option>
                                 @endforeach
                             </select>
+                                @if ($errors->has('user_id'))
+                                    <span class="text-red-500 text-sm">{{ $errors->first('user_id') }}</span>
+                                @endif
 
                             <label for="subject_id"
                                 class="block text-sm font-medium text-gray-700">{{ __('Subject') }}</label>
