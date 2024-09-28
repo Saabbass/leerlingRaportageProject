@@ -1,10 +1,10 @@
 <section>
     <header>
-        <h2 class="text-lg font-medium text-gray-900">
+        <h2 class="text-lg font-medium text-[#333333] dark:text-[#E0E0E0]">
             {{ __('Profile Information') }}
         </h2>
 
-        <p class="mt-1 text-sm text-gray-600">
+        <p class="mt-1 text-sm text-[#333333] dark:text-[#E0E0E0]">
             {{ __("Update your account's profile information, email address, and current role.") }}
         </p>
     </header>
@@ -19,7 +19,7 @@
             <x-input-error class="mt-2" :messages="$errors->get('role')" />
         </div>
 
-        <div class="flex items-center gap-4">
+        <div class="flex items-center gap-4 text-[#333333] dark:text-[#E0E0E0]">
             <x-primary-button>{{ __('Save Role') }}</x-primary-button>
 
             @if (session('status') === 'role-updated')
@@ -28,13 +28,11 @@
                     x-show="show"
                     x-transition
                     x-init="setTimeout(() => show = false, 2000)"
-                    class="text-sm text-gray-600"
+                    class="text-sm text-[#333333] dark:text-[#E0E0E0]"
                 >{{ __('Role updated.') }}</p>
             @endif
         </div>
     </form>
-
-   
 
     <form id="send-verification" method="post" action="{{ route('verification.send') }}">
         @csrf

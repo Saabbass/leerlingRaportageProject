@@ -36,7 +36,7 @@
                                     <form action="{{ route('grades.destroy', $grade->id) }}" method="POST" onsubmit="return confirm('{{ __('Are you sure you want to delete this grade?') }}');">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="text-red-500 hover:underline">
+                                        <button type="submit" class="text-[#D0021B] dark:text-[#FF6F61] hover:underline">
                                             {{ __('Delete') }}
                                         </button>
                                     </form>
