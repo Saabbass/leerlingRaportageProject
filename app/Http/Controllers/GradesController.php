@@ -20,7 +20,7 @@ class GradesController extends Controller
     public function create()
     {
         $subjects = Subject::select('id', 'subject_name')->get(); // Fetch all subjects
-        $users = User::select('id', 'name')->get(); // Fetch all users
+        $users = User::select('id', 'first_name', 'last_name')->get(); // Fetch all users
         return view('grades.create', compact('subjects', 'users'));
     }
 

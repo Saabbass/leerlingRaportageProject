@@ -21,7 +21,26 @@ class DatabaseSeeder extends Seeder
             'last_name' => 'Doe',
             'age' => 25,
             'email' => 'test@example.com',
-            'password' => Hash::make('password')
+            'password' => Hash::make('password'),
+            'role' => 'teacher'
+        ]);
+
+        $student = User::factory()->create([
+            'first_name' => 'Jane',
+            'last_name' => 'Smith',
+            'age' => 22,
+            'email' => 'student@example.com',
+            'password' => Hash::make('password'),
+            'role' => 'student'
+        ]);
+
+        User::factory()->create([
+            'first_name' => 'Mary',
+            'last_name' => 'Smith',
+            'age' => 45,
+            'email' => 'parent@example.com',
+            'password' => Hash::make('password'),
+            'role' => 'parent'
         ]);
 
         $this->call(SubjectSeeder::class);

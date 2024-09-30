@@ -7,8 +7,6 @@ use App\Models\Subject;
 use App\Models\User;
 use Illuminate\Http\Request;
 
-
-
 class AttendanceController extends Controller
 {
     public function index()

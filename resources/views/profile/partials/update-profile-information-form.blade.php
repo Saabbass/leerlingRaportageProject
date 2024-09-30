@@ -1,13 +1,38 @@
 <section>
     <header>
-        <h2 class="text-lg font-medium text-gray-900">
+        <h2 class="text-lg font-medium text-[#333333] dark:text-[#E0E0E0]">
             {{ __('Profile Information') }}
         </h2>
 
-        <p class="mt-1 text-sm text-gray-600">
-            {{ __("Update your account's profile information and email address.") }}
+        <p class="mt-1 text-sm text-[#333333] dark:text-[#E0E0E0]">
+            {{ __("Update your account's profile information, email address, and current role.") }}
         </p>
     </header>
+
+    <form method="post" action="{{ route('profile.updateRole') }}" class="mt-6 space-y-6">
+        @csrf
+        @method('patch')
+
+        <div>
+            <x-input-label for="role" :value="__('Current Role')" />
+            <x-text-input id="role" name="role" type="text" class="mt-1 block w-full" :value="old('role', $user->role)" required autofocus autocomplete="role" />
+            <x-input-error class="mt-2" :messages="$errors->get('role')" />
+        </div>
+
+        <div class="flex items-center gap-4 text-[#333333] dark:text-[#E0E0E0]">
+            <x-primary-button>{{ __('Save Role') }}</x-primary-button>
+
+            @if (session('status') === 'role-updated')
+                <p
+                    x-data="{ show: true }"
+                    x-show="show"
+                    x-transition
+                    x-init="setTimeout(() => show = false, 2000)"
+                    class="text-sm text-[#333333] dark:text-[#E0E0E0]"
+                >{{ __('Role updated.') }}</p>
+            @endif
+        </div>
+    </form>
 
     <form id="send-verification" method="post" action="{{ route('verification.send') }}">
         @csrf
