@@ -28,7 +28,7 @@ class AttendanceController extends Controller
             'user_id' => 'required|exists:users,id',
             'subject_id' => 'required|exists:subjects,id',
             'date' => 'required|date',
-            'status' => 'required|string|in:present,absent',
+            'status' => 'required|string|in:present,absent,late',
             'reason' => 'nullable|string|max:255',
         ]);
 
@@ -59,13 +59,17 @@ class AttendanceController extends Controller
     {
         $request->validate([
             'user_id' => 'required|exists:users,id',
+            'subject_id' => 'required|exists:subjects,id',
             'date' => 'required|date',
-            'reason' => 'required|string|max:255',
+            'status' => 'required|string|in:present,absent,late',
+            'reason' => 'nullable|string|max:255',
         ]);
 
         $attendance = Attendance::findOrFail($id);
         $attendance->user_id = $request->input('user_id');
+        $attendance->subject_id = $request->input('subject_id');
         $attendance->date = $request->input('date');
+        $attendance->status = $request->input('status');
         $attendance->reason = $request->input('reason');
         $attendance->save();
 

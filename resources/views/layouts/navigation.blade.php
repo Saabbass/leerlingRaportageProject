@@ -135,7 +135,7 @@
 
   <!-- Responsive Navigation Menu -->
   <div :class="{ 'block': open, 'hidden': !open }"
-    class="block sm:hidden border-t border-gray-200 dark:border-gray-600">
+    class="block sm:hidden border-t text-[#333333] dark:text-[#E0E0E0] hover:text-[#50E3C2] hover:dark:text-[#FF6F61] border-gray-200 dark:border-gray-600">
     <div class="pt-2 pb-3 space-y-1">
       @auth
         <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
@@ -149,12 +149,12 @@
     @auth
       <div class="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">
         <div class="px-4">
-          <div class="font-medium text-base text-gray-800 dark:text-[#E0E0E0]">{{ Auth::user()->firstname }}
+          <div class="font-medium text-base text-[#333333] dark:text-[#E0E0E0]">{{ Auth::user()->firstname }}
             {{ Auth::user()->lastname }}</div>
-          <div class="font-medium text-sm text-gray-500 dark:text-[#E0E0E0]">{{ Auth::user()->email }}</div>
+          <div class="font-medium text-sm text-[#333333] dark:text-[#E0E0E0]">{{ Auth::user()->email }}</div>
         </div>
 
-        <div class="mt-3 space-y-1">
+        <div class="mt-3 space-y-1 text-[#333333] dark:text-[#E0E0E0] hover:text-[#50E3C2] hover:dark:text-[#FF6F61]">
           @auth
             <x-responsive-nav-link :href="route('profile.edit')">
               {{ __('Profile') }}

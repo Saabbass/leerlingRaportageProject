@@ -44,19 +44,19 @@
                         <tbody class="bg-[#79b5ff] dark:bg-[#263238] divide-y divide-[#F5A623] dark:divide-[#FF6F61]">
                             @foreach ($attendances as $attendance)
                                 <tr>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-[#333333] dark:text-[#E0E0E0]">
+                                    <td class="px-4 py-2 whitespace-nowrap text-sm text-[#333333] dark:text-[#E0E0E0]">
                                         {{ optional($attendance->user)->first_name }} {{ optional($attendance->user)->last_name }}
                                     </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-[#333333] dark:text-[#E0E0E0]">
+                                    <td class="px-4 py-2 whitespace-nowrap text-sm text-[#333333] dark:text-[#E0E0E0]">
                                         {{ $attendance->date }} 
                                     </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-[#333333] dark:text-[#E0E0E0]">
-                                        {{ $attendance->reason }}
+                                    <td class="px-4 py-2 whitespace-nowrap text-sm text-[#333333] dark:text-[#E0E0E0] truncate">
+                                        {{substr($attendance->reason, 0, 15)}}
                                     </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-[#333333] dark:text-[#E0E0E0]">
+                                    <td class="px-4 py-2 whitespace-nowrap text-sm text-[#333333] dark:text-[#E0E0E0]">
                                         {{ $attendance->status }}
                                     </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-[#333333] dark:text-[#E0E0E0]">
+                                    <td class="px-4 py-2 whitespace-nowrap text-sm text-[#333333] dark:text-[#E0E0E0]">
                                         <a href="{{ route('attendance.edit', $attendance->id) }}" class="text-indigo-600 hover:text-indigo-900">
                                             {{ __('Edit') }}
                                         </a>

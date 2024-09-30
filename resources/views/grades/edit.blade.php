@@ -55,9 +55,9 @@
                             <a href="{{ route('grades.index') }}" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-2">
                                 {{ __('Cancel') }}
                             </a>
-                            <button type="submit" class="text-[#333333] dark:text-[#E0E0E0] bg-[#4A90E2] dark:bg-[#3B5998] hover:bg-[#357ABD] dark:hover:bg-[#2C3E50] font-bold py-2 px-4 rounded">
+                            <x-primary-button type="submit" class="font-bold py-2 px-4 rounded">
                                 {{ __('Update Grade') }}
-                            </button>
+                            </x-primary-button>
                         </div>
                     </form>
                 </div>
