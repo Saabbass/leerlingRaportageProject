@@ -11,8 +11,10 @@ class AttendanceController extends Controller
 {
     public function index()
     {
-        // Fetch attendances with user data
-        $attendances = Attendance::with('user')->get();
+        // Fetch attendances with user data and filter by status
+        $attendances = Attendance::with('user')
+            ->whereIn('status', ['present', 'absent', 'late'])
+            ->get();
 
         return view('attendance.index', ['attendances' => $attendances]);
     }
