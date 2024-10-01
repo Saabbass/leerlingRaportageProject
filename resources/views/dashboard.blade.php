@@ -9,21 +9,21 @@
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
       <div class="bg-[#79b5ff] dark:bg-[#263238] overflow-hidden shadow-sm sm:rounded-lg">
         <div class="p-6 text-[#333333] dark:text-[#E0E0E0]">
-          {{ __("You're logged in!") }}
+          {{ __("Je bent ingelogd!") }}
         </div>
       </div>
       <div class="bg-[#79b5ff] dark:bg-[#263238] overflow-hidden shadow-sm sm:rounded-lg mt-6">
         <div
           class="p-6 flex flex-wrap justify-evenly gap-1 text-[#333333] dark:text-[#FFC107] bg-[#C8E6C9] dark:bg-[#2E3B4E]">
           <a href="{{ route('subject.index') }}"
-            class="hover:underline rounded-xl hover:text-[#104E8B] dark:hover:text-[#FF6F61]">Subjects</a>
+            class="hover:underline rounded-xl hover:text-[#104E8B] dark:hover:text-[#FF6F61]">Vakken</a>
           <a href="{{ route('grades.index') }}"
-            class="hover:underline rounded-xl hover:text-[#104E8B] dark:hover:text-[#FF6F61]">Grades</a>
+            class="hover:underline rounded-xl hover:text-[#104E8B] dark:hover:text-[#FF6F61]">Cijfers</a>
           <a href="{{ route('attendance.index') }}"
-            class="hover:underline rounded-xl hover:text-[#104E8B] dark:hover:text-[#FF6F61]">attendance</a>
+            class="hover:underline rounded-xl hover:text-[#104E8B] dark:hover:text-[#FF6F61]">Aanwezigheid</a>
           @if (auth()->user()->role === 'teacher')
             <a href="{{ route('teacher.index') }}"
-              class="hover:underline rounded-xl hover:text-[#104E8B] dark:hover:text-[#FF6F61]">teacher</a>
+              class="hover:underline rounded-xl hover:text-[#104E8B] dark:hover:text-[#FF6F61]">Leraar</a>
           @endif
         </div>
 
@@ -33,9 +33,9 @@
             {{ __('Agenda') }}
           </h3>
           <ul class="mt-4">
-            <li>{{ __('Event 1: Meeting with team at 10 AM') }}</li>
-            <li>{{ __('Event 2: Project deadline at 3 PM') }}</li>
-            <li>{{ __('Event 3: Call with client at 5 PM') }}</li>
+            <li>{{ __('Evenement 1: Vergadering met team om 10 uur') }}</li>
+            <li>{{ __('Evenement 2: Projectdeadline om 3 uur') }}</li>
+            <li>{{ __('Evenement 3: Gesprek met klant om 5 uur') }}</li>
           </ul>
         </div> --}}
 
