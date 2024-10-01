@@ -4,6 +4,7 @@ use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\GradesController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SubjectController;
+use App\Http\Controllers\UserParentStudentController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -50,6 +51,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/subject/{id}/edit', [SubjectController::class, 'edit'])->name('subject.edit');
     Route::patch('/subject/{id}', [SubjectController::class, 'update'])->name('subject.update');
     Route::delete('/subject/{id}', [SubjectController::class, 'destroy'])->name('subject.destroy');
+});
+
+Route::middleware('auth')->group(function () {
+    Route::get('/teacher', [UserParentStudentController::class, 'index'])->name('teacher.index');
 });
 
 require __DIR__ . '/auth.php';
