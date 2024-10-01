@@ -16,7 +16,7 @@
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-    @vite(['public/css/styles.css', 'public/assets/js/themeSwitch.js'])
+    @vite(['public/assets/css/styles.css', 'public/assets/js/themeSwitch.js'])
   </head>
 
   <body class="font-sans antialiased light">

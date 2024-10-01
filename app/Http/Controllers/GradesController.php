@@ -30,9 +30,9 @@ class GradesController extends Controller
             'user_id' => 'required|exists:users,id',
             'subject_id' => 'required|exists:subjects,id',
             'assignment_name' => 'required|string|max:255',
-            'grade' => 'required|numeric|min:0|max:100',
+            'grade' => 'required|numeric|min:0|max:10',
             'date' => 'required|date',
-            'description' => 'nullable|string',
+            'description' => 'nullable|string|max:255',
         ]);
 
         $grade = new Grades();
@@ -61,8 +61,8 @@ class GradesController extends Controller
             'user_id' => 'required|exists:users,id',
             'subject_id' => 'required|exists:subjects,id',
             'assignment_name' => 'required|string|max:255',
-            'grade' => 'required|numeric|min:0|max:100', // Ensure 'grade' is required and numeric between 0 and 100
-            'description' => 'nullable|string',
+            'grade' => 'required|numeric|min:0|max:10', // Ensure 'grade' is required and numeric between 0 and 10
+            'description' => 'nullable|string|max:255',
         ]);
 
         $grade = Grades::findOrFail($id);

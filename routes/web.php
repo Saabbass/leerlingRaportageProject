@@ -23,9 +23,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::middleware('auth')->group(function () {
-    Route::get('/attendance', [AttendanceController::class, 'index'])->name('attendance.index');
-});
+// Route::middleware('auth')->group(function () {
+//     Route::get('/attendance', [AttendanceController::class, 'index'])->name('attendance.index');
+// });
 Route::middleware('auth')->group(function () {
     Route::get('/grades', [GradesController::class, 'index'])->name('grades.index');
     Route::get('/grades/create', [GradesController::class, 'create'])->name('grades.create');

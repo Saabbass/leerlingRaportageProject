@@ -15,13 +15,19 @@ class DashboardController extends Controller
     {
         $events = [];
  
-        $appointments = Attendance::all();
+        // $appointments = Attendance::all();
+        $appointments = Attendance::with(['user', 'subject'])->get();
+        // dd($appointments);
  
         foreach ($appointments as $appointment) {
             $events[] = [
-                'title' => $appointment->user_id,
+                'id' => $appointment->id,
+                'title' => $appointment->status,
                 'description' => $appointment->reason,
-                'date' => $appointment->date,
+                'start' => $appointment->date,
+                'end' => $appointment->date,
+                'title' => $appointment->user->first_name,
+                'subject_name' => $appointment->subject->subject_name,
             ];
         }
  

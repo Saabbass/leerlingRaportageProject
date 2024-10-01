@@ -8,8 +8,8 @@
       class="relative flex justify-center items-center bg-dots-darker bg-center dark:bg-dots-lighter selection:bg-red-500 selection:text-white h-full">
       <section
         class="container_img relative overflow-hidden max-h-full h-full min-h-screen w-full flex justify-center items-center">
-        {{-- <img src="{{ asset('assets/img/nova.png') }}" alt=""
-          class="absolute max-h-full h-full w-full object-cover"> --}}
+        <img src="{{ asset('assets/images/nova.png') }}" alt=""
+          class="absolute max-h-full h-full w-full object-cover">
         <div
           class="px-4 mx-auto max-w-screen-lg h-fit text-center #py-24 py-4 #lg:py-56 rounded-xl relative backdrop-blur-md bg-[#F5A623] dark:bg-[#2E3B4E]">
           <h1
