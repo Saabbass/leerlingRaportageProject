@@ -141,8 +141,16 @@
         <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
           {{ __('Dashboard') }}
         </x-responsive-nav-link>
+        <x-responsive-nav-link :href="route('attendance.index')" :active="request()->routeIs('attendance.index')">
+          {{ __('Attendance') }}
+        </x-responsive-nav-link>
+        <x-responsive-nav-link :href="route('subject.index')" :active="request()->routeIs('subject.index')">
+          {{ __('Subject') }}
+        </x-responsive-nav-link>
       @endauth
-      <x-responsive-nav-link></x-responsive-nav-link>
+      <x-responsive-nav-link href="/" :active="request()->routeIs('/')">
+        {{ __('Homepage') }}
+      </x-responsive-nav-link>
     </div>
 
     <!-- Responsive Settings Options -->
