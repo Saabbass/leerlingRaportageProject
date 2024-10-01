@@ -24,9 +24,11 @@
                     <h3 class="font-semibold text-lg text-[#333333] dark:text-[#E0E0E0] leading-tight">
                         {{ __('Check je afwezigheid:') }}
                     </h3>
-                    <a href="{{ route('attendance.create') }}" class="text-[#FFD700] dark:text-[#FFC107] hover:text-[#F5A623] dark:hover:text-[#FF6F61]">
-                        {{ __('Create Attendance') }}
-                    </a>
+                    @if(auth()->user()->role === 'teacher')
+                        <a href="{{ route('attendance.create') }}" class="text-[#FFD700] dark:text-[#FFC107] hover:text-[#F5A623] dark:hover:text-[#FF6F61]">
+                            {{ __('Create Attendance') }}
+                        </a>
+                    @endif
                 </div>
                     <table class="min-w-full divide-y divide-[#F5A623] dark:divide-[#FF6F61] mt-4">
                         <thead>
@@ -64,16 +66,18 @@
                                         {{ $attendance->status }}
                                     </td>
                                     <td class="px-4 py-2 whitespace-nowrap text-sm text-[#333333] dark:text-[#E0E0E0]">
-                                        <a href="{{ route('attendance.edit', $attendance->id) }}" class="text-indigo-600 hover:text-indigo-900">
-                                            {{ __('Edit') }}
-                                        </a>
-                                        <form action="{{ route('attendance.destroy', $attendance->id) }}" method="POST" class="inline">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="text-[#D0021B] dark:text-[#FF6F61] hover:text-red-900 ml-2">
-                                                {{ __('Delete') }}
-                                            </button>
-                                        </form>
+                                        @if(auth()->user()->role === 'teacher')
+                                            <a href="{{ route('attendance.edit', $attendance->id) }}" class="text-indigo-600 hover:text-indigo-900">
+                                                {{ __('Edit') }}
+                                            </a>
+                                            <form action="{{ route('attendance.destroy', $attendance->id) }}" method="POST" class="inline">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="text-[#D0021B] dark:text-[#FF6F61] hover:text-red-900 ml-2">
+                                                    {{ __('Delete') }}
+                                                </button>
+                                            </form>
+                                        @endif
                                     </td>
                                 </tr>
                             @endforeach
@@ -83,5 +87,4 @@
             </div>
         </div>
     </div>
-  
 </x-app-layout>

@@ -23,9 +23,11 @@
                 <div class="p-6 text-[#333333] dark:text-[#E0E0E0]">
                     <div class="flex justify-between items-center mb-6">
                         <h3 class="text-lg font-semibold">{{ __('Grade List') }}</h3>
-                        <a href="{{ route('grades.create') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                            {{ __('Create New Grade') }}
-                        </a>
+                        @if(auth()->user()->role === 'teacher')
+                            <a href="{{ route('grades.create') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                                {{ __('Create New Grade') }}
+                            </a>
+                        @endif
                     </div>
                     <div class="mt-4">
                         @foreach ($grades as $grade)
@@ -37,16 +39,18 @@
                                     <p>{{ __('Date: ') }}{{ $grade->date }}</p>
                                 </div>
                                 <div class="flex space-x-4">
-                                    <a href="{{ route('grades.edit', $grade->id) }}" class="text-blue-500 hover:underline">
-                                        {{ __('Edit') }}
-                                    </a>
-                                    <form action="{{ route('grades.destroy', $grade->id) }}" method="POST" onsubmit="return confirm('{{ __('Are you sure you want to delete this grade?') }}');">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="text-[#D0021B] dark:text-[#FF6F61] hover:underline">
-                                            {{ __('Delete') }}
-                                        </button>
-                                    </form>
+                                    @if(auth()->user()->role === 'teacher')
+                                        <a href="{{ route('grades.edit', $grade->id) }}" class="text-blue-500 hover:underline">
+                                            {{ __('Edit') }}
+                                        </a>
+                                        <form action="{{ route('grades.destroy', $grade->id) }}" method="POST" onsubmit="return confirm('{{ __('Are you sure you want to delete this grade?') }}');">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="text-[#D0021B] dark:text-[#FF6F61] hover:underline">
+                                                {{ __('Delete') }}
+                                            </button>
+                                        </form>
+                                    @endif
                                 </div>
                             </div>
                         @endforeach
