@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-[#333333] dark:text-[#E0E0E0] leading-tight">
-            {{ __('Attendances') }}
+            {{ __('Aanwezigheden') }}
         </h2>
     </x-slot>
 
@@ -10,23 +10,23 @@
             <div class="bg-[#79b5ff] dark:bg-[#263238] overflow-hidden shadow-sm sm:rounded-lg mt-6">
                 <div class="p-6 flex flex-wrap justify-evenly gap-1 text-[#1E90FF] dark:text-[#FFC107] bg-[#C8E6C9] dark:bg-[#2E3B4E]">
                     <a href="{{ route('subject.index') }}"
-                    class="hover:underline rounded-xl hover:text-[#104E8B] dark:hover:text-[#FF6F61]">Subjects</a>
+                    class="hover:underline rounded-xl hover:text-[#104E8B] dark:hover:text-[#FF6F61]">Vakken</a>
                   <a href="{{ route('grades.index') }}"
-                    class="hover:underline rounded-xl hover:text-[#104E8B] dark:hover:text-[#FF6F61]">Grades</a>
+                    class="hover:underline rounded-xl hover:text-[#104E8B] dark:hover:text-[#FF6F61]">Cijfers</a>
                   <a href="{{ route('attendance.index') }}"
-                    class="hover:underline rounded-xl hover:text-[#104E8B] dark:hover:text-[#FF6F61]">attendance</a>
+                    class="hover:underline rounded-xl hover:text-[#104E8B] dark:hover:text-[#FF6F61]">aanwezigheid</a>
                   @if (auth()->user()->role === 'teacher')
                     <a href="{{ route('teacher.index') }}"
-                      class="hover:underline rounded-xl hover:text-[#104E8B] dark:hover:text-[#FF6F61]">teacher</a>
+                      class="hover:underline rounded-xl hover:text-[#104E8B] dark:hover:text-[#FF6F61]">leraar</a>
                   @endif
                 </div>
                 <div class="p-6 text-[#333333] dark:text-[#E0E0E0]">
                     <h3 class="font-semibold text-lg text-[#333333] dark:text-[#E0E0E0] leading-tight">
-                        {{ __('Check je afwezigheid:') }}
+                        {{ __('Controleer uw afwezigheid:') }}
                     </h3>
                     @if(auth()->user()->role === 'teacher')
                         <a href="{{ route('attendance.create') }}" class="text-[#FFD700] dark:text-[#FFC107] hover:text-[#F5A623] dark:hover:text-[#FF6F61]">
-                            {{ __('Create Attendance') }}
+                            {{ __('Verander aanweigheid') }}
                         </a>
                     @endif
                 </div>
@@ -68,13 +68,13 @@
                                     <td class="px-4 py-2 whitespace-nowrap text-sm text-[#333333] dark:text-[#E0E0E0]">
                                         @if(auth()->user()->role === 'teacher')
                                             <a href="{{ route('attendance.edit', $attendance->id) }}" class="text-indigo-600 hover:text-indigo-900">
-                                                {{ __('Edit') }}
+                                                {{ __('Bewerken') }}
                                             </a>
                                             <form action="{{ route('attendance.destroy', $attendance->id) }}" method="POST" class="inline">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="text-[#D0021B] dark:text-[#FF6F61] hover:text-red-900 ml-2">
-                                                    {{ __('Delete') }}
+                                                    {{ __('Verwijderen') }}
                                                 </button>
                                             </form>
                                         @endif

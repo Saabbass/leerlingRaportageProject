@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-[#333333] dark:text-[#E0E0E0] leading-tight">
-            {{ __('Create Subject') }}
+            {{ __('Vak toevoegen') }}
         </h2>
     </x-slot>
 
@@ -13,20 +13,20 @@
                         @csrf
 
                         <div class="mb-4">
-                            <x-input-label for="name" :value="__('Subject Name')" />
+                            <x-input-label for="name" :value="__('Vaknaam')" />
                             <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus />
                             <x-input-error :messages="$errors->get('name')" class="mt-2" />
                         </div>
 
                         <div class="mb-4">
-                            <x-input-label for="description" :value="__('Description')" />
+                            <x-input-label for="description" :value="__('Beschrijving')" />
                             <x-textarea-input id="description" class="block mt-1 w-full" name="description" :value="old('description')" />
                             <x-input-error :messages="$errors->get('description')" class="mt-2" />
                         </div>
 
                         <div class="flex items-center justify-end mt-4">
                             <x-primary-button class="ml-4">
-                                {{ __('Create Subject') }}
+                                {{ __('Vak toevoegen') }}
                             </x-primary-button>
                         </div>
                     </form>
