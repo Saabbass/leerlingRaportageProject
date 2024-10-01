@@ -850,6 +850,16 @@ class DatabaseSeeder extends Seeder
             'role' => 'parent'
         ]);
 
+        User::factory()->create([
+            'first_name' => 'sary',
+            'last_name' => 'fmith',
+            'age' => 35,
+            'email' => 'parent@msn.com',
+            'password' => Hash::make('password'),
+            'role' => 'parent'
+        ]);
+
         $this->call(SubjectSeeder::class);
+        $this->call([UserParentStudentSeeder::class,]);
     }
 }
