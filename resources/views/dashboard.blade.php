@@ -4,7 +4,9 @@
       {{ __('Dashboard') }}
     </h2>
   </x-slot>
-
+  @if (auth()->user()->role === 'teacher')
+    <a href="{{ route('users.index') }}" class="hover:underline rounded-xl hover:text-[#104E8B] dark:hover:text-[#FF6F61]">Users</a>
+  @endif
   <div class="py-12">
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
       <div class="bg-[#79b5ff] dark:bg-[#263238] overflow-hidden shadow-sm sm:rounded-lg">
