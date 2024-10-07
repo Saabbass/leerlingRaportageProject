@@ -4,8 +4,6 @@
       {{ __('Aanwezigheden') }}
     </h2>
   </x-slot>
-
-<<<<<<< HEAD
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-[#79b5ff] dark:bg-[#263238] overflow-hidden shadow-sm sm:rounded-lg mt-6">
