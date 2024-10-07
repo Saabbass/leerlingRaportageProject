@@ -63,7 +63,7 @@
                                         {{substr($attendance->reason, 0, 15)}}
                                     </td>
                                     <td class="px-4 py-2 whitespace-nowrap text-sm text-[#333333] dark:text-[#E0E0E0]">
-                                        {{ $attendance->status }}
+                                        @if($attendance->status === 'present') {{ __('Aanwezig') }} @elseif($attendance->status === 'absent') {{ __('Afwezig') }} @elseif($attendance->status === 'late') {{ __('Laat') }} @endif
                                     </td>
                                     <td class="px-4 py-2 whitespace-nowrap text-sm text-[#333333] dark:text-[#E0E0E0]">
                                         @if(auth()->user()->role === 'teacher')

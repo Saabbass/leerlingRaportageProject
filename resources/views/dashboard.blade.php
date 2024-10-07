@@ -5,7 +5,7 @@
     </h2>
   </x-slot>
   @if (auth()->user()->role === 'teacher')
-    <a href="{{ route('users.index') }}" class="hover:underline rounded-xl hover:text-[#104E8B] dark:hover:text-[#FF6F61]">Users</a>
+    <a href="{{ route('users.index') }}" class="inline-flex items-center px-4 py-2 border border-transparent rounded-md font-semibold text-xs text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:border-blue-700 focus:ring focus:ring-blue-200 active:bg-blue-600 disabled:opacity-25 transition">Users</a>
   @endif
   <div class="py-12">
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
