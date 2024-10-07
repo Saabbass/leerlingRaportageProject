@@ -4,10 +4,13 @@
             {{ __('Users') }}
         </h2>
         <p class="text-sm text-red-600">{{ session('status') }}</p>
+        <td colspan="5" class="text-left">
+            <a href="{{ route('users.create') }}" class="inline-flex items-center px-4 py-2 border border-transparent rounded-md font-semibold text-xs text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:border-blue-700 focus:ring focus:ring-blue-200 active:bg-blue-600 disabled:opacity-25 transition">{{ __('Create User') }}</a>
+        </td>
     </x-slot>
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-[#79b5ff] dark:bg-[#263238] overflow-hidden shadow-sm sm:rounded-lg mt-6">
+            <div class="bg-[#fefeff] dark:bg-[#263238] overflow-hidden shadow-sm sm:rounded-lg mt-6">
                 <div class="p-6 flex flex-wrap justify-evenly gap-1 text-[#1E90FF] dark:text-[#FFC107] bg-[#C8E6C9] dark:bg-[#2E3B4E]">
                     <a href="{{ route('subject.index') }}"
                     class="hover:underline rounded-xl hover:text-[#104E8B] dark:hover:text-[#FF6F61]">Vakken</a>
@@ -24,7 +27,7 @@
                     <thead>
                         <tr>
                             <th scope="col" class="px-4 py-2 bg-[#C8E6C9] dark:bg-[#2E3B4E] text-left text-sm font-medium text-[#333333] dark:text-[#E0E0E0]">
-                                {{ __('first_name') }}
+                                {{ __('voornaam') }}
                             </th>
                             <th scope="col" class="px-4 py-2 bg-[#C8E6C9] dark:bg-[#2E3B4E] text-left text-sm font-medium text-[#333333] dark:text-[#E0E0E0]">
                                 {{ __('Achternaam') }}
@@ -40,9 +43,6 @@
                             </th>
                         </tr>
                         <tr>
-                            <td colspan="5" class="text-left">
-                                <a href="{{ route('users.create') }}" class="inline-flex items-center px-4 py-2 border border-transparent rounded-md font-semibold text-xs text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:border-blue-700 focus:ring focus:ring-blue-200 active:bg-blue-600 disabled:opacity-25 transition">{{ __('Create User') }}</a>
-                            </td>
                         </tr>
                     </thead>
                     <tbody class="bg-[#79b5ff] dark:bg-[#263238] divide-y divide-[#F5A623] dark:divide-[#FF6F61]">
