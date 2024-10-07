@@ -18,13 +18,14 @@
             class="hover:underline rounded-xl hover:text-[#104E8B] dark:hover:text-[#FF6F61]">Aanwezigheid</a>
           @if (auth()->user()->role === 'teacher')
             <a href="{{ route('teacher.index') }}"
-              class="hover:underline rounded-xl hover:text-[#104E8B] dark:hover:text-[#FF6F61]">Leraar</a>
+              class="hover:underline rounded-xl hover:text-[#104E8B] dark:hover:text-[#FF6F61]">Docenten</a>
           @endif
         </div>
         <div class="p-6 text-[#333333] dark:text-[#E0E0E0]">
           <div class="flex justify-between items-center mb-6">
-            <h3 class="text-lg font-semibold">{{ __('Vakkenlijst') }}</h3>
-            @if(auth()->user()->role === 'teacher')
+            <h3 class="text-lg font-semibold">{{ __('Vakkenlijst') }}
+            </h3>
+            @if (auth()->user()->role === 'teacher')
               <a href="{{ route('subject.create') }}"
                 class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                 {{ __('Nieuw vak maken') }}
@@ -39,7 +40,7 @@
                   <p>{{ $subj->description }}</p>
                 </div>
                 <div class="flex space-x-4">
-                  @if(auth()->user()->role === 'teacher')
+                  @if (auth()->user()->role === 'teacher')
                     <a href="{{ route('subject.edit', $subj->id) }}" class="text-blue-500 hover:underline">
                       {{ __('Bewerken') }}
                     </a>
