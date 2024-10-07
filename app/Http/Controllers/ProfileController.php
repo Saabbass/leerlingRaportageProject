@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -27,10 +28,51 @@ class ProfileController extends Controller
 
         return Redirect::route('profile.edit')->with('status', 'role-updated');
     }
+    public function update_user(Request $request, User $user): RedirectResponse // Renamed method
+    {
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,' . $user->id],
+            'role' => ['required', 'string', 'max:255'],
+        ]);
+
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        $user->role = $request->input('role');
+        $user->save();
+
+        return Redirect::route('users.index')->with('status', 'user-updated'); // Updated redirect route
+    }
+    public function edit_user(Request $request, User $user): View
+    {
+        return view('users.edit', [ // Updated view to match the users edit view
+            'user' => $user,
+        ]);
+    }
+
+    public function destroy_user(Request $request, User $user): RedirectResponse // Renamed method
+    {
+        $request->validateWithBag('userDeletion', [
+            'password' => ['required', 'current_password'],
+        ]);
+
+        Auth::logout();
+
+        $user->delete();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return Redirect::route('users.index')->with('status', 'user-deleted'); // Updated redirect route
+    }
+
+    public function index(): View
+    {
+        $users = User::all(); // Fetch all users
+        return view('users.index', compact('users'));
+    }
 
 
-
-    
     public function edit(Request $request): View
     {
         return view('profile.edit', [

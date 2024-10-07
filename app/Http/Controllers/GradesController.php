@@ -50,8 +50,8 @@ class GradesController extends Controller
     public function edit($id)
     {
         $grade = Grades::findOrFail($id);
-        $subjects = Subject::select('id', 'subject_name')->get(); // Fetch all subjects for editing
-        $users = User::select('id', 'name')->get(); // Fetch all users for editing
+        $subjects = Subject::select('id', 'subject_name')->get(); // Fetch all subjects for editing with subject name
+        $users = User::select('id', 'first_name', 'last_name')->get(); // Fetch all users for editing
         return view('grades.edit', compact('grade', 'subjects', 'users'));
     }
 
