@@ -17,8 +17,10 @@ Route::get('/', function () {
 // })->middleware(['auth', 'verified'])->name('dashboard');
 Route::get('/dashboard', \App\Http\Controllers\DashboardController::class)->middleware(['auth', 'verified'])->name('dashboard');
 Route::get('/users', [ProfileController::class, 'index'])->middleware(['auth'])->name('users.index');
-Route::patch('/users/{user}', [ProfileController::class, 'update_user'])->middleware(['auth'])->name('users.update');
+Route::put('/users/{user}', [ProfileController::class, 'update_user'])->middleware(['auth'])->name('users.update');
 Route::get('/users/{user}/edit', [ProfileController::class, 'edit_user'])->middleware(['auth'])->name('users.edit');
+Route::get('/users/create', [ProfileController::class, 'create_user'])->middleware(['auth'])->name('users.create');
+Route::post('/users', [ProfileController::class, 'store_user'])->middleware(['auth'])->name('users.store');
 Route::delete('/users/{user}', [ProfileController::class, 'destroy_user'])->middleware(['auth'])->name('users.destroy');
 
 
