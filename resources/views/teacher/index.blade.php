@@ -22,9 +22,17 @@
           @endif
         </div>
         <div class="p-6 text-[#333333] dark:text-[#E0E0E0]">
-          <h3 class="font-semibold text-lg text-[#333333] dark:text-[#E0E0E0] leading-tight">
-            {{ __('Relaties tussen Gebruikers, Ouders en Studenten:') }}
-          </h3>
+          <div class="flex justify-between items-center mb-6">
+            <h3 class="font-semibold text-lg text-[#333333] dark:text-[#E0E0E0] leading-tight">
+              {{ __('Relaties tussen Gebruikers, Ouders en Studenten:') }}
+            </h3>
+            @if (auth()->user()->role === 'teacher')
+              <a href="{{ route('teacher.create') }}"
+                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                {{ __('Nieuwe koppeling maken') }}
+              </a>
+            @endif
+          </div>
         </div>
         <table class="min-w-full divide-y divide-[#F5A623] dark:divide-[#FF6F61] mt-4">
           <thead>
