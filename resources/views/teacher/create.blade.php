@@ -1,37 +1,49 @@
 <x-app-layout>
   <x-slot name="header">
-      <h2 class="font-semibold text-xl text-[#333333] dark:text-[#E0E0E0] leading-tight">
-          {{ __('Ouder aan kind koppelen') }}
-      </h2>
+    <h2 class="font-semibold text-xl text-[#333333] dark:text-[#E0E0E0] leading-tight">
+      {{ __('Ouder aan kind koppelen') }}
+    </h2>
   </x-slot>
 
   <div class="py-12">
-      <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-          <div class="bg-[#79b5ff] dark:bg-[#263238] overflow-hidden shadow-sm sm:rounded-lg">
-              <div class="p-6 text-[#333333] dark:text-[#E0E0E0]">
-                  <form method="POST" action="{{ route('teacher.store') }}">
-                      @csrf
+    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+      <div class="bg-[#79b5ff] dark:bg-[#263238] overflow-hidden shadow-sm sm:rounded-lg">
+        <div class="p-6 text-[#333333] dark:text-[#E0E0E0]">
+          <form method="POST" action="{{ route('teacher.store') }}">
+            @csrf
 
-                      <div class="mb-4">
-                          <x-input-label for="name" :value="__('Vaknaam')" />
-                          <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus />
-                          <x-input-error :messages="$errors->get('name')" class="mt-2" />
-                      </div>
+            <div class="mb-4">
+              <x-input-label for="parent_id" :value="__('Ouder')" />
+              <select id="parent_id" name="parent_id"
+                class="bg-[#C8E6C9] dark:bg-[#2E3B4E] mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
+                required>
+                @foreach ($parents as $parent)
+                  <option value="{{ $parent->id }}">{{ $parent->first_name }} {{ $parent->last_name }}</option>
+                @endforeach
+              </select>
+              <x-input-error :messages="$errors->get('parent_id')" class="mt-2" />
+            </div>
 
-                      <div class="mb-4">
-                          <x-input-label for="description" :value="__('Beschrijving')" />
-                          <x-textarea-input id="description" class="block mt-1 w-full" name="description" :value="old('description')" />
-                          <x-input-error :messages="$errors->get('description')" class="mt-2" />
-                      </div>
+            <div class="mb-4">
+              <x-input-label for="student_id" :value="__('Student')" />
+              <select id="student_id" name="student_id"
+                class="bg-[#C8E6C9] dark:bg-[#2E3B4E] mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
+                required>
+                @foreach ($students as $student)
+                  <option value="{{ $student->id }}">{{ $student->first_name }} {{ $student->last_name }}</option>
+                @endforeach
+              </select>
+              <x-input-error :messages="$errors->get('student_id')" class="mt-2" />
+            </div>
 
-                      <div class="flex items-center justify-end mt-4">
-                          <x-primary-button class="ml-4">
-                              {{ __('Vak toevoegen') }}
-                          </x-primary-button>
-                      </div>
-                  </form>
-              </div>
-          </div>
+            <div class="flex items-center justify-end mt-4">
+              <x-primary-button class="ml-4">
+                {{ __('Link toevoegen') }}
+              </x-primary-button>
+            </div>
+          </form>
+        </div>
       </div>
+    </div>
   </div>
 </x-app-layout>
