@@ -1,10 +1,9 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-[#333333] dark:text-[#E0E0E0] leading-tight">
-            {{ __('Aanwezigheden') }}
-        </h2>
-    </x-slot>
-
+  <x-slot name="header">
+    <h2 class="font-semibold text-xl text-[#333333] dark:text-[#E0E0E0] leading-tight">
+      {{ __('Aanwezigheden') }}
+    </h2>
+  </x-slot>
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-[#79b5ff] dark:bg-[#263238] overflow-hidden shadow-sm sm:rounded-lg mt-6">
@@ -63,7 +62,7 @@
                                         {{substr($attendance->reason, 0, 15)}}
                                     </td>
                                     <td class="px-4 py-2 whitespace-nowrap text-sm text-[#333333] dark:text-[#E0E0E0]">
-                                        {{ $attendance->status }}
+                                        @if($attendance->status === 'present') {{ __('Aanwezig') }} @elseif($attendance->status === 'absent') {{ __('Afwezig') }} @elseif($attendance->status === 'late') {{ __('Laat') }} @endif
                                     </td>
                                     <td class="px-4 py-2 whitespace-nowrap text-sm text-[#333333] dark:text-[#E0E0E0]">
                                         @if(auth()->user()->role === 'teacher')
@@ -85,6 +84,5 @@
                     </table>
                 </div>
             </div>
-        </div>
-    </div>
+   
 </x-app-layout>

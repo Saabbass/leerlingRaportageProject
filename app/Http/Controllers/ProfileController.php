@@ -12,7 +12,7 @@ use Illuminate\View\View;
 
 class ProfileController extends Controller
 {
-    
+
     /**
      * Update the user's role.
      */
@@ -31,40 +31,87 @@ class ProfileController extends Controller
     public function update_user(Request $request, User $user): RedirectResponse // Renamed method
     {
         $request->validate([
-            'name' => ['required', 'string', 'max:255'],
+            'first_name' => ['required', 'string', 'max:255'],
+            'last_name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,' . $user->id],
             'role' => ['required', 'string', 'max:255'],
         ]);
 
-        $user->name = $request->input('name');
+        $user->first_name = $request->input('first_name');
+        $user->last_name = $request->input('last_name');
         $user->email = $request->input('email');
         $user->role = $request->input('role');
         $user->save();
 
         return Redirect::route('users.index')->with('status', 'user-updated'); // Updated redirect route
     }
-    public function edit_user(Request $request, User $user): View
+
+    public function edit_user($id): View
     {
-        return view('users.edit', [ // Updated view to match the users edit view
+        $user = User::findOrFail($id); // Fetch the user by ID
+        return view('users.edit', [
             'user' => $user,
         ]);
     }
-
-    public function destroy_user(Request $request, User $user): RedirectResponse // Renamed method
+    public function create_user(Request $request): View
     {
-        $request->validateWithBag('userDeletion', [
-            'password' => ['required', 'current_password'],
+        return view('users.create');
+    }
+    public function store_user(Request $request): RedirectResponse
+    {
+        $request->validate([
+            'first_name' => ['required', 'string', 'max:255'],
+            'last_name' => ['required', 'string', 'max:255'],
+            'age' => ['required', 'integer', 'min:0'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'role' => ['required', 'string', 'max:255'],
+            'password' => ['required', 'string', 'min:8'], // Added password validation
         ]);
 
-        Auth::logout();
+        $user = new User();
+        $user->first_name = $request->input('first_name');
+        $user->last_name = $request->input('last_name');
+        $user->age = $request->input('age');
+        $user->email = $request->input('email');
+        $user->role = $request->input('role');
+        $user->password = bcrypt($request->input('password')); // Added password
+        $user->save();
 
+        return Redirect::route('users.index')->with('status', 'user-created');
+    }
+
+
+
+    public function destroy_user($id)
+    {
+        $user = User::findOrFail($id);
         $user->delete();
 
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
-
-        return Redirect::route('users.index')->with('status', 'user-deleted'); // Updated redirect route
+        return redirect()->route('users.index')->with('success', 'User deleted successfully.');
     }
+
+    // public function destroy_user(Request $request, User $user): RedirectResponse // Renamed method
+    // {
+    //     $request->validateWithBag('userDeletion', [
+    //         'password' => ['required', 'current_password'],
+    //     ]);
+
+    //     // Removed the line that reassigns $user
+    //     // $user = $request->user(); // This line is unnecessary
+
+    //     // Remove connected tables or related data here
+    //     // Example: If the user has grades, delete them
+    //     $user->grades()->delete(); // Assuming a relationship exists
+
+    //     // Auth::logout();
+
+    //     $user->delete();
+
+    //     $request->session()->invalidate();
+    //     $request->session()->regenerateToken();
+
+    //     return Redirect::route('users.index')->with('status', 'user-deleted'); // Updated redirect route
+    // }
 
     public function index(): View
     {
