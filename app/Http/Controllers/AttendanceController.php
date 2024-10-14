@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AttendanceFormRequest;
 use App\Models\Attendance;
 use App\Models\Subject;
 use App\Models\User;
@@ -24,23 +25,9 @@ class AttendanceController extends Controller
         $subjects = Subject::select('id', 'subject_name')->get(); // Fetch all subjects with correct column name
         return view('attendance.create', compact('users', 'subjects'));
     }
-    public function store(Request $request)
+    public function store(AttendanceFormRequest $request)
     {
-        $request->validate([
-            'user_id' => 'required|exists:users,id',
-            'subject_id' => 'required|exists:subjects,id',
-            'date' => 'required|date',
-            'status' => 'required|string|in:present,absent,late',
-            'reason' => 'nullable|string|max:255',
-        ]);
-
-        $attendance = new Attendance();
-        $attendance->user_id = $request->input('user_id');
-        $attendance->subject_id = $request->input('subject_id');
-        $attendance->date = $request->input('date');
-        $attendance->status = $request->input('status');
-        $attendance->reason = $request->input('reason');
-        $attendance->save();
+        Attendance::create($request->validated());
 
         return redirect()->route('attendance.index')->with('success', 'Attendance recorded successfully.');
     }
@@ -57,15 +44,9 @@ class AttendanceController extends Controller
         return view('attendance.edit', compact('attendance', 'users'));
     }
 
-    public function update(Request $request, $id)
+    public function update(AttendanceFormRequest $request, $id)
     {
-        $request->validate([
-            'user_id' => 'required|exists:users,id',
-            'subject_id' => 'required|exists:subjects,id',
-            'date' => 'required|date',
-            'status' => 'required|string|in:present,absent,late',
-            'reason' => 'nullable|string|max:255',
-        ]);
+        $request->validated();
 
         $attendance = Attendance::findOrFail($id);
         $attendance->user_id = $request->input('user_id');

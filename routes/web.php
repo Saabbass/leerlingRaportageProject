@@ -62,6 +62,11 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('/teacher', [UserParentStudentController::class, 'index'])->name('teacher.index');
+    Route::get('/teacher/create', [UserParentStudentController::class, 'create'])->name('teacher.create');
+    Route::post('/teacher', [SubjectController::class, 'store'])->name('teacher.store');
+    Route::get('/teacher/{id}/edit', [SubjectController::class, 'edit'])->name('teacher.edit');
+    Route::patch('/teacher/{id}', [SubjectController::class, 'update'])->name('teacher.update');
+    Route::delete('/teacher/{id}', [SubjectController::class, 'destroy'])->name('teacher.destroy');
 });
 
 require __DIR__ . '/auth.php';
