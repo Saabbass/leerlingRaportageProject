@@ -31,11 +31,15 @@ class UserParentStudentController extends Controller
     //     return view('teacher.index', compact('data'));
     // }
 
-    
+
     public function create()
     {
-        return view('teacher.create');
+        $parents = User::where('role', 'parent')->get();
+        $students = User::where('role', 'student')->get();
+
+        return view('teacher.create', compact('parents', 'students'));
     }
+
 
     public function store(Request $request)
     {
@@ -44,42 +48,59 @@ class UserParentStudentController extends Controller
             'student_id' => 'required|exists:users,id',
         ]);
 
-        $parent = User::find($validatedData['parent_id']);
-        $student = User::find($validatedData['student_id']);
-
-        if ($parent->role !== 'parent' || $student->role !== 'student') {
-            return redirect()->back()->withErrors('Invalid parent or student role.');
-        }
-
-        UserParentStudent::create($validatedData);
+        UserParentStudent::create([
+            'parent_id' => $validatedData['parent_id'],
+            'student_id' => $validatedData['student_id'],
+        ]);
 
         return redirect()->route('teacher.index')->with('success', 'Record created successfully.');
     }
 
-    public function edit($id)
+
+    public function edit($parent_id, $student_id)
     {
-        $record = UserParentStudent::findOrFail($id);
-        return view('teacher.edit', compact('record'));
+        $userParentStudent = UserParentStudent::where('parent_id', $parent_id)->where('student_id', $student_id)->firstOrFail();
+        $parents = User::where('role', 'parent')->get();
+        $students = User::where('role', 'student')->get();
+
+        return view('teacher.edit', compact('userParentStudent', 'parents', 'students'));
     }
 
-    public function update(Request $request, $id)
+
+    public function update(Request $request, $parent_id, $student_id)
     {
         $validatedData = $request->validate([
             'parent_id' => 'required|exists:users,id',
             'student_id' => 'required|exists:users,id',
         ]);
 
-        $record = UserParentStudent::findOrFail($id);
-        $record->update($validatedData);
+        UserParentStudent::where('parent_id', $parent_id)
+        ->where('student_id', $student_id)
+        ->update($validatedData);
 
         return redirect()->route('teacher.index')->with('success', 'Record updated successfully.');
     }
 
-    public function destroy($id)
-    {
-        $record = UserParentStudent::findOrFail($id);
-        $record->delete();
 
+    public function destroy($parent_id, $student_id)
+    {
+        // $userParentStudent = UserParentStudent::where('parent_id', $parent_id)
+        //     ->where('student_id', $student_id)
+        //     ->first();
+
+        // if ($userParentStudent) {
+        //     $userParentStudent->delete();
+        //     // return redirect()->route('teacher.index')->with('success', 'Record deleted successfully.');
+        //     dd($userParentStudent);
+        // } else {
+        //     return redirect()->route('teacher.index')->with('error', 'Record not found.');
+        // }
+
+        UserParentStudent::where('parent_id', $parent_id)
+                 ->where('student_id', $student_id)
+                 ->delete();
+
+        // return response()->json(['message' => 'Order item deleted successfully']);
         return redirect()->route('teacher.index')->with('success', 'Record deleted successfully.');
     }
 }

@@ -1,7 +1,7 @@
 <x-app-layout>
   <x-slot name="header">
     <h2 class="font-semibold text-xl text-[#333333] dark:text-[#E0E0E0] leading-tight">
-      {{ __('Docent') }}
+      {{ __('Leraar') }}
     </h2>
   </x-slot>
 
@@ -45,6 +45,8 @@
                 class="px-4 py-2 bg-[#C8E6C9] dark:bg-[#2E3B4E] text-left text-sm font-medium text-[#333333] dark:text-[#E0E0E0]">
                 {{ __('Naam van de Student') }}
               </th>
+              <th scope="col"
+              class="px-4 py-2 bg-[#C8E6C9] dark:bg-[#2E3B4E] text-left text-sm font-medium text-[#333333] dark:text-[#E0E0E0]"></th>
             </tr>
           </thead>
           <tbody class="bg-[#79b5ff] dark:bg-[#263238] divide-y divide-[#F5A623] dark:divide-[#FF6F61]">
@@ -54,6 +56,18 @@
                   {{ $item->parent->first_name }} {{ $item->parent->last_name }}</td>
                 <td class="px-4 py-2 whitespace-nowrap text-sm text-[#333333] dark:text-[#E0E0E0]">
                   {{ $item->student->first_name }} {{ $item->student->last_name }}</td>
+                <td>
+                  <a href="{{ route('teacher.edit', ['parent_id' => $item->parent_id, 'student_id' => $item->student_id]) }}"
+                    class="btn btn-warning text-blue-500 hover:underline">Edit</a>
+                  <form
+                    action="{{ route('teacher.destroy', ['parent_id' => $item->parent_id, 'student_id' => $item->student_id]) }}"
+                    method="POST" style="display:inline;">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger text-[#D0021B] dark:text-[#FF6F61] hover:underline"
+                      onclick="return confirm('Are you sure you want to delete this record?');">Delete</button>
+                  </form>
+                </td>
               </tr>
             @endforeach
           </tbody>
