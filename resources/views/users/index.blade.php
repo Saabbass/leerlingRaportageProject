@@ -11,7 +11,7 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-[#fefeff] dark:bg-[#263238] overflow-hidden shadow-sm sm:rounded-lg mt-6">
-                <div class="p-6 flex flex-wrap justify-evenly gap-1 text-[#1E90FF] dark:text-[#FFC107] bg-[#C8E6C9] dark:bg-[#2E3B4E]">
+                <div class="p-6 flex flex-wrap justify-evenly gap-1 text-[#955b24] dark:text-[#FFC107] bg-[#C8E6C9] dark:bg-[#2E3B4E]">
                     <a href="{{ route('subject.index') }}"
                     class="hover:underline rounded-xl hover:text-[#104E8B] dark:hover:text-[#FF6F61]">Vakken</a>
                   <a href="{{ route('grades.index') }}"
@@ -22,6 +22,13 @@
                     <a href="{{ route('teacher.index') }}"
                       class="hover:underline rounded-xl hover:text-[#104E8B] dark:hover:text-[#FF6F61]">Leraar</a>
                   @endif
+                </div>
+                <div class="mt-4">
+                    <form method="GET" action="{{ route('users.index') }}" class="flex items-center">
+                        <input type="text" name="search" placeholder="{{ __('Search Users') }}" class="px-4 py-2 border border-gray-300 rounded-md" value="{{ request()->query('search') }}">
+                        <button type="submit" class="ml-2 inline-flex items-center px-4 py-2 border border-transparent rounded-md font-semibold text-xs text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:border-blue-700 focus:ring focus:ring-blue-200 active:bg-blue-600 disabled:opacity-25 transition">{{ __('Search') }}</button>
+                    </form>
+                </div>
                 </div>
                 <table class="min-w-full divide-y divide-[#F5A623] dark:divide-[#FF6F61] mt-4">
                     <thead>
@@ -67,6 +74,5 @@
             </div>
         </div>
     </div>
-
 </x-app-layout>
 
