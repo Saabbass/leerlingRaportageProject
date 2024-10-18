@@ -13,7 +13,7 @@ class GradesController extends Controller
     {
         $grades = Grades::all();
         $subjects = Subject::select('id', 'subject_name')->get(); // Fetch all subjects
-        $users = User::select('id', 'name')->get(); // Fetch all users
+        $users = User::select('id', 'first_name')->get(); // Fetch all users
         return view('grades.index', compact('grades', 'subjects', 'users'));
     }
 

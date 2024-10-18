@@ -1,12 +1,13 @@
 <?php
 
-use App\Http\Controllers\AttendanceController;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\GradesController;
+use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SubjectController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\UserParentStudentController;
-use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
@@ -62,6 +63,15 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('/teacher', [UserParentStudentController::class, 'index'])->name('teacher.index');
+});
+
+Route::middleware('auth')->group(function () {
+    Route::get('/messages',[MessageController::class, 'index'])->name('messages.index');
+    Route::get('/messages/create',[MessageController::class, 'create'])->name('messages.create');
+    Route::post('/messages',[MessageController::class, 'store'])->name('messages.store');
+    Route::get('/messages/{id}/edit',[MessageController::class, 'edit'])->name('messages.edit');
+    Route::put('/messages/{id}',[MessageController::class, 'update'])->name('messages.update');
+    Route::delete('/messages/{id}',[MessageController::class, 'destroy'])->name('messages.destroy');
 });
 
 require __DIR__ . '/auth.php';
