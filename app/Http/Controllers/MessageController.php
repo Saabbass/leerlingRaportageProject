@@ -31,7 +31,8 @@ class MessageController extends Controller
     public function create()
     {
         $students = User::where('role', 'student')->get();
-        return view('messages.create', compact('students'));
+        $parents = User::where('role', 'parent')->get();
+        return view('messages.create', compact('students', 'parents'));
     }
     public function store(Request $request)
 {
@@ -40,13 +41,14 @@ class MessageController extends Controller
         'title' => 'required|string|max:255',
         'content' => 'required|string',
         'user_id' => 'required|exists:users,id',
+        'recipient_type' => 'required|in:student,parent',
     ]);
     
     $message = new Announcements();
     $message->title = $request->input('title');
     $message->content = $request->input('content');
     $message->user_id = $request->input('user_id');
-    $message->sent_by = auth()->id(); // Set the sent_by field to the authenticated user's ID
+    $message->sent_by = auth()->id(); // Set the sent_by field
     $message->save();
 
     return redirect()->route('messages.index')->with('success', 'Message created successfully.');
@@ -55,7 +57,8 @@ class MessageController extends Controller
     {
         $message = Announcements::findOrFail($id);
         $students = User::where('role', 'student')->get();
-        return view('messages.edit', compact('message', 'students'));
+        $parents = User::where('role', 'parent')->get();
+        return view('messages.edit', compact('message', 'students', 'parents'));
     }
     public function update(Request $request, $id)
     {
