@@ -9,9 +9,8 @@
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
       <div class="bg-[#79b5ff] dark:bg-[#263238] overflow-hidden shadow-sm sm:rounded-lg">
         <div class="p-6 text-[#333333] dark:text-[#E0E0E0]">
-          <form method="POST" action="{{ route('teacher.update', ['parent_id' => $userParentStudent->parent_id, 'student_id' => $userParentStudent->student_id]) }}">
+          <form method="POST" action="{{ route('teacher.store') }}">
             @csrf
-            @method('PUT')
 
             <div class="mb-4">
               <x-input-label for="parent_id" :value="__('Ouder')" />
@@ -19,7 +18,7 @@
                 class="bg-[#C8E6C9] dark:bg-[#2E3B4E] mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
                 required>
                 @foreach ($parents as $parent)
-                  <option value="{{ $parent->id }}" {{ $userParentStudent->parent_id == $parent->id ? 'selected' : '' }}>{{ $parent->first_name }} {{ $parent->last_name }}</option>
+                  <option value="{{ $parent->id }}">{{ $parent->first_name }} {{ $parent->last_name }}</option>
                 @endforeach
               </select>
               <x-input-error :messages="$errors->get('parent_id')" class="mt-2" />
@@ -31,7 +30,7 @@
                 class="bg-[#C8E6C9] dark:bg-[#2E3B4E] mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
                 required>
                 @foreach ($students as $student)
-                  <option value="{{ $student->id }}" {{ $userParentStudent->student_id == $student->id ? 'selected' : '' }}>{{ $student->first_name }} {{ $student->last_name }}</option>
+                  <option value="{{ $student->id }}">{{ $student->first_name }} {{ $student->last_name }}</option>
                 @endforeach
               </select>
               <x-input-error :messages="$errors->get('student_id')" class="mt-2" />

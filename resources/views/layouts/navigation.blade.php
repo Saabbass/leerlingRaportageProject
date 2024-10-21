@@ -29,7 +29,7 @@
             </x-nav-link>
             @if (auth()->user()->role === 'teacher' || auth()->user()->role === 'student')
               <x-nav-link :href="route('teacher.index')" :active="request()->routeIs('teacher.index')">
-                {{ __('Docenten') }}
+                {{ __('Leraar') }}
               </x-nav-link>
               <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.index')">
                 {{ __('Gebruikers') }}
@@ -161,10 +161,20 @@
         <x-responsive-nav-link :href="route('subject.index')" :active="request()->routeIs('subject.index')">
           {{ __('Subject') }}
         </x-responsive-nav-link>
-      @endauth
+      @else
       <x-responsive-nav-link href="/" :active="request()->routeIs('/')">
         {{ __('Homepage') }}
       </x-responsive-nav-link>
+        <x-responsive-nav-link href="/login" :active="request()->routeIs('login')">
+          {{ __('login') }}
+        </x-responsive-nav-link>
+
+        @if (Route::has('register'))
+          <x-responsive-nav-link href="/register" :active="request()->routeIs('/register')">
+            {{ __('register') }}
+          </x-responsive-nav-link>
+        @endif
+      @endauth
     </div>
 
     <!-- Responsive Settings Options -->

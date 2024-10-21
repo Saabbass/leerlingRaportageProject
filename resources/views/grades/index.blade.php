@@ -22,7 +22,7 @@
           @endif
         </div>
         <div class="p-6 text-[#333333] dark:text-[#E0E0E0]">
-          <div class="flex justify-between items-center mb-6">
+          <div class="flex flex-col md:flex-row md:justify-between items-center mb-6 gap-4 md:gap-0">
             <h3 class="text-lg font-semibold">{{ __('Cijferlijst') }}</h3>
             @if (auth()->user()->role === 'teacher')
               <a href="{{ route('grades.create') }}"
@@ -33,14 +33,14 @@
           </div>
           <div class="mt-4">
             @foreach ($grades as $grade)
-              <div class="flex justify-between items-center py-2 border-b">
+              <div class="flex flex-col md:flex-row justify-between items-center border-b py-2">
                 <div>
                   <span>{{ $grade->assignment_name }}</span>
                   <p>{{ $subjects->firstWhere('id', $grade->subject_id)->subject_name }}</p>
                   <p>{{ __('Cijfer: ') }}{{ $grade->grade }}</p>
                   <p>{{ __('Datum: ') }}{{ $grade->date }}</p>
                 </div>
-                <div class="flex space-x-4">
+                <div class="flex flex-col justify-center items-center sm:flex-row sm:space-x-4">
                   @if (auth()->user()->role === 'teacher')
                     <a href="{{ route('grades.edit', $grade->id) }}" class="text-blue-500 hover:underline">
                       {{ __('Bewerken') }}

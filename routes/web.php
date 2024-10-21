@@ -63,6 +63,11 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('/teacher', [UserParentStudentController::class, 'index'])->name('teacher.index');
+    Route::get('/teacher/create', [UserParentStudentController::class, 'create'])->name('teacher.create');
+    Route::post('/teacher', [UserParentStudentController::class, 'store'])->name('teacher.store');
+    Route::get('teacher/{parent_id}/{student_id}/edit', [UserParentStudentController::class, 'edit'])->name('teacher.edit');
+    Route::put('teacher/{parent_id}/{student_id}', [UserParentStudentController::class, 'update'])->name('teacher.update');
+    Route::delete('teacher/{parent_id}/{student_id}', [UserParentStudentController::class, 'destroy'])->name('teacher.destroy');
 });
 
 Route::middleware('auth')->group(function () {
