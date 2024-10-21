@@ -60,7 +60,9 @@
                       @endif
                       <td class="px-4 py-2 text-sm font-medium whitespace-nowrap">
                           @if (auth()->user()->role !== 'student')
+                          @if (auth()->user()->id == $message->sent_by)
                             <a href="{{ route('messages.edit', $message) }}" class="text-indigo-600 hover:text-indigo-900">{{ __('Edit') }}</a>
+                            @endif
                             @endif
                             <form action="{{ route('messages.destroy', $message) }}" method="POST" class="inline">
                                 @csrf
