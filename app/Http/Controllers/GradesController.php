@@ -13,14 +13,16 @@ class GradesController extends Controller
     {
         $grades = Grades::all();
         $subjects = Subject::select('id', 'subject_name')->get(); // Fetch all subjects
-        $users = User::select('id', 'first_name', 'last_name')->get(); // Fetch all users
+        $users = User::select('id', 'first_name', 'last_name', 'role')->get(); // Fetch all users with their roles
         return view('grades.index', compact('grades', 'subjects', 'users'));
     }
+
+
 
     public function create()
     {
         $subjects = Subject::select('id', 'subject_name')->get(); // Fetch all subjects
-        $users = User::select('id', 'first_name', 'last_name')->get(); // Fetch all users
+        $users = User::select('id', 'first_name', 'last_name', 'role')->get(); // Fetch all users with their roles
         return view('grades.create', compact('subjects', 'users'));
     }
 

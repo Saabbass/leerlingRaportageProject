@@ -4,7 +4,6 @@
       {{ __('Cijfers') }}
     </h2>
   </x-slot>
-
   <div class="py-12">
     <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
       <div class="bg-[#79b5ff] dark:bg-[#263238] overflow-hidden shadow-sm sm:rounded-lg mt-6">
@@ -33,6 +32,9 @@
           </div>
           <div class="mt-4">
             @foreach ($grades as $grade)
+            @if (auth()->user()->role === 'teacher')
+              <p>{{ __('Student: ') }}{{ $users->firstWhere('id', $grade->user_id)->first_name }}</p>
+            @endif
               <div class="flex flex-col md:flex-row justify-between items-center border-b py-2">
                 <div>
                   <span>{{ $grade->assignment_name }}</span>

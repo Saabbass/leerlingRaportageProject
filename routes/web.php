@@ -11,12 +11,13 @@ use App\Http\Controllers\UserParentStudentController;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->middleware('auth')->name('welcome')->where('role', 'teacher');
 
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 Route::get('/dashboard', \App\Http\Controllers\DashboardController::class)->middleware(['auth', 'verified'])->name('dashboard');
+
 Route::get('/users', [ProfileController::class, 'index'])->middleware(['auth'])->name('users.index');
 Route::put('/users/{user}', [ProfileController::class, 'update_user'])->middleware(['auth'])->name('users.update');
 Route::get('/users/{user}/edit', [ProfileController::class, 'edit_user'])->middleware(['auth'])->name('users.edit');

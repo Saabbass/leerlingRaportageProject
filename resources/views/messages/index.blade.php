@@ -14,15 +14,15 @@
                   <div>
                     <a href="{{ route('messages.create') }}"
                       class="px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700">
-                      {{ __('New Message') }}
+                      {{ __('Nieuwe Bericht') }}
                     </a>
                     <a href="{{ route('messages.index', ['filter' => 'others']) }}"
                       class="px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700">
-                      {{ __('Messages from Others') }}
+                      {{ __('Andere Berichten') }}
                     </a>
                     <a href="{{ route('messages.index') }}"
                       class="px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700">
-                      {{ __('My Messages') }}
+                      {{ __('Mijn Berichten') }}
                     </a>
                   </div>
                 @endif
@@ -31,21 +31,27 @@
                 <thead>
                     <tr>
                         <th scope="col" class="px-4 py-2 bg-[#C8E6C9] dark:bg-[#2E3B4E] text-left text-sm font-medium text-[#333333] dark:text-[#E0E0E0]">
-                            {{ __('Title') }}
+                            {{ __('Titel') }}
                         </th>
                         <th scope="col" class="px-4 py-2 bg-[#C8E6C9] dark:bg-[#2E3B4E] text-left text-sm font-medium text-[#333333] dark:text-[#E0E0E0]">
-                            {{ __('Content') }}
+                            {{ __('Inhoud') }}
                         </th>
-                        @if (auth()->user()->role !== 'student')
+                        @if (auth()->user()->role === 'teacher')
                         <th scope="col" class="px-4 py-2 bg-[#C8E6C9] dark:bg-[#2E3B4E] text-left text-sm font-medium text-[#333333] dark:text-[#E0E0E0]">
-                          {{ __('Sent by') }}
-                      </th>
+                          {{ __('Verzonden naar') }}
+                        </th>
+                        @elseif (auth()->user()->role === 'student')
+                        <th scope="col" class="px-4 py-2 bg-[#C8E6C9] dark:bg-[#2E3B4E] text-left text-sm font-medium text-[#333333] dark:text-[#E0E0E0]">
+                          {{ __('Verzonden door') }}
+                        </th>
+                        @endif
+                        @if (auth()->user()->role === 'teacher')
+                        <th scope="col" class="px-4 py-2 bg-[#C8E6C9] dark:bg-[#2E3B4E] text-left text-sm font-medium text-[#333333] dark:text-[#E0E0E0]">
+                            {{ __('Verzonden naar') }}
+                        </th>
                         @endif
                         <th scope="col" class="px-4 py-2 bg-[#C8E6C9] dark:bg-[#2E3B4E] text-left text-sm font-medium text-[#333333] dark:text-[#E0E0E0]">
-                            {{ __('Sent to') }}
-                        </th>
-                        <th scope="col" class="px-4 py-2 bg-[#C8E6C9] dark:bg-[#2E3B4E] text-left text-sm font-medium text-[#333333] dark:text-[#E0E0E0]">
-                            {{ __('Actions') }}
+                            {{ __('Acties') }}
                         </th>
                     </tr>
                 </thead>
@@ -61,12 +67,14 @@
                       <td class="px-4 py-2 text-sm font-medium whitespace-nowrap">
                           @if (auth()->user()->role !== 'student')
                             <a href="{{ route('messages.edit', $message) }}" class="text-indigo-600 hover:text-indigo-900">{{ __('Edit') }}</a>
-                            @endif
+                          @endif
+                          @if (auth()->user()->role === 'teacher')
                             <form action="{{ route('messages.destroy', $message) }}" method="POST" class="inline">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="text-red-600 hover:text-red-900">{{ __('Delete') }}</button>
                             </form>
+                          @endif
                       </td>
                   </tr>
               @empty
