@@ -49,6 +49,9 @@
                         <th scope="col" class="px-4 py-2 bg-[#C8E6C9] dark:bg-[#2E3B4E] text-left text-sm font-medium text-[#333333] dark:text-[#E0E0E0]">
                             {{ __('Verzonden naar') }}
                         </th>
+                        <th scope="col" class="px-4 py-2 bg-[#C8E6C9] dark:bg-[#2E3B4E] text-left text-sm font-medium text-[#333333] dark:text-[#E0E0E0]">
+                            {{ __('Datum') }}
+                        </th>
                         @endif
                         <th scope="col" class="px-4 py-2 bg-[#C8E6C9] dark:bg-[#2E3B4E] text-left text-sm font-medium text-[#333333] dark:text-[#E0E0E0]">
                             {{ __('Acties') }}
@@ -64,6 +67,7 @@
                       @if (auth()->user()->role !== 'student')
                       <td class="px-4 py-2 whitespace-nowrap text-sm text-[#333333] dark:text-[#E0E0E0]">{{ $message->user->first_name }} {{ $message->user->last_name }}</td>
                       @endif
+                      <td class="px-4 py-2 whitespace-nowrap text-sm text-[#333333] dark:text-[#E0E0E0]">{{ $message->created_at->format('d-m-Y H:i') }}</td>
                       <td class="px-4 py-2 text-sm font-medium whitespace-nowrap">
                           @if (auth()->user()->role !== 'student')
                           @if (auth()->user()->id == $message->sent_by)
