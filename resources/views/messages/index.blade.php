@@ -68,13 +68,10 @@
                           @if (auth()->user()->role !== 'student')
                           @if (auth()->user()->id == $message->sent_by)
                             <a href="{{ route('messages.edit', $message) }}" class="text-indigo-600 hover:text-indigo-900">{{ __('Edit') }}</a>
-<<<<<<< HEAD
                           @endif
                           @if (auth()->user()->role === 'teacher')
-=======
                             @endif
-                            @endif
->>>>>>> 299df6c4c7751d8b3853a28c129dae5838f57fc0
+                          
                             <form action="{{ route('messages.destroy', $message) }}" method="POST" class="inline">
                                 @csrf
                                 @method('DELETE')
