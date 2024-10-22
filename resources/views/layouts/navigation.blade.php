@@ -12,6 +12,7 @@
           </a>
         </div>
 
+
         <!-- Navigation Links -->
         <div class="hidden space-x-3 md:-my-px md:ms-10 md:flex md:flex-wrap ">
           @auth
@@ -27,7 +28,10 @@
             <x-nav-link :href="route('attendance.index')" :active="request()->routeIs('attendance.index')">
               {{ __('Aanwezigheid') }}
             </x-nav-link>
-            @if (auth()->user()->role === 'teacher' || auth()->user()->role === 'student')
+            <x-nav-link :href="route('messages.index')" :active="request()->routeIs('messages.index')">
+              {{ __('Berichten') }}
+            </x-nav-link>
+            @if (auth()->user()->role == 'teacher')
               <x-nav-link :href="route('teacher.index')" :active="request()->routeIs('teacher.index')">
                 {{ __('Leraar') }}
               </x-nav-link>
