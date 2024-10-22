@@ -39,9 +39,6 @@
                 {{ __('Gebruikers') }}
               </x-nav-link>
               @endif
-              <x-nav-link :href="route('messages.index')" :active="request()->routeIs('messages.index')">
-                {{ __('Berichten') }}
-              </x-nav-link>
           @endauth
         </div>
 

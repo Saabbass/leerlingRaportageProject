@@ -54,6 +54,9 @@
                         </th>
                         @endif
                         <th scope="col" class="px-4 py-2 bg-[#C8E6C9] dark:bg-[#2E3B4E] text-left text-sm font-medium text-[#333333] dark:text-[#E0E0E0]">
+                            {{ __('Datum') }}
+                        </th>
+                        <th scope="col" class="px-4 py-2 bg-[#C8E6C9] dark:bg-[#2E3B4E] text-left text-sm font-medium text-[#333333] dark:text-[#E0E0E0]">
                             {{ __('Acties') }}
                         </th>
                     </tr>
