@@ -14,8 +14,11 @@
                   <div>
                     <a href="{{ route('messages.create') }}"
                       class="px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700">
-                      {{ __('Nieuwe berichten') }}
+                      {{ __('Nieuwe bericht') }}
                     </a>
+                  </div>
+                @endif
+                @if (auth()->user()->role == 'teacher')
                     <a href="{{ route('messages.index', ['filter' => 'others']) }}"
                       class="px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700">
                       {{ __('Andere berichten') }}
@@ -36,13 +39,16 @@
                         <th scope="col" class="px-4 py-2 bg-[#C8E6C9] dark:bg-[#2E3B4E] text-left text-sm font-medium text-[#333333] dark:text-[#E0E0E0]">
                             {{ __('Inhoud') }}
                         </th>
-                        @if (auth()->user()->role !== 'student')
+                        @if (auth()->user()->role == 'teacher')
                         <th scope="col" class="px-4 py-2 bg-[#C8E6C9] dark:bg-[#2E3B4E] text-left text-sm font-medium text-[#333333] dark:text-[#E0E0E0]">
                           {{ __('Verzonden door') }}
                       </th>
                         @endif
                         <th scope="col" class="px-4 py-2 bg-[#C8E6C9] dark:bg-[#2E3B4E] text-left text-sm font-medium text-[#333333] dark:text-[#E0E0E0]">
                             {{ __('Verzonden naar') }}
+                        </th>
+                        <th scope="col" class="px-4 py-2 bg-[#C8E6C9] dark:bg-[#2E3B4E] text-left text-sm font-medium text-[#333333] dark:text-[#E0E0E0]">
+                            {{ __('Verzonden op') }}
                         </th>
                         <th scope="col" class="px-4 py-2 bg-[#C8E6C9] dark:bg-[#2E3B4E] text-left text-sm font-medium text-[#333333] dark:text-[#E0E0E0]">
                             {{ __('Acties') }}
@@ -54,12 +60,13 @@
                   <tr>
                       <td class="px-4 py-2 whitespace-nowrap text-sm text-[#333333] dark:text-[#E0E0E0]">{{ $message->title }}</td>
                       <td class="px-4 py-2 whitespace-nowrap text-sm text-[#333333] dark:text-[#E0E0E0]">{{ $message->content }}</td>
-                      <td class="px-4 py-2 whitespace-nowrap text-sm text-[#333333] dark:text-[#E0E0E0]">Teacher  {{$message->sentBy->last_name}}</td>
-                      @if (auth()->user()->role !== 'student')
-                      <td class="px-4 py-2 whitespace-nowrap text-sm text-[#333333] dark:text-[#E0E0E0]">{{ $message->user->first_name }} {{ $message->user->last_name }}</td>
+                      @if (auth()->user()->role == 'teacher')
+                      <td class="px-4 py-2 whitespace-nowrap text-sm text-[#333333] dark:text-[#E0E0E0]">{{ $message->sentBy->first_name }} {{ $message->sentBy->last_name }}</td>
                       @endif
+                      <td class="px-4 py-2 whitespace-nowrap text-sm text-[#333333] dark:text-[#E0E0E0]">{{ $message->user->first_name }} {{ $message->user->last_name }}</td>
+                      <td class="px-4 py-2 whitespace-nowrap text-sm text-[#333333] dark:text-[#E0E0E0]">{{ $message->created_at->format('d-m-Y H:i') }}</td>
                       <td class="px-4 py-2 text-sm font-medium whitespace-nowrap">
-                          @if (auth()->user()->role !== 'student')
+                          @if (auth()->user()->role == 'teacher' || auth()->user()->role == 'parent')
                           @if (auth()->user()->id == $message->sent_by)
                             <a href="{{ route('messages.edit', $message) }}" class="text-indigo-600 hover:text-indigo-900">{{ __('Edit') }}</a>
                             <form action="{{ route('messages.destroy', $message) }}" method="POST" class="inline">
@@ -73,7 +80,7 @@
                   </tr>
               @empty
                   <tr>
-                      <td colspan="5" class="px-4 py-2 text-center text-sm text-[#333333] dark:text-[#E0E0E0]">
+                      <td colspan="6" class="px-4 py-2 text-center text-sm text-[#333333] dark:text-[#E0E0E0]">
                           {{ __('You have no messages.') }}
                       </td>
                   </tr>

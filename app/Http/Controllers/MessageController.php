@@ -10,38 +10,51 @@ use App\Models\Announcements;
 class MessageController extends Controller
 {
     public function index(Request $request)
-{
-    $query = Announcements::with(['sentBy', 'user']);
-
-    if (auth()->user()->role == 'student') {
-        $query->where('user_id', auth()->id());
-    } else if (auth()->user()->role == 'teacher') {
-        if ($request->has('filter') && $request->filter == 'others') {
-            $query->where('sent_by', '!=', auth()->id());
-        } else {
-            $query->where('sent_by', auth()->id());
+    {
+        $query = Announcements::with(['sentBy', 'user']);
+    
+        if (auth()->user()->role == 'student') {
+            $query->where('user_id', auth()->id());
+        } else if (auth()->user()->role == 'teacher') {
+            if ($request->has('filter') && $request->filter == 'others') {
+                $query->where('sent_by', '!=', auth()->id());
+            } else {
+                $query->where('sent_by', auth()->id());
+            }
+        } else if (auth()->user()->role == 'parent') {
+            $query->where(function($q) {
+                $q->where('sent_by', auth()->id())
+                ->orWhere('user_id', auth()->id());
+            });
         }
+    
+        $messages = $query->get();
+    
+        return view('messages.index', compact('messages'));
     }
 
-    $messages = $query->get();
+public function create()
+{
+    $user = auth()->user();
+    $students = [];
+    $parents = [];
+    $teachers = User::where('role', 'teacher')->get();
 
-    return view('messages.index', compact('messages'));
-}
-
-    public function create()
-    {
+    if ($user->role == 'teacher') {
         $students = User::where('role', 'student')->get();
         $parents = User::where('role', 'parent')->get();
-        return view('messages.create', compact('students', 'parents'));
     }
-    public function store(Request $request)
+
+    return view('messages.create', compact('students', 'parents', 'teachers'));
+}
+public function store(Request $request)
 {
     // Validate the request data
     $request->validate([
         'title' => 'required|string|max:255',
         'content' => 'required|string',
         'user_id' => 'required|exists:users,id',
-        'recipient_type' => 'required|in:student,parent',
+        'recipient_type' => 'required|in:student,parent,teacher',
     ]);
     
     $message = new Announcements();
@@ -53,13 +66,15 @@ class MessageController extends Controller
 
     return redirect()->route('messages.index')->with('success', 'Message created successfully.');
 }
-    public function edit($id)
-    {
-        $message = Announcements::findOrFail($id);
-        $students = User::where('role', 'student')->get();
-        $parents = User::where('role', 'parent')->get();
-        return view('messages.edit', compact('message', 'students', 'parents'));
-    }
+ 
+public function edit($id)
+{
+    $message = Announcements::findOrFail($id);
+    $students = User::where('role', 'student')->get();
+    $parents = User::where('role', 'parent')->get();
+    $teachers = User::where('role', 'teacher')->get();
+    return view('messages.edit', compact('message', 'students', 'parents', 'teachers'));
+}
     public function update(Request $request, $id)
     {
         // Validate the request data

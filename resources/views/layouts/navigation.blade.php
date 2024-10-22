@@ -34,10 +34,10 @@
               <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.index')">
                 {{ __('Gebruikers') }}
               </x-nav-link>
-                <x-nav-link :href="route('messages.index')" :active="request()->routeIs('messages.index')">
-                  {{ __('Berichten') }}
-                </x-nav-link>
-            @endif
+              @endif
+              <x-nav-link :href="route('messages.index')" :active="request()->routeIs('messages.index')">
+                {{ __('Berichten') }}
+              </x-nav-link>
           @endauth
         </div>
 
