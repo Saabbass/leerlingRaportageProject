@@ -30,7 +30,7 @@
                     </div>
                     <div class="mt-4">
                         <form method="GET" action="{{ route('users.index') }}" class="flex items-center">
-                            <input type="text" name="search" placeholder="{{ __('Search Users') }}" class="px-4 py-2 border border-gray-300 rounded-md" value="{{ request()->query('search') }}">
+                            <input type="text" name="search" placeholder="{{ __('Search Users') }}" class="px-4 py-2 border border-gray-300 rounded-md bg-darkblue text-white" value="{{ request()->query('search') }}">
                             <button type="submit" class="ml-2 inline-flex items-center px-4 py-2 border border-transparent rounded-md font-semibold text-xs text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:border-blue-700 focus:ring focus:ring-blue-200 active:bg-blue-600 disabled:opacity-25 transition">{{ __('Search') }}</button>
                         </form>
                     </div>
