@@ -49,10 +49,10 @@
                         <th scope="col" class="px-4 py-2 bg-[#C8E6C9] dark:bg-[#2E3B4E] text-left text-sm font-medium text-[#333333] dark:text-[#E0E0E0]">
                             {{ __('Verzonden naar') }}
                         </th>
+                        @endif
                         <th scope="col" class="px-4 py-2 bg-[#C8E6C9] dark:bg-[#2E3B4E] text-left text-sm font-medium text-[#333333] dark:text-[#E0E0E0]">
                             {{ __('Datum') }}
                         </th>
-                        @endif
                         <th scope="col" class="px-4 py-2 bg-[#C8E6C9] dark:bg-[#2E3B4E] text-left text-sm font-medium text-[#333333] dark:text-[#E0E0E0]">
                             {{ __('Acties') }}
                         </th>
@@ -75,12 +75,14 @@
                           @endif
                           @if (auth()->user()->role === 'teacher')
                             @endif
-                          
-                            <form action="{{ route('messages.destroy', $message) }}" method="POST" class="inline">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="text-red-600 hover:text-red-900">{{ __('Delete') }}</button>
-                            </form>
+                            @if (auth()->user()->role === 'teacher')
+                                <form action="{{ route('messages.destroy', $message) }}" method="POST" class="inline">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="text-red-600 hover:text-red-900">{{ __('Delete') }}</button>
+                                </form>
+                            @endif
+                           
                           @endif
                       </td>
                   </tr>
