@@ -19,6 +19,7 @@ class UserSeeder extends Seeder
         //create admin user
         // Create admin user
         User::create([
+            'id' => 1,
             'first_name' => 'Admin',
             'last_name' => 'User', 
             'age' => 30,
@@ -30,6 +31,7 @@ class UserSeeder extends Seeder
 
         // Create 40 student users
         User::create([
+            'id' => 2,
             'first_name' => 'Student',
             'last_name' => '1',
             'age' => 12,
@@ -40,6 +42,7 @@ class UserSeeder extends Seeder
         ]);
 
         User::create([
+            'id' => 3,
             'first_name' => 'Student',
             'last_name' => '2',
             'age' => 13,
@@ -50,6 +53,7 @@ class UserSeeder extends Seeder
         ]);
 
         User::create([
+            'id' => 4,
             'first_name' => 'Student',
             'last_name' => '3',
             'age' => 14,
@@ -60,6 +64,7 @@ class UserSeeder extends Seeder
         ]);
 
         User::create([
+            'id' => 5,
             'first_name' => 'Student',
             'last_name' => '4',
             'age' => 15,
@@ -70,6 +75,7 @@ class UserSeeder extends Seeder
         ]);
 
         User::create([
+            'id' => 6,
             'first_name' => 'Student',
             'last_name' => '5',
             'age' => 16,
@@ -80,6 +86,7 @@ class UserSeeder extends Seeder
         ]);
 
         User::create([
+            'id' => 7,
             'first_name' => 'Student',
             'last_name' => '6',
             'age' => 17,
@@ -90,6 +97,7 @@ class UserSeeder extends Seeder
         ]);
 
         User::create([
+            'id' => 8,
             'first_name' => 'Student',
             'last_name' => '7',
             'age' => 18,
@@ -100,6 +108,7 @@ class UserSeeder extends Seeder
         ]);
 
         User::create([
+            'id' => 9,
             'first_name' => 'Student',
             'last_name' => '8',
             'age' => 12,
@@ -110,6 +119,7 @@ class UserSeeder extends Seeder
         ]);
 
         User::create([
+            'id' => 10,
             'first_name' => 'Student',
             'last_name' => '9',
             'age' => 13,
@@ -120,6 +130,7 @@ class UserSeeder extends Seeder
         ]);
 
         User::create([
+            'id' => 11,
             'first_name' => 'Student',
             'last_name' => '10',
             'age' => 14,
@@ -131,6 +142,7 @@ class UserSeeder extends Seeder
 
         // Create 40 parent users
         User::create([
+            'id' => 12,
             'first_name' => 'Parent',
             'last_name' => '1',
             'age' => 35,
@@ -141,6 +153,7 @@ class UserSeeder extends Seeder
         ]);
 
         User::create([
+            'id' => 13,
             'first_name' => 'Parent',
             'last_name' => '2',
             'age' => 36,
@@ -151,6 +164,7 @@ class UserSeeder extends Seeder
         ]);
 
         User::create([
+            'id' => 14,
             'first_name' => 'Parent',
             'last_name' => '3',
             'age' => 37,
@@ -161,6 +175,7 @@ class UserSeeder extends Seeder
         ]);
 
         User::create([
+            'id' => 15,
             'first_name' => 'Parent',
             'last_name' => '4',
             'age' => 38,
@@ -171,6 +186,7 @@ class UserSeeder extends Seeder
         ]);
 
         User::create([
+            'id' => 16,
             'first_name' => 'Parent',
             'last_name' => '5',
             'age' => 39,
@@ -181,6 +197,7 @@ class UserSeeder extends Seeder
         ]);
 
         User::create([
+            'id' => 17,
             'first_name' => 'Parent',
             'last_name' => '6',
             'age' => 40,
@@ -191,6 +208,7 @@ class UserSeeder extends Seeder
         ]);
 
         User::create([
+            'id' => 18,
             'first_name' => 'Parent',
             'last_name' => '7',
             'age' => 41,
@@ -201,6 +219,7 @@ class UserSeeder extends Seeder
         ]);
 
         User::create([
+            'id' => 19,
             'first_name' => 'Parent',
             'last_name' => '8',
             'age' => 42,
@@ -211,6 +230,7 @@ class UserSeeder extends Seeder
         ]);
 
         User::create([
+            'id' => 20,
             'first_name' => 'Parent',
             'last_name' => '9',
             'age' => 43,
@@ -221,6 +241,7 @@ class UserSeeder extends Seeder
         ]);
 
         User::create([
+            'id' => 21,
             'first_name' => 'Parent',
             'last_name' => '10',
             'age' => 44,
