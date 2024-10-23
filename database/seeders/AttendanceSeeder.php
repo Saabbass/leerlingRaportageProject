@@ -25,7 +25,7 @@ class AttendanceSeeder extends Seeder
             'subject_id' => 1,
             'date' => '2023-09-01',
             'status' => 'absent',
-            'reason' => 'Sick',
+            'reason' => 'ziek',
         ]);
 
         \App\Models\Attendance::create([
@@ -57,7 +57,7 @@ class AttendanceSeeder extends Seeder
             'subject_id' => 1,
             'date' => '2023-09-02',
             'status' => 'absent',
-            'reason' => 'Family emergency',
+            'reason' => 'Familie noodgeval',
         ]);
     }
 }

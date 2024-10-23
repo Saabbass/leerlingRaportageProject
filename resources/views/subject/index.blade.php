@@ -18,7 +18,7 @@
             class="hover:underline rounded-xl hover:text-[#104E8B] dark:hover:text-[#FF6F61]">Aanwezigheid</a>
           @if (auth()->user()->role === 'teacher')
             <a href="{{ route('teacher.index') }}"
-              class="hover:underline rounded-xl hover:text-[#104E8B] dark:hover:text-[#FF6F61]">Docenten</a>
+              class="hover:underline rounded-xl hover:text-[#104E8B] dark:hover:text-[#FF6F61]">Leraar</a>
           @endif
         </div>
         <div class="p-6 text-[#333333] dark:text-[#E0E0E0]">

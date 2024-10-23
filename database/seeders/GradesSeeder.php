@@ -15,28 +15,28 @@ class GradesSeeder extends Seeder
         \App\Models\Grades::create([
             'user_id' => 1,
             'subject_id' => 1,
-            'assignment_name' => 'Math Homework 1',
+            'assignment_name' => 'Wiskunde Huiswerk 1',
             'grade' => 8.5,
             'date' => '2023-09-15',
-            'description' => 'First homework assignment for Math class.',
+            'description' => 'Eerste huiswerkopdracht voor de wiskundeles.',
         ]);
 
         \App\Models\Grades::create([
             'user_id' => 2,
             'subject_id' => 2,
-            'assignment_name' => 'Science Project',
+            'assignment_name' => 'Wetenschapsproject',
             'grade' => 9.0,
             'date' => '2023-09-20',
-            'description' => 'Group project on renewable energy sources.',
+            'description' => 'Groepsproject over hernieuwbare energiebronnen.',
         ]);
 
         \App\Models\Grades::create([
             'user_id' => 3,
             'subject_id' => 1,
-            'assignment_name' => 'Math Quiz 1',
+            'assignment_name' => 'Wiskunde Toets 1',
             'grade' => 7.0,
             'date' => '2023-09-25',
-            'description' => 'Quiz covering chapters 1 and 2.',
+            'description' => 'Toets over hoofdstukken 1 en 2.',
         ]);
     }
 }
