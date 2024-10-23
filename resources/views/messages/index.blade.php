@@ -78,12 +78,13 @@
                           @endif
                           @if (auth()->user()->role === 'teacher')
                             @endif
-                          
-                            <form action="{{ route('messages.destroy', $message) }}" method="POST" class="inline">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="text-red-600 hover:text-red-900">{{ __('Delete') }}</button>
-                            </form>
+                            @if (auth()->user()->role === 'teacher')
+                                <form action="{{ route('messages.destroy', $message) }}" method="POST" class="inline">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="text-red-600 hover:text-red-900">{{ __('Delete') }}</button>
+                                </form>
+                            @endif
                           @endif
                       </td>
                   </tr>

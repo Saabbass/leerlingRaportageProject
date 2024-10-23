@@ -8,16 +8,16 @@
 
           <ul class="flex flex-wrap items-center mb-6 text-sm font-medium text-[#333333] dark:text-[#E0E0E0] sm:mb-0">
               <li>
-                  <a href="#" class="hover:text-[#50E3C2] hover:dark:text-[#FF6F61] hover:underline me-4 md:me-6">About us</a>
+                  <a href="#" class="hover:text-[#50E3C2] hover:dark:text-[#FF6F61] hover:underline me-4 md:me-6"></a>
               </li>
               <li>
-                  <a href="#" class="hover:text-[#50E3C2] hover:dark:text-[#FF6F61] hover:underline me-4 md:me-6">Privacy Policy</a>
+                  <a href="#" class="hover:text-[#50E3C2] hover:dark:text-[#FF6F61] hover:underline me-4 md:me-6"></a>
               </li>
               <li>
-                  <a href="#" class="hover:text-[#50E3C2] hover:dark:text-[#FF6F61] hover:underline me-4 md:me-6">Licensing</a>
+                  <a href="#" class="hover:text-[#50E3C2] hover:dark:text-[#FF6F61] hover:underline me-4 md:me-6"></a>
               </li>
               <li>
-                  <a href="#" class="hover:text-[#50E3C2] hover:dark:text-[#FF6F61] hover:underline">Contact</a>
+                  <a href="#" class="hover:text-[#50E3C2] hover:dark:text-[#FF6F61] hover:underline"></a>
               </li>
           </ul>
           
