@@ -43,14 +43,12 @@
                         <th scope="col" class="px-4 py-2 bg-[#C8E6C9] dark:bg-[#2E3B4E] text-left text-sm font-medium text-[#333333] dark:text-[#E0E0E0]">
                           {{ __('Verzonden naar') }}
                         </th>
-                        @elseif (auth()->user()->role === 'student')
+                        @elseif (auth()->user()->role === 'student' || auth()->user()->role === 'parent')
                         <th scope="col" class="px-4 py-2 bg-[#C8E6C9] dark:bg-[#2E3B4E] text-left text-sm font-medium text-[#333333] dark:text-[#E0E0E0]">
                           {{ __('Verzonden door') }}
                         </th>
-                        @endif
-                        @if (auth()->user()->role === 'teacher')
                         <th scope="col" class="px-4 py-2 bg-[#C8E6C9] dark:bg-[#2E3B4E] text-left text-sm font-medium text-[#333333] dark:text-[#E0E0E0]">
-                            {{ __('Verzonden naar') }}
+                          {{ __('Verzonden naar') }}
                         </th>
                         @endif
                         <th scope="col" class="px-4 py-2 bg-[#C8E6C9] dark:bg-[#2E3B4E] text-left text-sm font-medium text-[#333333] dark:text-[#E0E0E0]">
@@ -66,7 +64,9 @@
                   <tr>
                       <td class="px-4 py-2 whitespace-nowrap text-sm text-[#333333] dark:text-[#E0E0E0]">{{ $message->title }}</td>
                       <td class="px-4 py-2 whitespace-nowrap text-sm text-[#333333] dark:text-[#E0E0E0]">{{ $message->content }}</td>
-                      @if (auth()->user()->role == 'teacher')
+                      @if (auth()->user()->role === 'teacher')
+                      <td class="px-4 py-2 whitespace-nowrap text-sm text-[#333333] dark:text-[#E0E0E0]">{{ $message->user->first_name }} {{ $message->user->last_name }}</td>
+                      @elseif (auth()->user()->role === 'student' || auth()->user()->role === 'parent')
                       <td class="px-4 py-2 whitespace-nowrap text-sm text-[#333333] dark:text-[#E0E0E0]">{{ $message->sentBy->first_name }} {{ $message->sentBy->last_name }}</td>
                       @endif
                       <td class="px-4 py-2 whitespace-nowrap text-sm text-[#333333] dark:text-[#E0E0E0]">{{ $message->user->first_name }} {{ $message->user->last_name }}</td>
@@ -75,16 +75,12 @@
                           @if (auth()->user()->role == 'teacher' || auth()->user()->role == 'parent')
                           @if (auth()->user()->id == $message->sent_by)
                             <a href="{{ route('messages.edit', $message) }}" class="text-indigo-600 hover:text-indigo-900">{{ __('Edit') }}</a>
+                            <form action="{{ route('messages.destroy', $message) }}" method="POST" class="inline">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="text-red-600 hover:text-red-900">{{ __('Delete') }}</button>
+                            </form>
                           @endif
-                          @if (auth()->user()->role === 'teacher')
-                            @endif
-                            @if (auth()->user()->role === 'teacher')
-                                <form action="{{ route('messages.destroy', $message) }}" method="POST" class="inline">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="text-red-600 hover:text-red-900">{{ __('Delete') }}</button>
-                                </form>
-                            @endif
                           @endif
                       </td>
                   </tr>
