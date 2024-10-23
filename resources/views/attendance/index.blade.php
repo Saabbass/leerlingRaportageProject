@@ -59,41 +59,45 @@
           </thead>
           <tbody class="bg-[#79b5ff] dark:bg-[#263238] divide-y divide-[#F5A623] dark:divide-[#FF6F61]">
             @foreach ($attendances as $attendance)
-              <tr>
-                <td class="px-4 py-2 whitespace-nowrap text-sm text-[#333333] dark:text-[#E0E0E0]">
-                  {{ optional($attendance->user)->first_name }} {{ optional($attendance->user)->last_name }}
-                </td>
-                <td class="px-4 py-2 whitespace-nowrap text-sm text-[#333333] dark:text-[#E0E0E0]">
-                  {{ $attendance->date }}
-                </td>
-                <td class="px-4 py-2 whitespace-nowrap text-sm text-[#333333] dark:text-[#E0E0E0] truncate">
-                  {{ substr($attendance->reason, 0, 15) }}
-                </td>
-                <td class="px-4 py-2 whitespace-nowrap text-sm text-[#333333] dark:text-[#E0E0E0]">
-                  @if ($attendance->status === 'present')
-                    {{ __('Aanwezig') }}
-                  @elseif($attendance->status === 'absent')
-                    {{ __('Afwezig') }}
-                  @elseif($attendance->status === 'late')
-                    {{ __('Laat') }}
-                  @endif
-                </td>
-                <td class="px-4 py-2 whitespace-nowrap text-sm text-[#333333] dark:text-[#E0E0E0]">
-                  @if (auth()->user()->role === 'teacher')
-                    <a href="{{ route('attendance.edit', $attendance->id) }}"
-                      class="text-indigo-600 hover:text-indigo-900">
-                      {{ __('Bewerken') }}
-                    </a>
-                    <form action="{{ route('attendance.destroy', $attendance->id) }}" method="POST" class="inline">
-                      @csrf
-                      @method('DELETE')
-                      <button type="submit" class="text-[#D0021B] dark:text-[#FF6F61] hover:text-red-900 ml-2">
-                        {{ __('Verwijderen') }}
-                      </button>
-                    </form>
-                  @endif
-                </td>
-              </tr>
+              @if (auth()->user()->role === 'teacher' || 
+                  (auth()->user()->role === 'student' && auth()->id() === $attendance->user_id) ||
+                  (auth()->user()->role === 'parent' && auth()->user()->students->contains($attendance->user_id)))
+                <tr>
+                  <td class="px-4 py-2 whitespace-nowrap text-sm text-[#333333] dark:text-[#E0E0E0]">
+                    {{ optional($attendance->user)->first_name }} {{ optional($attendance->user)->last_name }}
+                  </td>
+                  <td class="px-4 py-2 whitespace-nowrap text-sm text-[#333333] dark:text-[#E0E0E0]">
+                    {{ $attendance->date }}
+                  </td>
+                  <td class="px-4 py-2 whitespace-nowrap text-sm text-[#333333] dark:text-[#E0E0E0] truncate">
+                    {{ substr($attendance->reason, 0, 15) }}
+                  </td>
+                  <td class="px-4 py-2 whitespace-nowrap text-sm text-[#333333] dark:text-[#E0E0E0]">
+                    @if ($attendance->status === 'present')
+                      {{ __('Aanwezig') }}
+                    @elseif($attendance->status === 'absent')
+                      {{ __('Afwezig') }}
+                    @elseif($attendance->status === 'late')
+                      {{ __('Laat') }}
+                    @endif
+                  </td>
+                  <td class="px-4 py-2 whitespace-nowrap text-sm text-[#333333] dark:text-[#E0E0E0]">
+                    @if (auth()->user()->role === 'teacher')
+                      <a href="{{ route('attendance.edit', $attendance->id) }}"
+                        class="text-indigo-600 hover:text-indigo-900">
+                        {{ __('Bewerken') }}
+                      </a>
+                      <form action="{{ route('attendance.destroy', $attendance->id) }}" method="POST" class="inline">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="text-[#D0021B] dark:text-[#FF6F61] hover:text-red-900 ml-2">
+                          {{ __('Verwijderen') }}
+                        </button>
+                      </form>
+                    @endif
+                  </td>
+                </tr>
+              @endif
             @endforeach
           </tbody>
         </table>
