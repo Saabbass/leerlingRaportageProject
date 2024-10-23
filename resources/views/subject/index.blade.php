@@ -9,7 +9,7 @@
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
       <div class="bg-[#79b5ff] dark:bg-[#263238] overflow-hidden shadow-sm sm:rounded-lg mt-6">
         <div
-          class="p-6 flex flex-wrap justify-evenly gap-1 text-[#1E90FF] dark:text-[#FFC107]  bg-[#C8E6C9] dark:bg-[#2E3B4E]">
+          class="p-6 flex flex-wrap justify-evenly gap-1 text-[#955b24] dark:text-[#FFC107]  bg-[#C8E6C9] dark:bg-[#2E3B4E]">
           <a href="{{ route('subject.index') }}"
             class="hover:underline rounded-xl hover:text-[#104E8B] dark:hover:text-[#FF6F61]">Vakken</a>
           <a href="{{ route('grades.index') }}"
@@ -18,7 +18,7 @@
             class="hover:underline rounded-xl hover:text-[#104E8B] dark:hover:text-[#FF6F61]">Aanwezigheid</a>
           @if (auth()->user()->role === 'teacher')
             <a href="{{ route('teacher.index') }}"
-              class="hover:underline rounded-xl hover:text-[#104E8B] dark:hover:text-[#FF6F61]">Docenten</a>
+              class="hover:underline rounded-xl hover:text-[#104E8B] dark:hover:text-[#FF6F61]">Leraar</a>
           @endif
         </div>
         <div class="p-6 text-[#333333] dark:text-[#E0E0E0]">

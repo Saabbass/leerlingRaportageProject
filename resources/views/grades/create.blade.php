@@ -18,7 +18,9 @@
                 class="bg-[#C8E6C9] dark:bg-[#2E3B4E] mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                 required>
                 @foreach ($users as $user)
-                  <option value="{{ $user->id }}">{{ $user->first_name }} {{ $user->last_name }}</option>
+                  @if ($user->role === 'student')
+                    <option value="{{ $user->id }}">{{ $user->first_name }} {{ $user->last_name }}</option>
+                  @endif
                 @endforeach
               </select>
               @if ($errors->has('user_id'))

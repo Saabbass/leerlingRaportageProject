@@ -6,7 +6,7 @@
                 <h2 class="font-semibold text-xl">{{ __('Create User') }}</h2>
                 <form method="POST" action="{{ route('users.store') }}">
                     @csrf
-                    <div class="mb-4">
+                     <div class="mb-4">
                         <label for="first_name" class="block text-sm font-medium text-[#333333] dark:text-[#E0E0E0]">{{ __('First Name') }}</label>
                         <input type="text" id="first_name" name="first_name" required
                             class="bg-[#C8E6C9] dark:bg-[#2E3B4E] mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">

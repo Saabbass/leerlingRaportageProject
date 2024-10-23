@@ -1,21 +1,23 @@
 <?php
 
-use App\Http\Controllers\AttendanceController;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\GradesController;
+use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SubjectController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\UserParentStudentController;
-use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->middleware('auth')->name('welcome')->where('role', 'teacher');
 
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 Route::get('/dashboard', \App\Http\Controllers\DashboardController::class)->middleware(['auth', 'verified'])->name('dashboard');
+
 Route::get('/users', [ProfileController::class, 'index'])->middleware(['auth'])->name('users.index');
 Route::put('/users/{user}', [ProfileController::class, 'update_user'])->middleware(['auth'])->name('users.update');
 Route::get('/users/{user}/edit', [ProfileController::class, 'edit_user'])->middleware(['auth'])->name('users.edit');
@@ -67,6 +69,15 @@ Route::middleware('auth')->group(function () {
     Route::get('teacher/{parent_id}/{student_id}/edit', [UserParentStudentController::class, 'edit'])->name('teacher.edit');
     Route::put('teacher/{parent_id}/{student_id}', [UserParentStudentController::class, 'update'])->name('teacher.update');
     Route::delete('teacher/{parent_id}/{student_id}', [UserParentStudentController::class, 'destroy'])->name('teacher.destroy');
+});
+
+Route::middleware('auth')->group(function () {
+    Route::get('/messages',[MessageController::class, 'index'])->name('messages.index');
+    Route::get('/messages/create',[MessageController::class, 'create'])->name('messages.create');
+    Route::post('/messages',[MessageController::class, 'store'])->name('messages.store');
+    Route::get('/messages/{id}/edit',[MessageController::class, 'edit'])->name('messages.edit');
+    Route::put('/messages/{id}',[MessageController::class, 'update'])->name('messages.update');
+    Route::delete('/messages/{id}',[MessageController::class, 'destroy'])->name('messages.destroy');
 });
 
 require __DIR__ . '/auth.php';

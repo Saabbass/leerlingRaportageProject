@@ -113,9 +113,15 @@ class ProfileController extends Controller
     //     return Redirect::route('users.index')->with('status', 'user-deleted'); // Updated redirect route
     // }
 
-    public function index(): View
+    public function index(Request $request): View // Added Request parameter
     {
-        $users = User::all(); // Fetch all users
+        $query = $request->input('search'); // Get the search query
+        $users = User::when($query, function ($queryBuilder) use ($query) {
+            return $queryBuilder->where('first_name', 'like', "%{$query}%")
+                                 ->orWhere('last_name', 'like', "%{$query}%")
+                                 ->orWhere('email', 'like', "%{$query}%");
+        })->get(); // Fetch users based on search query
+
         return view('users.index', compact('users'));
     }
 
@@ -164,3 +170,33 @@ class ProfileController extends Controller
         return Redirect::to('/');
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -4,12 +4,11 @@
       {{ __('Cijfers') }}
     </h2>
   </x-slot>
-
   <div class="py-12">
-    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
       <div class="bg-[#79b5ff] dark:bg-[#263238] overflow-hidden shadow-sm sm:rounded-lg mt-6">
         <div
-          class="p-6 flex flex-wrap justify-evenly gap-1 text-[#1E90FF] dark:text-[#FFC107]  bg-[#C8E6C9] dark:bg-[#2E3B4E]">
+          class="p-6 flex flex-wrap justify-evenly gap-1 text-[#955b24] dark:text-[#FFC107]  bg-[#C8E6C9] dark:bg-[#2E3B4E]">
           <a href="{{ route('subject.index') }}"
             class="hover:underline rounded-xl hover:text-[#104E8B] dark:hover:text-[#FF6F61]">Vakken</a>
           <a href="{{ route('grades.index') }}"
@@ -26,13 +25,16 @@
             <h3 class="text-lg font-semibold">{{ __('Cijferlijst') }}</h3>
             @if (auth()->user()->role === 'teacher')
               <a href="{{ route('grades.create') }}"
-                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                class="px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700">
                 {{ __('Nieuw cijfer maken') }}
               </a>
             @endif
           </div>
           <div class="mt-4">
             @foreach ($grades as $grade)
+            @if (auth()->user()->role === 'teacher')
+              <p>{{ __('Student: ') }}{{ $users->firstWhere('id', $grade->user_id)->first_name }}</p>
+            @endif
               <div class="flex flex-col md:flex-row justify-between items-center border-b py-2">
                 <div>
                   <span>{{ $grade->assignment_name }}</span>
@@ -53,7 +55,7 @@
                         {{ __('Verwijderen') }}
                       </button>
                     </form>
-                    @endif
+                  @endif
                 </div>
               </div>
             @endforeach
