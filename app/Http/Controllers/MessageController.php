@@ -13,6 +13,8 @@ class MessageController extends Controller
 {
     $query = Announcements::with(['sentBy', 'user']);
 
+    
+
     if (auth()->user()->role == 'student') {
         $query->where('user_id', auth()->id());
     } else if (auth()->user()->role == 'teacher') {
@@ -25,8 +27,8 @@ class MessageController extends Controller
         $childIds = auth()->user()->students()->pluck('student_id');
         $query->where(function($q) use ($childIds) {
             $q->where('sent_by', auth()->id())
-              ->orWhereIn('user_id', $childIds)
-              ->orWhere('user_id', auth()->id());
+            ->orWhereIn('user_id', $childIds)
+            ->orWhere('user_id', auth()->id());
         });
     }
 
