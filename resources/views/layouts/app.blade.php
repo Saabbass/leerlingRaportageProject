@@ -17,6 +17,7 @@
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @vite(['public/assets/css/styles.css', 'public/assets/js/themeSwitch.js'])
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js'></script>
   </head>
 
   <body class="font-sans antialiased light">
