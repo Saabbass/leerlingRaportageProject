@@ -25,7 +25,7 @@
 
             <div class="mb-4">
               <label for="subject_date_start"
-                class="block text-sm font-medium text-[#333333] dark:text-[#E0E0E0]">{{ __('Opdracht Naam') }}</label>
+                class="block text-sm font-medium text-[#333333] dark:text-[#E0E0E0]">{{ __('Start') }}</label>
               <input type="date" name="subject_date_start" id="subject_date_start" value="{{ old('start_date') }}"
                 class="bg-[#C8E6C9] dark:bg-[#2E3B4E] mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                 required>
@@ -33,7 +33,7 @@
 
             <div class="mb-4">
               <label for="subject_date_end"
-                class="block text-sm font-medium text-[#333333] dark:text-[#E0E0E0]">{{ __('Beschrijving') }}</label>
+                class="block text-sm font-medium text-[#333333] dark:text-[#E0E0E0]">{{ __('Eindigd') }}</label>
               <input type="date" name="subject_date_end" id="subject_date_end" value="{{ old('end_date') }}"
                 class="bg-[#C8E6C9] dark:bg-[#2E3B4E] mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                 required>
