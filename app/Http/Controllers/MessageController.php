@@ -10,28 +10,30 @@ use App\Models\Announcements;
 class MessageController extends Controller
 {
     public function index(Request $request)
-    {
-        $query = Announcements::with(['sentBy', 'user']);
-    
-        if (auth()->user()->role == 'student') {
-            $query->where('user_id', auth()->id());
-        } else if (auth()->user()->role == 'teacher') {
-            if ($request->has('filter') && $request->filter == 'others') {
-                $query->where('sent_by', '!=', auth()->id());
-            } else {
-                $query->where('sent_by', auth()->id());
-            }
-        } else if (auth()->user()->role == 'parent') {
-            $query->where(function($q) {
-                $q->where('sent_by', auth()->id())
-                ->orWhere('user_id', auth()->id());
-            });
+{
+    $query = Announcements::with(['sentBy', 'user']);
+
+    if (auth()->user()->role == 'student') {
+        $query->where('user_id', auth()->id());
+    } else if (auth()->user()->role == 'teacher') {
+        if ($request->has('filter') && $request->filter == 'others') {
+            $query->where('sent_by', '!=', auth()->id());
+        } else {
+            $query->where('sent_by', auth()->id());
         }
-    
-        $messages = $query->get();
-    
-        return view('messages.index', compact('messages'));
+    } else if (auth()->user()->role == 'parent') {
+        $childIds = auth()->user()->students()->pluck('student_id');
+        $query->where(function($q) use ($childIds) {
+            $q->where('sent_by', auth()->id())
+              ->orWhereIn('user_id', $childIds)
+              ->orWhere('user_id', auth()->id());
+        });
     }
+
+    $messages = $query->get();
+
+    return view('messages.index', compact('messages'));
+}
 
 public function create()
 {

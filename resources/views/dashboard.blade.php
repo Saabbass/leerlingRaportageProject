@@ -23,8 +23,7 @@
           @if (auth()->user()->role === 'teacher')
             <a href="{{ route('teacher.index') }}"
               class="hover:underline rounded-xl hover:text-[#104E8B] dark:hover:text-[#FF6F61]">Leraar</a>
-            <a href="{{ route('users.index') }}"
-              class="hover:underline rounded-xl hover:text-[#104E8B] dark:hover:text-[#FF6F61]">Users</a>
+        
           @endif
         </div>
 
