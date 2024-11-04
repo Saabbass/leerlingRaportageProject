@@ -17,6 +17,7 @@ class EventSubjectSeeder extends Seeder
       'subject_name' => 'hellohello',
       'start' => today(),
       'end'=> today(),
+      'status'=> 'active',
     ]);
   }
 }

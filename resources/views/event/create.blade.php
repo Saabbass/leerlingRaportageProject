@@ -39,13 +39,17 @@
                 required>
             </div>
 
+            <div class="mb-4">
+              <input type="hidden" name="subject_status" id="subject_status" value="active">
+            </div>
+
             <div class="flex justify-end">
               <a href="{{ route('dashboard') }}"
                 class="bg-gray-500 hover:bg-gray-700 text-[#333333] dark:text-[#E0E0E0] font-bold py-2 px-4 rounded mr-2">
                 {{ __('Annuleren') }}
               </a>
               <x-primary-button type="submit" class="font-bold py-2 px-4 rounded">
-                {{ __('Cijfer creëren') }}
+                {{ __('Evenement creëren') }}
               </x-primary-button>
             </div>
           </form>

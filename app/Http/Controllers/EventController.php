@@ -22,6 +22,7 @@ class EventController extends Controller
       'subject_id' => 'required|exists:subjects,id',
       'subject_date_start' => 'required|date',
       'subject_date_end' => 'required|date',
+      'subject_status' => 'required|string',
     ]);
 
 
@@ -30,6 +31,7 @@ class EventController extends Controller
     $event->subject_name = $subject->subject_name;
     $event->start = $request->input('subject_date_start');
     $event->end = $request->input('subject_date_end');
+    $event->status = $request->input('subject_status');
     $event->save();
 
     return redirect()->route('dashboard')->with('success', 'Subject added to callendar successfully.');
@@ -55,6 +57,7 @@ class EventController extends Controller
       'subject_id' => 'required|string|max:255',
       'subject_date_start' => 'required|date',
       'subject_date_end' => 'required|date',
+      'subject_status' => 'required|string',
     ]);
 
     // $event = Event::findOrFail($id);
@@ -62,6 +65,7 @@ class EventController extends Controller
     $event->subject_name = $subject->subject_name;
     $event->start = $request->input('subject_date_start');
     $event->end = $request->input('subject_date_end');
+    $event->status = $request->input('subject_status');
     $event->save();
 
     return redirect()->route('dashboard')->with('success', 'De les is succesvol aangepast.');

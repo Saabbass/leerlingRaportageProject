@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('subject_name');
             $table->dateTime('start');
             $table->dateTime('end');
+            $table->string('status');
 
             $table->foreign('subject_id')->references('id')->on('subjects')->onDelete('cascade');
             $table->timestamps();
