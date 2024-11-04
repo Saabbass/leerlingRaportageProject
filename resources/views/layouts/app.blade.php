@@ -30,6 +30,7 @@
         <meta name="session-info" content="{{ session('info') }}">
     @endif
   
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js'></script>
   </head>
   
   <body class="font-sans antialiased light">

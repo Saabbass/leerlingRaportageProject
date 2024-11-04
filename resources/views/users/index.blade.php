@@ -28,10 +28,17 @@
                           class="hover:underline rounded-xl hover:text-[#104E8B] dark:hover:text-[#FF6F61]">Leraar</a>
                       @endif
                     </div>
-                    <div class="mt-4">
-                        <form method="GET" action="{{ route('users.index') }}" class="flex items-center">
-                            <input type="text" name="search" placeholder="{{ __('Search Users') }}" class="px-4 py-2 border border-gray-300 rounded-md bg-darkblue text-white" value="{{ request()->query('search') }}">
-                            <button type="submit" class="ml-2 inline-flex items-center px-4 py-2 border border-transparent rounded-md font-semibold text-xs text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:border-blue-700 focus:ring focus:ring-blue-200 active:bg-blue-600 disabled:opacity-25 transition">{{ __('Search') }}</button>
+                    <div class="mt-4 px-6">
+                        <form method="GET" action="{{ route('users.index') }}" class="flex items-center space-x-4">
+                            <input type="text" 
+                                   name="search" 
+                                   placeholder="{{ __('Search Users') }}" 
+                                   class="flex-1 px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 transition-colors duration-200"
+                                   value="{{ request()->query('search') }}">
+                            <button type="submit" 
+                                    class="px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors duration-200 font-medium text-sm">
+                                {{ __('Search') }}
+                            </button>
                         </form>
                     </div>
                     </div>

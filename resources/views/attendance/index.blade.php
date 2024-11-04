@@ -59,9 +59,10 @@
           </thead>
           <tbody class="bg-[#79b5ff] dark:bg-[#263238] divide-y divide-[#F5A623] dark:divide-[#FF6F61]">
             @foreach ($attendances as $attendance)
-              @if (auth()->user()->role === 'teacher' || 
-                  (auth()->user()->role === 'student' && auth()->id() === $attendance->user_id) ||
-                  (auth()->user()->role === 'parent' && auth()->user()->students->contains($attendance->user_id)))
+            @if (auth()->user()->role === 'teacher' || 
+            (auth()->user()->role === 'student' && auth()->id() === $attendance->user_id) ||
+            (auth()->user()->role === 'parent' && auth()->user()->isParentOf($attendance->user_id)))
+        
                 <tr>
                   <td class="px-4 py-2 whitespace-nowrap text-sm text-[#333333] dark:text-[#E0E0E0]">
                     {{ optional($attendance->user)->first_name }} {{ optional($attendance->user)->last_name }}

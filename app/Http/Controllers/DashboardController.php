@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Attendance;
+use App\Models\Event;
 use App\Models\Subject;
 use Illuminate\Http\Request;
 
@@ -16,18 +17,23 @@ class DashboardController extends Controller
         $events = [];
  
         // $appointments = Attendance::all();
-        $appointments = Attendance::with(['user', 'subject'])->get();
+        $appointments = Event::with(['user'])->get();
         // dd($appointments);
  
         foreach ($appointments as $appointment) {
             $events[] = [
                 'id' => $appointment->id,
-                'title' => $appointment->status,
+                'title' => $appointment->subject_name,
                 'description' => $appointment->reason,
-                'start' => $appointment->date,
-                'end' => $appointment->date,
-                'title' => $appointment->user->first_name,
-                'subject_name' => $appointment->subject->subject_name,
+                'start' => $appointment->start,
+                'end' => $appointment->end,
+                'status' => $appointment->status,
+                // 'title' => $appointment->user->first_name,
+                // 'subject_name' => $appointment->subject->subject_name,
+                'url' => route('event.edit', ['id' => $appointment->id]),
+                [
+                    'url' => 'event/' .$appointment->id,
+                ]
             ];
         }
  

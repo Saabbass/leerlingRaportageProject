@@ -20,11 +20,13 @@
             class="hover:underline rounded-xl hover:text-[#104E8B] dark:hover:text-[#FF6F61]">Cijfers</a>
           <a href="{{ route('attendance.index') }}"
             class="hover:underline rounded-xl hover:text-[#104E8B] dark:hover:text-[#FF6F61]">Aanwezigheid</a>
+            
+          <a href="{{ route('goals.index') }}"
+            class="hover:underline rounded-xl hover:text-[#104E8B] dark:hover:text-[#FF6F61]">goals</a>
+
           @if (auth()->user()->role === 'teacher')
             <a href="{{ route('teacher.index') }}"
               class="hover:underline rounded-xl hover:text-[#104E8B] dark:hover:text-[#FF6F61]">Leraar</a>
-            <a href="{{ route('users.index') }}"
-              class="hover:underline rounded-xl hover:text-[#104E8B] dark:hover:text-[#FF6F61]">Users</a>
           @endif
         </div>
 
@@ -40,6 +42,12 @@
         </div> --}}
 
         <div class="p-6 text-[#333333] dark:text-[#E0E0E0]">
+          @if (auth()->user()->role === 'teacher')
+            <a href="{{ route('event.create') }}"
+              class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+              {{ __('Aan agenda toevoegen') }}
+            </a>
+          @endif
           <div id='calendar'></div>
         </div>
       </div>
@@ -47,19 +55,33 @@
   </div>
   @push('scripts')
     {{-- <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script> --}}
-    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js'></script>
+    {{-- <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js'></script> --}}
     {{-- <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/main.min.js"></script> --}}
     <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.15/index.global.min.js'></script>
     <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@6.1.15/index.global.min.js'></script>
+    <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/timegrid@6.1.15/index.global.min.js'></script>
     <script>
       document.addEventListener('DOMContentLoaded', function() {
         var calendarEl = document.getElementById('calendar');
+        var events = @json($events);
+        // Modify events to set color based on status
+        events = events.map(event => {
+          if (event.status === 'inactive') {
+            event.color = 'red';
+          }
+          return event;
+        });
+
         var calendar = new FullCalendar.Calendar(calendarEl, {
           initialView: 'dayGridWeek',
-          slotMinTime: '1:00:00',
-          slotMaxTime: '23:00:00',
-          events: @json($events),
+          editable: true,
+          displayEventTime: false,
+          events: events,
+          eventClick: function(info) {
+            info.el.style.borderColor = 'red';
+          }
         });
+
         calendar.render();
       });
     </script>
