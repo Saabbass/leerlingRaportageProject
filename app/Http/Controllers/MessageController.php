@@ -34,6 +34,8 @@ class MessageController extends Controller
 
     $messages = $query->get();
 
+
+
     return view('messages.index', compact('messages'));
 }
 
