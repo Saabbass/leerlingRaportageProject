@@ -39,6 +39,12 @@
         </div> --}}
 
         <div class="p-6 text-[#333333] dark:text-[#E0E0E0]">
+          @if (auth()->user()->role === 'teacher')
+            <a href="{{ route('event.create') }}"
+              class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+              {{ __('Aan agenda toevoegen') }}
+            </a>
+          @endif
           <div id='calendar'></div>
         </div>
       </div>
@@ -46,17 +52,34 @@
   </div>
   @push('scripts')
     {{-- <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script> --}}
-    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js'></script>
+    {{-- <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js'></script> --}}
     {{-- <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/main.min.js"></script> --}}
     <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.15/index.global.min.js'></script>
     <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@6.1.15/index.global.min.js'></script>
+    <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/timegrid@6.1.15/index.global.min.js'></script>
     <script>
       document.addEventListener('DOMContentLoaded', function() {
         var calendarEl = document.getElementById('calendar');
         var calendar = new FullCalendar.Calendar(calendarEl, {
           initialView: 'dayGridWeek',
-          slotMinTime: '1:00:00',
-          slotMaxTime: '23:00:00',
+          editable: true,
+          displayEventTime: false,
+          // slotMinTime: '1:00:00',
+          // slotMaxTime: '23:00:00',
+          eventClick: function(info) {
+            // alert('Event: ' + info.event.title);
+            // alert('Coordinates: ' + info.jsEvent.pageX + ',' + info.jsEvent.pageY);
+            // alert('View: ' + info.view.type);
+
+
+            // change the border color just for fun
+            info.el.style.borderColor = 'red';
+          },
+          // headerToolbar: {
+          //   left: 'prev,next today',
+          //   center: 'title',
+          //   right: 'dayGridMonth,timeGridWeek,dayGridWeek'
+          // },
           events: @json($events),
         });
         calendar.render();

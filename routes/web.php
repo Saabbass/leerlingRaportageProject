@@ -7,6 +7,7 @@ use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\AttendanceController;
+use App\Http\Controllers\EventController;
 use App\Http\Controllers\UserParentStudentController;
 
 Route::get('/', function () {
@@ -60,6 +61,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/subject/{id}/edit', [SubjectController::class, 'edit'])->name('subject.edit');
     Route::patch('/subject/{id}', [SubjectController::class, 'update'])->name('subject.update');
     Route::delete('/subject/{id}', [SubjectController::class, 'destroy'])->name('subject.destroy');
+
+    Route::get('/event/create', [EventController::class, 'create'])->name('event.create');
+    Route::post('/event/store', [EventController::class, 'store'])->name('event.store');
+    Route::get('/event/{id}/edit', [EventController::class, 'edit'])->name('event.edit');
+    Route::patch('/event/{id}', [EventController::class, 'update'])->name('event.update');
+    Route::delete('/event/{id}', [EventController::class, 'destroy'])->name('event.destroy');
 });
 
 Route::middleware('auth')->group(function () {

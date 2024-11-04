@@ -12,4 +12,14 @@ class Subject extends Model
         'subject_name',
         'subject_description',
     ];
+
+    // public function subject()
+    // {
+    //     return $this->belongsTo(Subject::class);
+    // }
+
+    public function event()
+    {
+        return $this->belongsTo(Event::class);
+    }
 }
