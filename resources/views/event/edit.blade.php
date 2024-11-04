@@ -41,6 +41,15 @@
                 required>
             </div>
 
+            <div class="mb-4">
+              <label for="subject_status" class="block text-sm font-medium text-[#333333] dark:text-[#E0E0E0]">{{ __('Status') }}</label>
+              <select id="subject_status" name="subject_status" class="bg-[#C8E6C9] dark:bg-[#2E3B4E] mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md" required>
+                  <option value="active" {{ $event->status == 'active' ? 'selected' : '' }}>{{ __('Actief') }}</option>
+                  <option value="inactive" {{ $event->status == 'inactive' ? 'selected' : '' }}>{{ __('Gaat niet door') }}</option>
+              </select>
+              <x-input-error :messages="$errors->get('subject_status')" class="mt-2" />
+          </div>
+
             <div class="flex justify-end">
               <a href="{{ route('grades.index') }}"
                 class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-2">

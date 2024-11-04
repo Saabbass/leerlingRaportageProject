@@ -27,6 +27,7 @@ class DashboardController extends Controller
                 'description' => $appointment->reason,
                 'start' => $appointment->start,
                 'end' => $appointment->end,
+                'status' => $appointment->status,
                 // 'title' => $appointment->user->first_name,
                 // 'subject_name' => $appointment->subject->subject_name,
                 'url' => route('event.edit', ['id' => $appointment->id]),

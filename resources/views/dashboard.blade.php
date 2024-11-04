@@ -27,7 +27,6 @@
           @if (auth()->user()->role === 'teacher')
             <a href="{{ route('teacher.index') }}"
               class="hover:underline rounded-xl hover:text-[#104E8B] dark:hover:text-[#FF6F61]">Leraar</a>
-        
           @endif
         </div>
 
@@ -64,28 +63,25 @@
     <script>
       document.addEventListener('DOMContentLoaded', function() {
         var calendarEl = document.getElementById('calendar');
+        var events = @json($events);
+        // Modify events to set color based on status
+        events = events.map(event => {
+          if (event.status === 'inactive') {
+            event.color = 'red';
+          }
+          return event;
+        });
+
         var calendar = new FullCalendar.Calendar(calendarEl, {
           initialView: 'dayGridWeek',
           editable: true,
           displayEventTime: false,
-          // slotMinTime: '1:00:00',
-          // slotMaxTime: '23:00:00',
+          events: events,
           eventClick: function(info) {
-            // alert('Event: ' + info.event.title);
-            // alert('Coordinates: ' + info.jsEvent.pageX + ',' + info.jsEvent.pageY);
-            // alert('View: ' + info.view.type);
-
-
-            // change the border color just for fun
             info.el.style.borderColor = 'red';
-          },
-          // headerToolbar: {
-          //   left: 'prev,next today',
-          //   center: 'title',
-          //   right: 'dayGridMonth,timeGridWeek,dayGridWeek'
-          // },
-          events: @json($events),
+          }
         });
+
         calendar.render();
       });
     </script>
