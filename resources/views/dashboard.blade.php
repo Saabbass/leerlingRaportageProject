@@ -44,7 +44,7 @@
               {{ __('Aan agenda toevoegen') }}
             </a>
           @endif
-          <div id='calendar'></div>
+          <div class="py-4" id='calendar'></div>
         </div>
       </div>
     </div>
@@ -56,6 +56,7 @@
     <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.15/index.global.min.js'></script>
     <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@6.1.15/index.global.min.js'></script>
     <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/timegrid@6.1.15/index.global.min.js'></script>
+    <script src='fullcalendar/core/locales/nl.global.js'></script>
     <script>
       document.addEventListener('DOMContentLoaded', function() {
         var calendarEl = document.getElementById('calendar');
@@ -69,9 +70,19 @@
         });
 
         var calendar = new FullCalendar.Calendar(calendarEl, {
-          initialView: 'dayGridWeek',
+          locale: 'nl',
+          initialView: 'timeGridFiveDay',
+          views: {
+            timeGridFiveDay: {
+              type: 'timeGrid',
+              duration: {
+                days: 5
+              }
+            }
+          },
           editable: true,
-          displayEventTime: false,
+          displayEventTime: true,
+          nowIndicator: true,
           events: events,
           eventClick: function(info) {
             info.el.style.borderColor = 'red';

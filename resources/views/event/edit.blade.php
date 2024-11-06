@@ -28,7 +28,7 @@
             <div class="mb-4">
               <label for="subject_date_start"
                 class="block text-sm font-medium text-[#333333] dark:text-[#E0E0E0]">{{ __('Start') }}</label>
-              <input type="date" name="subject_date_start" id="subject_date_start" value="{{ $event->start }}"
+              <input type="datetime-local" name="subject_date_start" id="subject_date_start" value="{{ $event->start }}"
                 class="bg-[#C8E6C9] dark:bg-[#2E3B4E] mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                 required>
             </div>
@@ -36,7 +36,7 @@
             <div class="mb-4">
               <label for="subject_date_end"
                 class="block text-sm font-medium text-[#333333] dark:text-[#E0E0E0]">{{ __('Eindigd') }}</label>
-              <input type="date" name="subject_date_end" id="subject_date_end" value="{{ $event->end }}"
+              <input type="datetime-local" name="subject_date_end" id="subject_date_end" value="{{ $event->end }}"
                 class="bg-[#C8E6C9] dark:bg-[#2E3B4E] mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                 required>
             </div>
