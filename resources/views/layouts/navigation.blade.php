@@ -157,15 +157,29 @@
           {{ __('Dashboard') }}
         </x-responsive-nav-link>
         <x-responsive-nav-link :href="route('attendance.index')" :active="request()->routeIs('attendance.index')">
-          {{ __('Attendance') }}
+          {{ __('Aanwezigheid') }}
         </x-responsive-nav-link>
         <x-responsive-nav-link :href="route('subject.index')" :active="request()->routeIs('subject.index')">
-          {{ __('Subject') }}
+          {{ __('Lessen') }}
         </x-responsive-nav-link>
+        <x-responsive-nav-link :href="route('grades.index')" :active="request()->routeIs('grades.index')">
+          {{ __('Cijfers') }}
+        </x-responsive-nav-link>
+        <x-responsive-nav-link :href="route('messages.index')" :active="request()->routeIs('messages.index')">
+          {{ __('Berichten') }}
+        </x-responsive-nav-link>
+        @if (auth()->user()->role == 'teacher')
+          <x-responsive-nav-link :href="route('teacher.index')" :active="request()->routeIs('teacher.index')">
+            {{ __('Leraar') }}
+          </x-responsive-nav-link>
+          <x-responsive-nav-link :href="route('users.index')" :active="request()->routeIs('users.index')">
+            {{ __('Gebruikers') }}
+          </x-responsive-nav-link>
+        @endif
       @else
-      <x-responsive-nav-link href="/" :active="request()->routeIs('/')">
-        {{ __('Homepage') }}
-      </x-responsive-nav-link>
+        <x-responsive-nav-link href="/" :active="request()->routeIs('/')">
+          {{ __('Homepage') }}
+        </x-responsive-nav-link>
         <x-responsive-nav-link href="/login" :active="request()->routeIs('login')">
           {{ __('login') }}
         </x-responsive-nav-link>
