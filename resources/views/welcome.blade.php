@@ -21,7 +21,7 @@
           <p class="mb-8 text-lg font-normal lg:text-xl sm:px-16 lg:px-48 text-[#333333] dark:text-[#E0E0E0]">Hier bij
             NovaCollege richten we ons op studenten waar technologie, innovatie en kapitaal langdurige waarde kunnen ontsluiten en economische groei kunnen stimuleren.</p>
           <div class="flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-y-0">
-            <a href="#"
+            <a href="{{ route('dashboard') }}"
               class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-[#FFFFFF] hover:text-[#F7F8FA] dark:text-[#E0E0E0] hover:dark:text-[#FF6F61] bg-[#3B5998] hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900">
               Ga door
               <svg class="w-3.5 h-3.5 ms-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"

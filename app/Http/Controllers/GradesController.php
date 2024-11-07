@@ -45,6 +45,7 @@ class GradesController extends Controller
         $grade->date = $request->input('date');
         $grade->description = $request->input('description');
         $grade->save();
+        
 
         return redirect()->route('grades.index')->with('success', 'Grade created successfully.');
     }

@@ -51,18 +51,20 @@
                 class="px-4 py-2 bg-[#C8E6C9] dark:bg-[#2E3B4E] text-left text-sm font-medium text-[#333333] dark:text-[#E0E0E0]">
                 {{ __('Status') }}
               </th>
-              <th scope="col"
-                class="px-4 py-2 bg-[#C8E6C9] dark:bg-[#2E3B4E] text-left text-sm font-medium text-[#333333] dark:text-[#E0E0E0]">
-                {{ __('Acties') }}
-              </th>
+              @if (auth()->user()->role === 'teacher')
+                <th scope="col"
+                  class="px-4 py-2 bg-[#C8E6C9] dark:bg-[#2E3B4E] text-left text-sm font-medium text-[#333333] dark:text-[#E0E0E0]">
+                  {{ __('Acties') }}
+                </th>
+              @endif
             </tr>
           </thead>
           <tbody class="bg-[#79b5ff] dark:bg-[#263238] divide-y divide-[#F5A623] dark:divide-[#FF6F61]">
             @foreach ($attendances as $attendance)
-            @if (auth()->user()->role === 'teacher' || 
-            (auth()->user()->role === 'student' && auth()->id() === $attendance->user_id) ||
-            (auth()->user()->role === 'parent' && auth()->user()->isParentOf($attendance->user_id)))
-        
+              @if (auth()->user()->role === 'teacher' ||
+                      (auth()->user()->role === 'student' && auth()->id() === $attendance->user_id) ||
+                      (auth()->user()->role === 'parent' &&
+                          auth()->user()->isParentOf($attendance->user_id)))
                 <tr>
                   <td class="px-4 py-2 whitespace-nowrap text-sm text-[#333333] dark:text-[#E0E0E0]">
                     {{ optional($attendance->user)->first_name }} {{ optional($attendance->user)->last_name }}
@@ -82,8 +84,8 @@
                       {{ __('Laat') }}
                     @endif
                   </td>
-                  <td class="px-4 py-2 whitespace-nowrap text-sm text-[#333333] dark:text-[#E0E0E0]">
-                    @if (auth()->user()->role === 'teacher')
+                  @if (auth()->user()->role === 'teacher')
+                    <td class="px-4 py-2 whitespace-nowrap text-sm text-[#333333] dark:text-[#E0E0E0]">
                       <a href="{{ route('attendance.edit', $attendance->id) }}"
                         class="text-indigo-600 hover:text-indigo-900">
                         {{ __('Bewerken') }}
@@ -95,8 +97,8 @@
                           {{ __('Verwijderen') }}
                         </button>
                       </form>
-                    @endif
-                  </td>
+                    </td>
+                  @endif
                 </tr>
               @endif
             @endforeach

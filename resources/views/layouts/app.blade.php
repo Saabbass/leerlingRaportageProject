@@ -11,14 +11,28 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @vite(['public/assets/css/styles.css', 'public/assets/js/themeSwitch.js'])
+    @if(session('success'))
+        <meta name="session-success" content="{{ session('success') }}">
+    @endif
+    @if(session('error'))
+        <meta name="session-error" content="{{ session('error') }}">
+    @endif
+    @if(session('warning'))
+        <meta name="session-warning" content="{{ session('warning') }}">
+    @endif
+    @if(session('info'))
+        <meta name="session-info" content="{{ session('info') }}">
+    @endif
+  
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js'></script>
   </head>
-
+  
   <body class="font-sans antialiased light">
       <div class="">
       @include('layouts.navigation')
@@ -26,7 +40,7 @@
       <!-- Page Heading -->
       @if (isset($header))
         <header class="bg-[#F7F8FA] dark:bg-[#1C1C2E] shadow">
-          <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+          <div class="px-4 py-6 mx-auto max-w-7xl sm:px-6 lg:px-8">
             {{ $header }}
           </div>
         </header>
@@ -37,7 +51,8 @@
         {{ $slot }}
       </main>
 
-
+      @include('components.notification')
+      
       @include('layouts.footer')
     </div>
     @stack('scripts')
