@@ -31,14 +31,14 @@
             @endif
           </div>
           <div class="mt-4">
-            @foreach ($grades as $grade)
+            @foreach (auth()->user()->role === 'teacher' ? $grades : $grades->where('user_id', auth()->user()->id) as $grade)
             @if (auth()->user()->role === 'teacher')
               <p>{{ __('Student: ') }}{{ $users->firstWhere('id', $grade->user_id)->first_name }}</p>
             @endif
               <div class="flex flex-col md:flex-row justify-between items-center border-b py-2">
                 <div>
                   <span>{{ $grade->assignment_name }}</span>
-                  <p>{{ $subjects->firstWhere('id', $grade->subject_id)->subject_name }}</p>
+                  <p>{{ $subjects->firstWhere('id', $grade->subject_id)->subject_name }}</p>             
                   <p>{{ __('Cijfer: ') }}{{ $grade->grade }}</p>
                   <p>{{ __('Datum: ') }}{{ $grade->date }}</p>
                 </div>
