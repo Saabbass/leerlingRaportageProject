@@ -12,7 +12,8 @@ class Announcements extends Model
     protected $fillable = [
         'title',
         'content',
-        'user_id'
+        'user_id',
+        'sent_by'
     ];
 
     protected $table = 'announcements';

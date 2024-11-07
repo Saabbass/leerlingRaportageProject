@@ -8,11 +8,12 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\GoalController;
 use App\Http\Controllers\UserParentStudentController;
 
 Route::get('/', function () {
     return view('welcome');
-})->middleware('auth')->name('welcome')->where('role', 'teacher');
+});
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -32,6 +33,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::get('/goals/create', [GoalController::class, 'create'])->name('goals.create');
+    Route::get('/goals/index', [GoalController::class, 'create'])->name('goals.index');
+    Route::post('/goals', [GoalController::class, 'store'])->name('goals.store');
+    Route::get('/goals/{id}/edit', [GoalController::class, 'edit'])->name('goals.edit');
+    Route::patch('/goals/{id}', [GoalController::class, 'update'])->name('goals.update');
+    Route::delete('/goals/{id}', [GoalController::class, 'destroy'])->name('goals.destroy');
 });
 
 // Route::middleware('auth')->group(function () {

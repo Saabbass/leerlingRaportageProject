@@ -20,6 +20,10 @@
             class="hover:underline rounded-xl hover:text-[#104E8B] dark:hover:text-[#FF6F61]">Cijfers</a>
           <a href="{{ route('attendance.index') }}"
             class="hover:underline rounded-xl hover:text-[#104E8B] dark:hover:text-[#FF6F61]">Aanwezigheid</a>
+            
+          <a href="{{ route('goals.index') }}"
+            class="hover:underline rounded-xl hover:text-[#104E8B] dark:hover:text-[#FF6F61]">goals</a>
+
           @if (auth()->user()->role === 'teacher')
             <a href="{{ route('teacher.index') }}"
               class="hover:underline rounded-xl hover:text-[#104E8B] dark:hover:text-[#FF6F61]">Leraar</a>
