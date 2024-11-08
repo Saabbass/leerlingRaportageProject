@@ -62,7 +62,7 @@ class EventController extends Controller
 
     // $event = Event::findOrFail($id);
     $event->subject_id = $subject->id;
-    $event->subject_name = $subject->subject_name;
+    $event->subject_name = $request->input('subject_name');
     $event->start = $request->input('subject_date_start');
     $event->end = $request->input('subject_date_end');
     $event->status = $request->input('subject_status');

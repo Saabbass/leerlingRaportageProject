@@ -1,7 +1,6 @@
 <?php
 
 use App\Models\User;
-use Database\Factories\UserFactory;
 
 test('can render subject overview screen for logged in users', function () {
     $response = $this->get('/subject');

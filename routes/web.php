@@ -13,7 +13,7 @@ use App\Http\Controllers\UserParentStudentController;
 
 Route::get('/', function () {
     return view('welcome');
-})->middleware('auth')->name('welcome')->where('role', 'teacher');
+});
 
 Route::get('/dashboard', function () {
     return view('dashboard');
