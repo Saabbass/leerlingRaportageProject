@@ -20,8 +20,8 @@ class UserSeeder extends Seeder
         // Create admin user with random names
         User::create([
             'id' => 1,
-            'first_name' => $firstNames[array_rand($firstNames)], // Random first name
-            'last_name' => $lastNames[array_rand($lastNames)],   // Random last name
+            'first_name' => "admin", // Random first name
+            'last_name' => "admin",   // Random last name
             'age' => 30,
             'email' => 'test@example.com',
             'password' => bcrypt('password'),
@@ -42,7 +42,7 @@ class UserSeeder extends Seeder
                 'remember_token' => Str::random(10),
             ]);
         }
-
+        
         // Create 40 parent users
         for ($i = 42; $i <= 81; $i++) {
             User::create([
