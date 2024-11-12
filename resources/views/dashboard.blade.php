@@ -65,6 +65,7 @@
         events = events.map(event => {
           if (event.status === 'inactive') {
             event.color = '#d70101';
+            event.title= 'gaat niet door';
           }
           return event;
         });

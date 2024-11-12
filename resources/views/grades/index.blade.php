@@ -42,8 +42,8 @@
             @endif
           </div>
           <div class="mt-4">
-            @foreach ($grades as $grade)
-              @if (auth()->user()->role === 'teacher')
+            @foreach (auth()->user()->role === 'teacher' ? $grades : $grades->where('user_id', auth()->user()->id) as $grade)
+            @if (auth()->user()->role === 'teacher')
                 <x-subject-title>{{ __('Student: ') }}{{ $users->firstWhere('id', $grade->user_id)->first_name }}</x-subject-title>
               @endif
               <div
