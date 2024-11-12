@@ -1,94 +1,121 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-[#333333] dark:text-[#E0E0E0] leading-tight">
-          {{ __('Berichten') }}
-        </h2>
-    </x-slot>
-    <div class="py-12">
-        <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
-          <div class="bg-[#79b5ff] dark:bg-[#263238] overflow-hidden shadow-sm sm:rounded-lg mt-6">
-            <div class="p-6 text-[#333333] dark:text-[#E0E0E0]">
-              <div class="flex items-center justify-between mb-6">
-                <h3 class="text-lg font-semibold">{{ __('Jouw berichten') }}</h3>
-                @if (auth()->user()->role !== 'student')
-                  <div>
-                    <a href="{{ route('messages.create') }}"
-                      class="px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700">
-                      {{ __('Nieuwe Bericht') }}
-                    </a>
-                  </div>
-                @endif
-                @if (auth()->user()->role == 'teacher')
-                    <a href="{{ route('messages.index', ['filter' => 'others']) }}"
-                      class="px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700">
-                      {{ __('Andere Berichten') }}
-                    </a>
-                    <a href="{{ route('messages.index') }}"
-                      class="px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700">
-                      {{ __('Mijn Berichten') }}
-                    </a>
-                  </div>
-                @endif
-              </div>
-              <table class="min-w-full divide-y divide-[#F5A623] dark:divide-[#FF6F61] mt-4">
-                <thead>
-                    <tr>
-                        <th scope="col" class="px-4 py-2 bg-[#C8E6C9] dark:bg-[#2E3B4E] text-left text-sm font-medium text-[#333333] dark:text-[#E0E0E0]">
-                            {{ __('Titel') }}
-                        </th>
-                        <th scope="col" class="px-4 py-2 bg-[#C8E6C9] dark:bg-[#2E3B4E] text-left text-sm font-medium text-[#333333] dark:text-[#E0E0E0]">
-                            {{ __('Inhoud') }}
-                        </th>
-                        @if (auth()->user()->role !== 'student')
-                        <th scope="col" class="px-4 py-2 bg-[#C8E6C9] dark:bg-[#2E3B4E] text-left text-sm font-medium text-[#333333] dark:text-[#E0E0E0]">
-                          {{ __('Verzonden naar') }}
-                        </th>
-                        @endif
-                        <th scope="col" class="px-4 py-2 bg-[#C8E6C9] dark:bg-[#2E3B4E] text-left text-sm font-medium text-[#333333] dark:text-[#E0E0E0]">
-                          {{ __('Verzonden door') }}
-                        </th>
-                        <th scope="col" class="px-4 py-2 bg-[#C8E6C9] dark:bg-[#2E3B4E] text-left text-sm font-medium text-[#333333] dark:text-[#E0E0E0]">
-                            {{ __('Datum') }}
-                        </th>
-                        <th scope="col" class="px-4 py-2 bg-[#C8E6C9] dark:bg-[#2E3B4E] text-left text-sm font-medium text-[#333333] dark:text-[#E0E0E0]">
-                            {{ __('Acties') }}
-                        </th>
-                    </tr>
-                </thead>
-                <tbody class="bg-[#79b5ff] dark:bg-[#263238] divide-y divide-[#F5A623] dark:divide-[#FF6F61]">
-                  @forelse($messages as $message)
-                  <tr>
-                      <td class="px-4 py-2 whitespace-nowrap text-sm text-[#333333] dark:text-[#E0E0E0]">{{ $message->title }}</td>
-                      <td class="px-4 py-2 whitespace-nowrap text-sm text-[#333333] dark:text-[#E0E0E0]">{{ $message->content }}</td>
-                      @if (auth()->user()->role !== 'student')
-                      <td class="px-4 py-2 whitespace-nowrap text-sm text-[#333333] dark:text-[#E0E0E0]">{{ $message->user->first_name }} {{ $message->user->last_name }}</td>
-                      @endif
-                      <td class="px-4 py-2 whitespace-nowrap text-sm text-[#333333] dark:text-[#E0E0E0]">{{ $message->sentBy->first_name }} {{ $message->sentBy->last_name }}</td>
-                      <td class="px-4 py-2 whitespace-nowrap text-sm text-[#333333] dark:text-[#E0E0E0]">{{ $message->created_at->format('d-m-Y H:i') }}</td>
-                      <td class="px-4 py-2 text-sm font-medium whitespace-nowrap">
-                          @if (auth()->user()->role == 'teacher' || auth()->user()->role == 'parent')
-                          @if (auth()->user()->id == $message->sent_by)
-                            <a href="{{ route('messages.edit', $message) }}" class="text-indigo-600 hover:text-indigo-900">{{ __('Edit') }}</a>
-                            <form action="{{ route('messages.destroy', $message) }}" method="POST" class="inline">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="text-red-600 hover:text-red-900">{{ __('Delete') }}</button>
-                            </form>
-                          @endif
-                          @endif
-                      </td>
-                  </tr>
-              @empty
-                  <tr>
-                      <td colspan="6" class="px-4 py-2 text-center text-sm text-[#333333] dark:text-[#E0E0E0]">
-                          {{ __('You have no messages.') }}
-                      </td>
-                  </tr>
-              @endforelse
-                </tbody>
-            </table>
-            </div>
+  <x-slot name="header">
+    <x-page-title>
+      {{ __('Berichten') }}
+    </x-page-title>
+
+    @if (session('error'))
+      <x-error-failed>
+        {{ session('error') }}
+      </x-error-failed>
+    @endif
+
+    @if (session('success'))
+      <x-error-succes>
+        {{ session('success') }}
+      </x-error-succes>
+    @endif
+  </x-slot>
+
+  <div class="py-12">
+    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+      <div
+        class="bg-secondaryLightHero dark:bg-secondaryDarkHero overflow-hidden drop-shadow-[4px_4px_7px_rgba(0,0,0,0.25)] sm:rounded-lg mt-6">
+        <div
+          class="p-6 flex flex-wrap justify-evenly gap-1 drop-shadow-[4px_4px_7px_rgba(0,0,0,0.25)] bg-primaryLightHero dark:bg-primaryDarkHero">
+          <x-hero-nav-link :href="route('subject.index')" :active="request()->routeIs('subject.index')">{{ __('Vakken') }}</x-hero-nav-link>
+          <x-hero-nav-link :href="route('grades.index')" :active="request()->routeIs('grades.index')">{{ __('Cijfers') }}</x-hero-nav-link>
+          <x-hero-nav-link :href="route('attendance.index')" :active="request()->routeIs('attendance.index')">{{ __('Aanwezigheid') }}</x-hero-nav-link>
+          @if (auth()->user()->role === 'teacher')
+            <x-hero-nav-link :href="route('teacher.index')" :active="request()->routeIs('teacher.index')">{{ __('Leraar') }}</x-hero-nav-link>
+          @endif
+        </div>
+        <div class="flex justify-between items-center mb-6 p-6">
+          <x-hero-title>{{ __('Jouw berichten') }}</x-hero-title>
+          <div class="flex flex-wrap gap-2">
+            @if (auth()->user()->role !== 'student')
+              <x-link-create href="{{ route('messages.create') }}">
+                {{ __('Nieuwe Bericht') }}
+              </x-link-create>
+            @endif
+            @if (auth()->user()->role == 'teacher')
+              <x-link-create href="{{ route('messages.index', ['filter' => 'others']) }}">
+                {{ __('Andere Berichten') }}
+              </x-link-create>
+              <x-link-create href="{{ route('messages.index') }}">
+                {{ __('Mijn Berichten') }}
+              </x-link-create>
+            @endif
           </div>
         </div>
+        <x-table>
+          <x-table-head>
+            <tr>
+              <x-table-th>
+                {{ __('Titel') }}
+              </x-table-th>
+              <x-table-th>
+                {{ __('Inhoud') }}
+              </x-table-th>
+              @if (auth()->user()->role !== 'student')
+                <x-table-th>
+                  {{ __('Verzonden naar') }}
+                </x-table-th>
+              @endif
+              <x-table-th>
+                {{ __('Verzonden door') }}
+              </x-table-th>
+              <x-table-th>
+                {{ __('Datum') }}
+              </x-table-th>
+              <x-table-th>
+                {{ __('Acties') }}
+              </x-table-th>
+            </tr>
+          </x-table-head>
+          <x-table-body>
+            @forelse($messages as $message)
+              <tr>
+                <x-table-td>
+                  {{ $message->title }}</x-table-td>
+                <x-table-td>
+                  {{ $message->content }}</x-table-td>
+                @if (auth()->user()->role !== 'student')
+                  <x-table-td>
+                    {{ $message->user->first_name }} {{ $message->user->last_name }}</x-table-td>
+                @endif
+                <x-table-td>
+                  {{ $message->sentBy->first_name }} {{ $message->sentBy->last_name }}</x-table-td>
+                <x-table-td>
+                  {{ $message->created_at->format('d-m-Y H:i') }}</x-table-td>
+                <x-table-td-action>
+                  @if (auth()->user()->role == 'teacher' || auth()->user()->role == 'parent')
+                    @if (auth()->user()->id == $message->sent_by)
+                      <x-link-change href="{{ route('messages.edit', $message) }}">
+                        {{ __('Bewerken') }}
+                      </x-link-change>
+                      <form action="{{ route('messages.destroy', $message) }}" method="POST" class="inline">
+                        @csrf
+                        @method('DELETE')
+                        <x-link-delete>
+                          {{ __('Verwijderen') }}
+                        </x-link-delete>
+                      </form>
+                    @endif
+                  @endif
+                </x-table-td-action>
+              </tr>
+            @empty
+              <tr>
+                <x-table-td-empty>
+                  {{ __('You have no messages.') }}
+                </x-table-td-empty>
+              </tr>
+            @endforelse
+          </x-table-body>
+        </x-table>
       </div>
+    </div>
+  </div>
+  </div>
 </x-app-layout>

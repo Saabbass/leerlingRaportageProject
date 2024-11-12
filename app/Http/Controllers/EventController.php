@@ -34,7 +34,7 @@ class EventController extends Controller
     $event->status = $request->input('subject_status');
     $event->save();
 
-    return redirect()->route('dashboard')->with('success', 'Subject added to callendar successfully.');
+    return redirect()->route('dashboard')->with('success', 'Les aangemaakt.');
   }
 
   public function edit($id)
@@ -76,6 +76,6 @@ class EventController extends Controller
     $event = Event::findOrFail($id);
     $event->delete();
 
-    return redirect()->route('dashboard')->with('success', 'Subject deleted from callendar successfully.');
+    return redirect()->route('dashboard')->with('success', 'Les verwijderd.');
   }
 }

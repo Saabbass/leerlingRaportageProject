@@ -43,7 +43,7 @@ class ProfileController extends Controller
         $user->role = $request->input('role');
         $user->save();
 
-        return Redirect::route('users.index')->with('status', 'user-updated'); // Updated redirect route
+        return redirect()->route('users.index')->with('success', 'Gebruiker aangepast.'); // Updated redirect route
     }
 
     public function edit_user($id): View
@@ -77,7 +77,7 @@ class ProfileController extends Controller
         $user->password = bcrypt($request->input('password')); // Added password
         $user->save();
 
-        return Redirect::route('users.index')->with('status', 'user-created');
+        return redirect()->route('users.index')->with('success', 'Gebruiker toegevoegd.');
     }
 
 
@@ -87,7 +87,7 @@ class ProfileController extends Controller
         $user = User::findOrFail($id);
         $user->delete();
 
-        return redirect()->route('users.index')->with('success', 'User deleted successfully.');
+        return redirect()->route('users.index')->with('success', 'Gebruiker verwijderd.');
     }
 
     // public function destroy_user(Request $request, User $user): RedirectResponse // Renamed method

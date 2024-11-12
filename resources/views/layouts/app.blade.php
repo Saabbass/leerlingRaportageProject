@@ -77,6 +77,24 @@ Hero Background Color 1: #E3F2FD (Light Blue) - A soft, calming blue that comple
 Hero Background Color 2: #FFF3E0 (Light Orange) - A warm, inviting color that pairs well with the accent color.
 Hero Background Color 3: #E8F5E9 (Light Green) - A fresh, clean color that adds a natural touch.
 
+Color pallete light alt
+Primary Color: #3B5998 (Warm Blue) - A softer, warmer blue that still provides a strong base.
+Secondary Color: #2C3E50 (Warm Dark Blue) - Complements the primary color with a warmer touch.
+Accent Color: #FF6F61 (Coral) - Keeps the vibrant, warm highlight.
+Background Color: #F5F5F5 (Light Gray) - A light, neutral background that maintains a clean and airy feel.
+Text Color: #333333 (Dark Gray) - Ensures readability and contrast against the light background.
+Text Hover Color: #FF6F61 (Coral) - Matches the accent color for a cohesive look.
+Highlight Color: #FFC107 (Warm Gold) - For highlighting key information with a friendly, welcoming feel.
+Success Color: #FFB74D (Warm Orange) - Indicates success and positive actions with a warm, encouraging tone.
+Button Background Color: #3B5998 (Warm Blue) - Matches the primary color for consistency.
+Button Hover Background Color: #2C3E50 (Warm Dark Blue) - Slightly darker shade for hover effect.
+Button Text Color: #FFFFFF (White) - Ensures readability on the button background.
+Button Hover Text Color: #FFC107 (Warm Gold) - Adds a warm highlight on hover.
+Hero Background Color 1: #E0E0E0 (Light Gray) - A neutral, light background.
+Hero Background Color 2: #FFD700 (Gold) - A vibrant, warm color that stands out.
+Hero Background Color 3: #8A2BE2 (Blue Violet) - A rich, cool color that adds depth and contrast.
+
+
 Color pallete dark
 Primary Color: #3B5998 (Warm Blue) - A softer, warmer blue that still provides a strong base.
 Secondary Color: #2C3E50 (Warm Dark Blue) - Complements the primary color with a warmer touch.

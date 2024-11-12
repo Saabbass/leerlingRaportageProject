@@ -66,7 +66,7 @@
     </div>
 
     <div class="flex items-center justify-end mt-4">
-      <a class="underline text-sm text-[#333333] dark:text-[#E0E0E0] hover:text-[#FFC107] dark:hover:text-[#FF6F61] rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+      <a class="underline text-sm text-secondaryLightText dark:text-primaryDarkText hover:text-[#FFC107] dark:hover:text-[#FF6F61] rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
         href="{{ route('login') }}">
         {{ __('Already registered?') }}
       </a>

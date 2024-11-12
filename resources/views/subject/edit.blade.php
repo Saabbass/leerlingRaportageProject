@@ -1,39 +1,39 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-[#333333] dark:text-[#E0E0E0] leading-tight">
-            {{ __('Vak bewerken') }}
-        </h2>
-    </x-slot>
+  <x-slot name="header">
+    <x-page-title>
+      {{ __('Vak bewerken') }}
+    </x-page-title>
+  </x-slot>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-[#79b5ff] dark:bg-[#263238] overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-[#333333] dark:text-[#E0E0E0]">
-                    <form action="{{ route('subject.update', $subject->id) }}" method="POST">
-                        @csrf
-                        @method('PATCH')
+  <div class="py-12">
+    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+      <div class="bg-secondaryLightHero dark:bg-secondaryDarkHero overflow-hidden shadow-sm sm:rounded-lg p-6">
+        <form action="{{ route('subject.update', $subject->id) }}" method="POST">
+          @csrf
+          @method('PATCH')
 
-                        <div class="mb-4">
-                            <label for="name" class="block text-sm font-medium v">{{ __('Vaknaam') }}</label>
-                            <input type="text" name="name" id="name" value="{{ old('name', $subject->subject_name) }}" class="bg-[#C8E6C9] dark:bg-[#2E3B4E] mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" required>
-                        </div>
+          <div class="mb-4">
+            <x-input-label for="name">{{ __('Vaknaam') }}</x-input-label>
+            <x-text-input type="text" name="name" id="name" value="{{ old('name', $subject->subject_name) }}"
+              required />
+          </div>
 
-                        <div class="mb-4">
-                            <label for="description" class="block text-sm font-medium v">{{ __('Beschrijving') }}</label>
-                            <textarea name="description" id="description" class="bg-[#C8E6C9] dark:bg-[#2E3B4E] mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">{{ old('description', $subject->description) }}</textarea>
-                        </div>
+          <div class="mb-4">
+            <x-input-label for="description">{{ __('Beschrijving') }}</x-input-label>
+            <x-textarea-input name="description"
+              id="description">{{ old('description', $subject->description) }}</x-textarea-input>
+          </div>
 
-                        <div class="flex justify-end">
-                            <a href="{{ route('subject.index') }}" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-2">
-                                {{ __('Annuleren') }}
-                            </a>
-                            <x-primary-button type="submit" class="font-bold py-2 px-4 rounded">
-                                {{ __('Wijzigingen opslaan') }}
-                            </x-primary-button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
+          <div class="flex justify-end gap-2">
+            <x-cancel-button href="{{ route('subject.index') }}">
+              {{ __('Annuleren') }}
+            </x-cancel-button>
+            <x-accept-button>
+              {{ __('Wijzigingen opslaan') }}
+            </x-accept-button>
+          </div>
+        </form>
+      </div>
     </div>
+  </div>
 </x-app-layout>
