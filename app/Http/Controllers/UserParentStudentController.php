@@ -47,14 +47,25 @@ class UserParentStudentController extends Controller
             'parent_id' => 'required|exists:users,id',
             'student_id' => 'required|exists:users,id',
         ]);
-
+    
+        // Check if the connection already exists
+        $exists = UserParentStudent::where('parent_id', $validatedData['parent_id'])
+                    ->where('student_id', $validatedData['student_id'])
+                    ->exists();
+    
+        if ($exists) {
+            return redirect()->route('teacher.index')->with('error', 'De ouder is al aan het kind gekoppeld.');
+        }
+    
+        // Create the new record
         UserParentStudent::create([
             'parent_id' => $validatedData['parent_id'],
             'student_id' => $validatedData['student_id'],
         ]);
-
-        return redirect()->route('teacher.index')->with('success', 'Record created successfully.');
+    
+        return redirect()->route('teacher.index')->with('success', 'De koppeling is gelukt.');
     }
+    
 
 
     public function edit($parent_id, $student_id)
@@ -78,7 +89,7 @@ class UserParentStudentController extends Controller
         ->where('student_id', $student_id)
         ->update($validatedData);
 
-        return redirect()->route('teacher.index')->with('success', 'Record updated successfully.');
+        return redirect()->route('teacher.index')->with('success', 'Koppeling aangepast.');
     }
 
 

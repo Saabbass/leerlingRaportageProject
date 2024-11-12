@@ -36,14 +36,14 @@ class SubjectController extends Controller
         $subject->description = $request->input('description');
         $subject->save();
 
-        return redirect()->route('subject.index')->with('success', 'Subject created successfully.');
+        return redirect()->route('subject.index')->with('success', 'Vak aangemaakt.');
     }
     public function destroy($id)
     {
         $subject = Subject::findOrFail($id);
         $subject->delete();
 
-        return redirect()->route('subject.index')->with('success', 'Subject deleted successfully.');
+        return redirect()->route('subject.index')->with('success', 'Vak verwijderd.');
     }
     public function update(Request $request, $id)
     {
@@ -57,6 +57,6 @@ class SubjectController extends Controller
         $subject->description = $request->input('description');
         $subject->save();
 
-        return redirect()->route('subject.index')->with('success', 'Subject updated successfully.');
+        return redirect()->route('subject.index')->with('success', 'Vak aangepast.');
     }
 }

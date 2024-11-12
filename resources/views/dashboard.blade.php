@@ -1,54 +1,50 @@
 <x-app-layout>
   <x-slot name="header">
-    <h2 class="font-semibold text-xl text-[#333333] dark:text-[#E0E0E0] leading-tight">
+    <x-page-title>
       {{ __('Dashboard') }}
-    </h2>
+    </x-page-title>
+
+    @if (session('error'))
+      <x-error-failed>
+        {{ session('error') }}
+      </x-error-failed>
+    @endif
+
+    @if (session('success'))
+      <x-error-succes>
+        {{ session('success') }}
+      </x-error-succes>
+    @endif
   </x-slot>
+
   <div class="py-12">
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-      <div class="bg-[#79b5ff] dark:bg-[#263238] overflow-hidden shadow-sm sm:rounded-lg">
-        <div class="p-6 text-[#333333] dark:text-[#E0E0E0]">
+      <div
+        class="bg-secondaryLightHero dark:bg-secondaryDarkHero overflow-hidden drop-shadow-[4px_4px_7px_rgba(0,0,0,0.25)] sm:rounded-lg mt-6">
+        <x-hero-title class="p-6">
           {{ __('Je bent ingelogd!') }}
-        </div>
+        </x-hero-title>
       </div>
-      <div class="bg-[#79b5ff] dark:bg-[#263238] overflow-hidden shadow-sm sm:rounded-lg mt-6">
+      <div
+        class="bg-secondaryLightHero dark:bg-secondaryDarkHero overflow-hidden drop-shadow-[4px_4px_7px_rgba(0,0,0,0.25)] sm:rounded-lg mt-6">
         <div
-          class="p-6 flex flex-wrap justify-evenly gap-1 text-[#955b24] dark:text-[#FFC107]  bg-[#C8E6C9] dark:bg-[#2E3B4E]">
-          <a href="{{ route('subject.index') }}"
-            class="hover:underline rounded-xl hover:text-[#104E8B] dark:hover:text-[#FF6F61]">Vakken</a>
-          <a href="{{ route('grades.index') }}"
-            class="hover:underline rounded-xl hover:text-[#104E8B] dark:hover:text-[#FF6F61]">Cijfers</a>
-          <a href="{{ route('attendance.index') }}"
-            class="hover:underline rounded-xl hover:text-[#104E8B] dark:hover:text-[#FF6F61]">Aanwezigheid</a>
-            
-          <a href="{{ route('goals.index') }}"
-            class="hover:underline rounded-xl hover:text-[#104E8B] dark:hover:text-[#FF6F61]">goals</a>
-
+          class="p-6 flex flex-wrap justify-evenly gap-1 drop-shadow-[4px_4px_7px_rgba(0,0,0,0.25)] bg-primaryLightHero dark:bg-primaryDarkHero">
+          <x-hero-nav-link :href="route('subject.index')" :active="request()->routeIs('subject.index')">{{ __('Vakken') }}</x-hero-nav-link>
+          <x-hero-nav-link :href="route('grades.index')" :active="request()->routeIs('grades.index')">{{ __('Cijfers') }}</x-hero-nav-link>
+          <x-hero-nav-link :href="route('attendance.index')" :active="request()->routeIs('attendance.index')">{{ __('Aanwezigheid') }}</x-hero-nav-link>
+          <x-hero-nav-link :href="route('goals.index')" :active="request()->routeIs('goals.index')">{{ __('goals') }}</x-hero-nav-link>
           @if (auth()->user()->role === 'teacher')
-            <a href="{{ route('teacher.index') }}"
-              class="hover:underline rounded-xl hover:text-[#104E8B] dark:hover:text-[#FF6F61]">Leraar</a>
+            <x-hero-nav-link :href="route('teacher.index')" :active="request()->routeIs('teacher.index')">{{ __('Leraar') }}</x-hero-nav-link>
           @endif
         </div>
 
-        {{-- <div class="p-6 text-[#333333] dark:text-[#E0E0E0]">
-          <h3 class="font-semibold text-lg text-[#333333] dark:text-[#E0E0E0] leading-tight">
-            {{ __('Agenda') }}
-          </h3>
-          <ul class="mt-4">
-            <li>{{ __('Evenement 1: Vergadering met team om 10 uur') }}</li>
-            <li>{{ __('Evenement 2: Projectdeadline om 3 uur') }}</li>
-            <li>{{ __('Evenement 3: Gesprek met klant om 5 uur') }}</li>
-          </ul>
-        </div> --}}
-
-        <div class="p-6 text-[#333333] dark:text-[#E0E0E0]">
+        <div class="p-6 text-secondaryLightText dark:text-primaryDarkText">
           @if (auth()->user()->role === 'teacher')
-            <a href="{{ route('event.create') }}"
-              class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            <x-primary-link-btn :href="route('event.create')" :active="request()->routeIs('event.create')">
               {{ __('Aan agenda toevoegen') }}
-            </a>
+            </x-primary-link-btn>
           @endif
-          <div class="py-4" id='calendar'></div>
+          <div class="py-4 text-secondaryLightText dark:text-primaryDarkText" id='calendar'></div>
         </div>
       </div>
     </div>
@@ -68,7 +64,7 @@
         // Modify events to set color based on status
         events = events.map(event => {
           if (event.status === 'inactive') {
-            event.color = 'red';
+            event.color = '#d70101';
           }
           return event;
         });
