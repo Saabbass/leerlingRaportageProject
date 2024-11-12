@@ -58,9 +58,11 @@
             @foreach ($data as $item)
               <tr>
                 <x-table-td>
-                  {{ $item->parent->first_name }} {{ $item->parent->last_name }}</x-table-td>
+                  {{ $item->parent->first_name }} {{ $item->parent->last_name }} ({{ $item->parent->email }})
+                </x-table-td>
                 <x-table-td>
-                  {{ $item->student->first_name }} {{ $item->student->last_name }}</x-table-td>
+                  {{ $item->student->first_name }} {{ $item->student->last_name }} ({{ $item->student->email }})
+                </x-table-td>
                 <x-table-td-action>
                   <x-link-change
                     href="{{ route('teacher.edit', ['parent_id' => $item->parent_id, 'student_id' => $item->student_id]) }}">{{ __('Bewerken') }}</x-link-change>
