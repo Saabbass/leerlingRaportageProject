@@ -15,13 +15,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
 Route::get('/dashboard', \App\Http\Controllers\DashboardController::class)->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/users', [ProfileController::class, 'index'])->middleware(['auth'])->name('users.index');
-Route::get('/users/{user}', [ProfileController::class, 'show'])->middleware(['auth'])->name('users.student-detail');
+Route::get('/users/{user}/details', [ProfileController::class, 'show_detail'])->middleware(['auth'])->name('users.studentDetail');
 Route::put('/users/{user}', [ProfileController::class, 'update_user'])->middleware(['auth'])->name('users.update');
 Route::get('/users/{user}/edit', [ProfileController::class, 'edit_user'])->middleware(['auth'])->name('users.edit');
 Route::get('/users/create', [ProfileController::class, 'create_user'])->middleware(['auth'])->name('users.create');

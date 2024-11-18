@@ -42,7 +42,7 @@
                 {{ __('Gebruikers:') }}
               </x-hero-title>
               @if (auth()->user()->role === 'teacher')
-                <x-link-create :href="route('users.create')" :active="request()->routeIs('users.create')">
+                <x-link-create href="{{ route('users.create') }}">
                   {{ __('Maak gebruiker aan') }}
                 </x-link-create>
               @endif
@@ -103,7 +103,7 @@
                   </x-table-td>
                   <td class="px-4 py-2 whitespace-nowrap text-sm font-medium">
                     <x-link-change href="{{ route('users.edit', $user) }}">{{ __('Bewerken') }}</x-link-change>
-                    <a href="{{ route('users.student-detail', $user->id) }}">{{ __('Bekijk Student Details') }}</a>
+                    <a href="{{ route('users.studentDetail', $user) }}">{{ __('Bekijk Student Details') }}</a>
                     <form action="{{ route('users.destroy', $user) }}" method="POST" class="inline">
                       @csrf
                       @method('DELETE')

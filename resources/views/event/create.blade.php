@@ -36,13 +36,13 @@
             </div>
 
             <div class="flex justify-end">
-              <a href="{{ route('dashboard') }}"
+              <x-cancel-button href="{{ route('dashboard') }}"
                 class="bg-gray-500 hover:bg-gray-700 text-secondaryLightText dark:text-primaryDarkText font-bold py-2 px-4 rounded mr-2">
                 {{ __('Annuleren') }}
-              </a>
-              <x-primary-button type="submit" class="font-bold py-2 px-4 rounded">
+              </x-cancel-button>
+              <x-accept-button type="submit" class="font-bold py-2 px-4 rounded">
                 {{ __('les inplannen') }}
-              </x-primary-button>
+              </x-accept-button>
             </div>
           </form>
         </div>
