@@ -48,7 +48,7 @@ Route::middleware('auth')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::get('/grades', [GradesController::class, 'index'])->name('grades.index');
     Route::get('/grades/create', [GradesController::class, 'create'])->name('grades.create');
-    Route::post('/grades', [GradesController::class, 'store'])->name('grades.store');
+    Route::post('/grades/store', [GradesController::class, 'store'])->name('grades.store');
     Route::get('/grades/{id}/edit', [GradesController::class, 'edit'])->name('grades.edit');
     Route::patch('/grades/{id}', [GradesController::class, 'update'])->name('grades.update');
     Route::delete('/grades/{id}', [GradesController::class, 'destroy'])->name('grades.destroy');
@@ -56,7 +56,7 @@ Route::middleware('auth')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::get('/attendance', [AttendanceController::class, 'index'])->name('attendance.index');
     Route::get('/attendance/create', [AttendanceController::class, 'create'])->name('attendance.create');
-    Route::post('/attendance', [AttendanceController::class, 'store'])->name('attendance.store');
+    Route::post('/attendance/store', [AttendanceController::class, 'store'])->name('attendance.store');
     Route::get('/attendance/{id}/edit', [AttendanceController::class, 'edit'])->name('attendance.edit');
     Route::patch('/attendance/{id}', [AttendanceController::class, 'update'])->name('attendance.update');
     Route::delete('/attendance/{id}', [AttendanceController::class, 'destroy'])->name('attendance.destroy');
@@ -65,7 +65,7 @@ Route::middleware('auth')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::get('/subject', [SubjectController::class, 'index'])->name('subject.index');
     Route::get('/subject/create', [SubjectController::class, 'create'])->name('subject.create');
-    Route::post('/subject', [SubjectController::class, 'store'])->name('subject.store');
+    Route::post('/subject/store', [SubjectController::class, 'store'])->name('subject.store');
     Route::get('/subject/{id}/edit', [SubjectController::class, 'edit'])->name('subject.edit');
     Route::patch('/subject/{id}', [SubjectController::class, 'update'])->name('subject.update');
     Route::delete('/subject/{id}', [SubjectController::class, 'destroy'])->name('subject.destroy');
@@ -80,7 +80,7 @@ Route::middleware('auth')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::get('/teacher', [UserParentStudentController::class, 'index'])->name('teacher.index');
     Route::get('/teacher/create', [UserParentStudentController::class, 'create'])->name('teacher.create');
-    Route::post('/teacher', [UserParentStudentController::class, 'store'])->name('teacher.store');
+    Route::post('/teacher/store', [UserParentStudentController::class, 'store'])->name('teacher.store');
     Route::get('teacher/{parent_id}/{student_id}/edit', [UserParentStudentController::class, 'edit'])->name('teacher.edit');
     Route::put('teacher/{parent_id}/{student_id}', [UserParentStudentController::class, 'update'])->name('teacher.update');
     Route::delete('teacher/{parent_id}/{student_id}', [UserParentStudentController::class, 'destroy'])->name('teacher.destroy');
@@ -89,9 +89,9 @@ Route::middleware('auth')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::get('/messages',[MessageController::class, 'index'])->name('messages.index');
     Route::get('/messages/create',[MessageController::class, 'create'])->name('messages.create');
-    Route::post('/messages',[MessageController::class, 'store'])->name('messages.store');
+    Route::post('/messages/store',[MessageController::class, 'store'])->name('messages.store');
     Route::get('/messages/{id}/edit',[MessageController::class, 'edit'])->name('messages.edit');
-    Route::put('/messages/{id}',[MessageController::class, 'update'])->name('messages.update');
+    Route::patch('/messages/{id}',[MessageController::class, 'update'])->name('messages.update');
     Route::delete('/messages/{id}',[MessageController::class, 'destroy'])->name('messages.destroy');
 });
 
