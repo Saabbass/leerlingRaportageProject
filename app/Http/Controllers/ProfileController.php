@@ -169,6 +169,23 @@ class ProfileController extends Controller
 
         return Redirect::to('/');
     }
+
+    
+    // public function detail_user($id): View
+    // {
+    //     $user = User::with('parent')->findOrFail($id); // Fetch the user with parent relationship
+    //     return view('users.detail', [
+    //         'user' => $user,
+    //     ]);
+    // }
+
+    public function show($id): View
+    {
+        $student = User::with('parents')->findOrFail($id); // Fetch the user with parents relationship
+        return view('users.student-detail', [
+            'student' => $student,
+        ]);
+    }
 }
 
 

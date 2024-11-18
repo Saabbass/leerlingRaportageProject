@@ -32,10 +32,10 @@
           <x-hero-nav-link :href="route('subject.index')" :active="request()->routeIs('subject.index')">{{ __('Vakken') }}</x-hero-nav-link>
           <x-hero-nav-link :href="route('grades.index')" :active="request()->routeIs('grades.index')">{{ __('Cijfers') }}</x-hero-nav-link>
           <x-hero-nav-link :href="route('attendance.index')" :active="request()->routeIs('attendance.index')">{{ __('Aanwezigheid') }}</x-hero-nav-link>
-          {{-- <x-hero-nav-link :href="route('goals.index')" :active="request()->routeIs('goals.index')">{{ __('goals') }}</x-hero-nav-link> --}}
+          {{-- <x-hero-nav-link :href="route('goals.index')" :active="request()->routeIs('goals.index')">{{ __('goals') }}</x-hero-nav-link>
           @if (auth()->user()->role === 'teacher')
             <x-hero-nav-link :href="route('teacher.index')" :active="request()->routeIs('teacher.index')">{{ __('Leraar') }}</x-hero-nav-link>
-          @endif
+          @endif --}}
         </div>
 
         <div class="p-6 text-secondaryLightText dark:text-primaryDarkText">

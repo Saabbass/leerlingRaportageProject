@@ -41,7 +41,7 @@
                 {{ __('Annuleren') }}
               </a>
               <x-primary-button type="submit" class="font-bold py-2 px-4 rounded">
-                {{ __('Evenement creëren') }}
+                {{ __('les inplannen') }}
               </x-primary-button>
             </div>
           </form>

@@ -50,7 +50,7 @@ class User extends Authenticatable
 
     public function parents()
     {
-        return $this->hasMany(UserParentStudent::class, 'student_id');
+        return $this->hasMany(UserParentStudent::class, 'student_id', 'id');
     }
 
     public function students()

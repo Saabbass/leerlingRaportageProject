@@ -21,6 +21,7 @@ Route::get('/dashboard', function () {
 Route::get('/dashboard', \App\Http\Controllers\DashboardController::class)->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/users', [ProfileController::class, 'index'])->middleware(['auth'])->name('users.index');
+Route::get('/users/{user}', [ProfileController::class, 'show'])->middleware(['auth'])->name('users.student-detail');
 Route::put('/users/{user}', [ProfileController::class, 'update_user'])->middleware(['auth'])->name('users.update');
 Route::get('/users/{user}/edit', [ProfileController::class, 'edit_user'])->middleware(['auth'])->name('users.edit');
 Route::get('/users/create', [ProfileController::class, 'create_user'])->middleware(['auth'])->name('users.create');
