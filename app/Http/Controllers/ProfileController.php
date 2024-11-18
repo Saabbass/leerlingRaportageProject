@@ -53,10 +53,12 @@ class ProfileController extends Controller
             'user' => $user,
         ]);
     }
+    
     public function create_user(Request $request): View
     {
         return view('users.create');
     }
+
     public function store_user(Request $request): RedirectResponse
     {
         $request->validate([
@@ -179,10 +181,10 @@ class ProfileController extends Controller
     //     ]);
     // }
 
-    public function show($id): View
+    public function show_detail($id): View
     {
         $student = User::with('parents')->findOrFail($id); // Fetch the user with parents relationship
-        return view('users.student-detail', [
+        return view('users.studentDetail', [
             'student' => $student,
         ]);
     }
