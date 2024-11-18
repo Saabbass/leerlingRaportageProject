@@ -35,7 +35,7 @@
           <div class="flex flex-wrap gap-2">
             @if (auth()->user()->role !== 'student')
               <x-link-create href="{{ route('messages.create') }}">
-                {{ __('Nieuwe Bericht') }}
+                {{ __('Nieuw Bericht') }}
               </x-link-create>
             @endif
             @if (auth()->user()->role == 'teacher')
