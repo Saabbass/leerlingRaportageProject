@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreEventRequest;
+use App\Http\Requests\UpdateEventRequest;
 use App\Models\Event;
 use App\Models\Subject;
 use Illuminate\Http\Request;
@@ -14,27 +16,20 @@ class EventController extends Controller
     return view('event.create', compact('subjects'));
   }
 
-  public function store(Request $request)
+  public function store(StoreEventRequest $request)
   {
-    $subject = Subject::find($request->subject_id);
-
-    $request->validate([
-      'subject_id' => 'required|exists:subjects,id',
-      'subject_date_start' => 'required|date',
-      'subject_date_end' => 'required|date',
-      'subject_status' => 'required|string',
-    ]);
-
-
-    $event = new Event();
-    $event->subject_id = $subject->id;
-    $event->subject_name = $subject->subject_name;
-    $event->start = $request->input('subject_date_start');
-    $event->end = $request->input('subject_date_end');
-    $event->status = $request->input('subject_status');
-    $event->save();
-
-    return redirect()->route('dashboard')->with('success', 'Subject added to callendar successfully.');
+      $validated = $request->validated();
+      $subject = Subject::find($validated['subject_id']);
+  
+      $event = new Event();
+      $event->subject_id = $subject->id;
+      $event->subject_name = $subject->subject_name;
+      $event->start = $validated['subject_date_start'];
+      $event->end = $validated['subject_date_end'];
+      $event->status = $validated['subject_status'];
+      $event->save();
+  
+      return redirect()->route('dashboard')->with('success', 'Subject added to calendar successfully.');
   }
 
   public function edit($id)
@@ -48,28 +43,22 @@ class EventController extends Controller
     return view('event.edit', compact('event', 'subjects'));
   }
 
-  public function update(Request $request, $id)
-  {
-    $event = Event::findOrFail($id);
-    $subject = Subject::find($request->subject_id);
+  public function update(UpdateEventRequest $request, $id)
+    {
+        $event = Event::findOrFail($id);
+        $subject = Subject::find($request->subject_id);
 
-    $request->validate([
-      'subject_id' => 'required|string|max:255',
-      'subject_date_start' => 'required|date',
-      'subject_date_end' => 'required|date',
-      'subject_status' => 'required|string',
-    ]);
+        $validated = $request->validated();
 
-    // $event = Event::findOrFail($id);
-    $event->subject_id = $subject->id;
-    $event->subject_name = $request->input('subject_name');
-    $event->start = $request->input('subject_date_start');
-    $event->end = $request->input('subject_date_end');
-    $event->status = $request->input('subject_status');
-    $event->save();
+        $event->subject_id = $subject->id;
+        $event->subject_name = $subject->subject_name;
+        $event->start = $validated['subject_date_start'];
+        $event->end = $validated['subject_date_end'];
+        $event->status = $validated['subject_status'];
+        $event->save();
 
-    return redirect()->route('dashboard')->with('success', 'De les is succesvol aangepast.');
-  }
+        return redirect()->route('dashboard')->with('success', 'De les is succesvol aangepast.');
+    }
 
   public function destroy($id)
   {

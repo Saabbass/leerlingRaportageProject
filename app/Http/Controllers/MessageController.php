@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreMessageRequest;
+use App\Http\Requests\UpdateMessageRequest;
 use App\Models\User;
 
 use Illuminate\Http\Request;
 use App\Models\Announcements;
+use GuzzleHttp\Psr7\Message;
+use Illuminate\Auth\Events\Validated;
 
 class MessageController extends Controller
 {
@@ -53,22 +57,10 @@ public function create()
 
     return view('messages.create', compact('students', 'parents', 'teachers'));
 }
-public function store(Request $request)
+public function store(StoreMessageRequest $request)
 {
-    // Validate the request data
-    $request->validate([
-        'title' => 'required|string|max:255',
-        'content' => 'required|string',
-        'user_id' => 'required|exists:users,id',
-        'recipient_type' => 'required|in:student,parent,teacher',
-    ]);
-    
-    $recipientType = $request->input('recipient_type');
-
-    $message = new Announcements();
-    $message->title = $request->input('title');
-    $message->content = $request->input('content');
-    $message->user_id = $request->input('user_id');
+    // Create a new announcement with validated data
+    $message = new Announcements($request->validated());
     $message->sent_by = auth()->id(); // Set the sent_by field
     $message->save();
 
@@ -83,28 +75,14 @@ public function edit($id)
     $teachers = User::where('role', 'teacher')->get();
     return view('messages.edit', compact('message', 'students', 'parents', 'teachers'));
 }
-    public function update(Request $request, $id)
-    {
-        // Validate the request data
-        $request->validate([
-            'title' => 'required|string|max:255',
-            'content' => 'required|string',
-            'user_id' => 'required|exists:users,id',
-            'recipient_type' => 'required|in:student,parent,teacher',
-        ]);
+public function update(UpdateMessageRequest $request, $id)
+{
+    // Update the announcement
+    $message = Announcements::findOrFail($id);
+    $message->update($request->validated());
 
-        $recipientType = $request->input('recipient_type');
-
-        // Update the announcement
-        $message = Announcements::findOrFail($id);
-        $message->update([
-            'title' => $request->title,
-            'content' => $request->content,
-            'user_id' => $request->user_id,
-        ]);
-
-        return redirect()->route('messages.index')->with('status', 'Message updated successfully!');
-    }
+    return redirect()->route('messages.index')->with('status', 'Message updated successfully!');
+}
     public function destroy($id)
     {
         $message = Announcements::findOrFail($id);

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreGradeRequest;
+use App\Http\Requests\UpdateGradeRequest;
 use App\Models\Grades;
 use App\Models\Subject;
 use App\Models\User;
@@ -26,26 +28,18 @@ class GradesController extends Controller
         return view('grades.create', compact('subjects', 'users'));
     }
 
-    public function store(Request $request)
+    public function store(StoreGradeRequest $request)
     {
-        $request->validate([
-            'user_id' => 'required|exists:users,id',
-            'subject_id' => 'required|exists:subjects,id',
-            'assignment_name' => 'required|string|max:255',
-            'grade' => 'required|numeric|min:0|max:10',
-            'date' => 'required|date',
-            'description' => 'nullable|string|max:255',
-        ]);
+        $validated = $request->validated();
 
         $grade = new Grades();
-        $grade->user_id = $request->input('user_id');
-        $grade->subject_id = $request->input('subject_id');
-        $grade->assignment_name = $request->input('assignment_name');
-        $grade->grade = $request->input('grade');
-        $grade->date = $request->input('date');
-        $grade->description = $request->input('description');
+        $grade->user_id = $validated['user_id'];
+        $grade->subject_id = $validated['subject_id'];
+        $grade->assignment_name = $validated['assignment_name'];
+        $grade->grade = $validated['grade'];
+        $grade->date = $validated['date'];
+        $grade->description = $validated['description'];
         $grade->save();
-        
 
         return redirect()->route('grades.index')->with('success', 'Grade created successfully.');
     }
@@ -58,24 +52,12 @@ class GradesController extends Controller
         return view('grades.edit', compact('grade', 'subjects', 'users'));
     }
 
-    public function update(Request $request, $id)
+    public function update(UpdateGradeRequest $request, $id)
     {
-        $request->validate([
-            'user_id' => 'required|exists:users,id',
-            'subject_id' => 'required|exists:subjects,id',
-            'assignment_name' => 'required|string|max:255',
-            'grade' => 'required|numeric|min:0|max:10', // Ensure 'grade' is required and numeric between 0 and 10
-            'description' => 'nullable|string|max:255',
-        ]);
+        $validated = $request->validated();
 
         $grade = Grades::findOrFail($id);
-        $grade->update([
-            'user_id' => $request->user_id,
-            'subject_id' => $request->subject_id,
-            'assignment_name' => $request->assignment_name,
-            'grade' => $request->grade,
-            'description' => $request->description,
-        ]);
+        $grade->update($validated);
 
         return redirect()->route('grades.index')->with('success', 'Grade updated successfully.');
     }
