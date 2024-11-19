@@ -63,6 +63,8 @@ public function store(Request $request)
         'recipient_type' => 'required|in:student,parent,teacher',
     ]);
     
+    $recipientType = $request->input('recipient_type');
+
     $message = new Announcements();
     $message->title = $request->input('title');
     $message->content = $request->input('content');
@@ -88,7 +90,10 @@ public function edit($id)
             'title' => 'required|string|max:255',
             'content' => 'required|string',
             'user_id' => 'required|exists:users,id',
+            'recipient_type' => 'required|in:student,parent,teacher',
         ]);
+
+        $recipientType = $request->input('recipient_type');
 
         // Update the announcement
         $message = Announcements::findOrFail($id);
