@@ -29,7 +29,7 @@ class AttendanceController extends Controller
     {
         Attendance::create($request->validated());
 
-        return redirect()->route('attendance.index')->with('success', 'Attendance recorded successfully.');
+        return redirect()->route('attendance.index')->with('success', 'Aanwezigheid gemeld.');
     }
     public function edit($id)
     {
@@ -56,7 +56,7 @@ class AttendanceController extends Controller
         $attendance->reason = $request->input('reason');
         $attendance->save();
 
-        return redirect()->route('attendance.index')->with('success', 'Attendance updated successfully.');
+        return redirect()->route('attendance.index')->with('success', 'Aanwezigheid aangepast.');
     }
 
     public function destroy($id)
@@ -64,6 +64,6 @@ class AttendanceController extends Controller
         $attendance = Attendance::findOrFail($id);
         $attendance->delete();
 
-        return redirect()->route('attendance.index')->with('success', 'Attendance deleted successfully.');
+        return redirect()->route('attendance.index')->with('success', 'Aanwezigheid verwijderd.');
     }
 }

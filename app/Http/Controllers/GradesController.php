@@ -47,7 +47,7 @@ class GradesController extends Controller
         $grade->save();
         
 
-        return redirect()->route('grades.index')->with('success', 'Grade created successfully.');
+        return redirect()->route('grades.index')->with('success', 'Cijfer toegevoegd.');
     }
 
     public function edit($id)
@@ -77,7 +77,7 @@ class GradesController extends Controller
             'description' => $request->description,
         ]);
 
-        return redirect()->route('grades.index')->with('success', 'Grade updated successfully.');
+        return redirect()->route('grades.index')->with('success', 'Cijfer aangepast.');
     }
 
     public function destroy($id)
@@ -85,6 +85,6 @@ class GradesController extends Controller
         $grade = Grades::findOrFail($id);
         $grade->delete();
 
-        return redirect()->route('grades.index')->with('success', 'Grade deleted successfully.');
+        return redirect()->route('grades.index')->with('success', 'Cijfer verwijderd.');
     }
 }

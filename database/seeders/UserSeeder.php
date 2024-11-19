@@ -14,14 +14,14 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         // Arrays of random first names and last names
-        $firstNames = ['Alice', 'Bob', 'Charlie', 'David', 'Eva', 'Frank', 'Grace', 'Hannah', 'Ian', 'Jack'];
-        $lastNames = ['Smith', 'Johnson', 'Williams', 'Jones', 'Brown', 'Davis', 'Miller', 'Wilson', 'Moore', 'Taylor'];
+        $firstNames = ['Alice', 'Bob', 'Charlie', 'David', 'Eva', 'Frank', 'Grace', 'Hannah', 'Ian', 'Jack', 'Liam', 'Mia', 'Noah', 'Olivia', 'Sophia', 'James', 'Ava', 'Isabella', 'Lucas', 'Amelia', 'Ethan', 'Chloe', 'Mason', 'Ella', 'Logan', 'Zoe', 'Jacob', 'Lily', 'Michael', 'Aria', 'Daniel', 'Scarlett', 'Matthew', 'Sofia', 'Henry', 'Victoria', 'Sebastian', 'Nora', 'Alexander', 'Mila'];
+        $lastNames = ['Smith', 'Johnson', 'Williams', 'Jones', 'Brown', 'Davis', 'Miller', 'Wilson', 'Moore', 'Taylor', 'Anderson', 'Thomas', 'Jackson', 'White', 'Harris', 'Martin', 'Thompson', 'Garcia', 'Martinez', 'Robinson', 'Clark', 'Rodriguez', 'Lewis', 'Lee', 'Walker', 'Hall', 'Allen', 'Young', 'Hernandez', 'King', 'Wright', 'Scott', 'Torres', 'Nguyen', 'Hill', 'Flores', 'Green', 'Adams', 'Nelson', 'Baker'];
 
         // Create admin user with random names
         User::create([
             'id' => 1,
-            'first_name' => $firstNames[array_rand($firstNames)], // Random first name
-            'last_name' => $lastNames[array_rand($lastNames)],   // Random last name
+            'first_name' => "admin", // Random first name
+            'last_name' => "admin",   // Random last name
             'age' => 30,
             'email' => 'test@example.com',
             'password' => bcrypt('password'),
@@ -42,9 +42,9 @@ class UserSeeder extends Seeder
                 'remember_token' => Str::random(10),
             ]);
         }
-
+        
         // Create 40 parent users
-        for ($i = 42; $i <= 81; $i++) {
+        for ($i = 42; $i <= 121; $i++) {
             User::create([
                 'id' => $i,
                 'first_name' => $firstNames[array_rand($firstNames)], // Random first name

@@ -1,59 +1,78 @@
 <x-app-layout>
   <x-slot name="header">
-    <h2 class="font-semibold text-xl text-[#333333] dark:text-[#E0E0E0] leading-tight">
+    <x-page-title>
       {{ __('Cijfers') }}
-    </h2>
+    </x-page-title>
+
+    @if (session('error'))
+      <x-error-failed>
+        {{ session('error') }}
+      </x-error-failed>
+    @endif
+
+    @if (session('success'))
+      <x-error-succes>
+        {{ session('success') }}
+      </x-error-succes>
+    @endif
   </x-slot>
+
   <div class="py-12">
     <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
-      <div class="bg-[#79b5ff] dark:bg-[#263238] overflow-hidden shadow-sm sm:rounded-lg mt-6">
+      <div
+        class="bg-secondaryLightHero dark:bg-secondaryDarkHero overflow-hidden drop-shadow-[4px_4px_7px_rgba(0,0,0,0.25)] sm:rounded-lg mt-6">
         <div
-          class="p-6 flex flex-wrap justify-evenly gap-1 text-[#955b24] dark:text-[#FFC107]  bg-[#C8E6C9] dark:bg-[#2E3B4E]">
-          <a href="{{ route('subject.index') }}"
-            class="hover:underline rounded-xl hover:text-[#104E8B] dark:hover:text-[#FF6F61]">Vakken</a>
-          <a href="{{ route('grades.index') }}"
-            class="hover:underline rounded-xl hover:text-[#104E8B] dark:hover:text-[#FF6F61]">Cijfers</a>
-          <a href="{{ route('attendance.index') }}"
-            class="hover:underline rounded-xl hover:text-[#104E8B] dark:hover:text-[#FF6F61]">Aanwezigheid</a>
-          @if (auth()->user()->role === 'teacher')
-            <a href="{{ route('teacher.index') }}"
-              class="hover:underline rounded-xl hover:text-[#104E8B] dark:hover:text-[#FF6F61]">Leraar</a>
-          @endif
+          class="p-6 flex flex-wrap justify-evenly gap-1 text-primaryLightText dark:text-secondaryDarkText drop-shadow-[4px_4px_7px_rgba(0,0,0,0.25)] bg-primaryLightHero dark:bg-primaryDarkHero">
+          <x-hero-nav-link :href="route('subject.index')" :active="request()->routeIs('subject.index')">{{ __('Vakken') }}</x-hero-nav-link>
+          <x-hero-nav-link :href="route('grades.index')" :active="request()->routeIs('grades.index')">{{ __('Cijfers') }}</x-hero-nav-link>
+          <x-hero-nav-link :href="route('attendance.index')" :active="request()->routeIs('attendance.index')">{{ __('Aanwezigheid') }}</x-hero-nav-link>
+          {{-- @if (auth()->user()->role === 'teacher')
+            <x-hero-nav-link :href="route('teacher.index')" :active="request()->routeIs('teacher.index')">{{ __('Leraar') }}</x-hero-nav-link>
+          @endif --}}
         </div>
-        <div class="p-6 text-[#333333] dark:text-[#E0E0E0]">
+        <div class="p-6 text-secondaryLightText dark:text-primaryDarkText">
           <div class="flex flex-col md:flex-row md:justify-between items-center mb-6 gap-4 md:gap-0">
-            <h3 class="text-lg font-semibold">{{ __('Cijferlijst') }}</h3>
+            <x-hero-title>
+              {{ __('Cijferlijst') }}
+            </x-hero-title>
             @if (auth()->user()->role === 'teacher')
-              <a href="{{ route('grades.create') }}"
-                class="px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700">
+              <x-link-create href="{{ route('grades.create') }}">
                 {{ __('Nieuw cijfer maken') }}
-              </a>
+              </x-link-create>
             @endif
           </div>
           <div class="mt-4">
             @foreach (auth()->user()->role === 'teacher' ? $grades : $grades->where('user_id', auth()->user()->id) as $grade)
             @if (auth()->user()->role === 'teacher')
-              <p>{{ __('Student: ') }}{{ $users->firstWhere('id', $grade->user_id)->first_name }}</p>
-            @endif
-              <div class="flex flex-col md:flex-row justify-between items-center border-b py-2">
+                <x-subject-title>{{ __('Student: ') }}{{ $users->firstWhere('id', $grade->user_id)->first_name }}</x-subject-title>
+              @endif
+              <div
+                class="flex justify-between items-center border-b border-secondaryLightBorder dark:border-primaryDarkBorder py-2">
                 <div>
-                  <span>{{ $grade->assignment_name }}</span>
-                  <p>{{ $subjects->firstWhere('id', $grade->subject_id)->subject_name }}</p>             
-                  <p>{{ __('Cijfer: ') }}{{ $grade->grade }}</p>
-                  <p>{{ __('Datum: ') }}{{ $grade->date }}</p>
+                  <x-subject-title>
+                    {{ $grade->assignment_name }}
+                  </x-subject-title>
+                  <x-subject-description>
+                    {{ $subjects->firstWhere('id', $grade->subject_id)->subject_name }}</x-subject-description>
+                  <x-subject-description>
+                    {{ __('Cijfer: ') }}{{ $grade->grade }}
+                  </x-subject-description>
+                  <x-subject-description>
+                    {{ __('Datum: ') }}{{ $grade->date }}
+                  </x-subject-description>
                 </div>
                 <div class="flex flex-col justify-center items-center sm:flex-row sm:space-x-4">
                   @if (auth()->user()->role === 'teacher')
-                    <a href="{{ route('grades.edit', $grade->id) }}" class="text-blue-500 hover:underline">
+                    <x-link-change href="{{ route('grades.edit', $grade->id) }}">
                       {{ __('Bewerken') }}
-                    </a>
+                    </x-link-change>
                     <form action="{{ route('grades.destroy', $grade->id) }}" method="POST"
                       onsubmit="return confirm('{{ __('Weet u zeker dat u dit cijfer wilt verwijderen?') }}');">
                       @csrf
                       @method('DELETE')
-                      <button type="submit" class="text-[#D0021B] dark:text-[#FF6F61] hover:underline">
+                      <x-link-delete type="submit">
                         {{ __('Verwijderen') }}
-                      </button>
+                      </x-link-delete>
                     </form>
                   @endif
                 </div>
