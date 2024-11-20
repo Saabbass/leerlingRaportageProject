@@ -3,22 +3,10 @@
     <x-page-title>
       {{ __('Berichten') }}
     </x-page-title>
-
-    @if (session('error'))
-      <x-error-failed>
-        {{ session('error') }}
-      </x-error-failed>
-    @endif
-
-    @if (session('success'))
-      <x-error-succes>
-        {{ session('success') }}
-      </x-error-succes>
-    @endif
   </x-slot>
 
   <div class="py-12">
-    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
       <div
         class="bg-secondaryLightHero dark:bg-secondaryDarkHero overflow-hidden drop-shadow-[4px_4px_7px_rgba(0,0,0,0.25)] sm:rounded-lg mt-6">
         <div
@@ -30,7 +18,7 @@
             <x-hero-nav-link :href="route('teacher.index')" :active="request()->routeIs('teacher.index')">{{ __('Leraar') }}</x-hero-nav-link>
           @endif --}}
         </div>
-        <div class="flex justify-between items-center mb-6 p-6">
+        <div class="flex items-center justify-between p-6 mb-6">
           <x-hero-title>{{ __('Jouw berichten') }}</x-hero-title>
           <div class="flex flex-wrap gap-2">
             @if (auth()->user()->role !== 'student')

@@ -81,7 +81,7 @@ public function update(UpdateMessageRequest $request, $id)
     $message = Announcements::findOrFail($id);
     $message->update($request->validated());
 
-    return redirect()->route('messages.index')->with('status', 'Message updated successfully!');
+    return redirect()->route('messages.index')->with('info', 'Message updated successfully!');
 }
 
     public function destroy($id)
@@ -89,6 +89,6 @@ public function update(UpdateMessageRequest $request, $id)
         $message = Announcements::findOrFail($id);
         $message->delete();
 
-        return redirect()->route('messages.index')->with('status', 'Bericht verwijderd!');
+        return redirect()->route('messages.index')->with('info', 'Bericht verwijderd!');
     }
 }
