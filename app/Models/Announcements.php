@@ -13,7 +13,7 @@ class Announcements extends Model
         'title',
         'content',
         'user_id',
-        'sent_by'
+        'sent_by',
     ];
 
     protected $table = 'announcements';

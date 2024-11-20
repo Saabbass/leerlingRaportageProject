@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreSubjectRequest;
+use App\Http\Requests\UpdateSubjectRequest;
 use App\Models\Subject;
 use Illuminate\Http\Request;
 
@@ -25,15 +27,13 @@ class SubjectController extends Controller
 
         return view('subject.edit', ['subject' => $subject]);
     }
-    public function store(Request $request)
+    public function store(StoreSubjectRequest $request)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'description' => 'nullable|string',
-        ]);
+        $validated = $request->validated();
+
         $subject = new Subject();
-        $subject->subject_name = $request->input('name');
-        $subject->description = $request->input('description');
+        $subject->subject_name = $validated['name'];
+        $subject->description = $validated['description'];
         $subject->save();
 
         return redirect()->route('subject.index')->with('success', 'Vak aangemaakt.');
@@ -45,16 +45,13 @@ class SubjectController extends Controller
 
         return redirect()->route('subject.index')->with('success', 'Vak verwijderd.');
     }
-    public function update(Request $request, $id)
+    public function update(UpdateSubjectRequest $request, $id)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'description' => 'nullable|string',
-        ]);
+        $validated = $request->validated();
 
         $subject = Subject::findOrFail($id);
-        $subject->subject_name = $request->input('name');
-        $subject->description = $request->input('description');
+        $subject->subject_name = $validated['name'];
+        $subject->description = $validated['description'];
         $subject->save();
 
         return redirect()->route('subject.index')->with('success', 'Vak aangepast.');

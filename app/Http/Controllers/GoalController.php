@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreGoalRequest;
+use App\Http\Requests\UpdateGoalRequest;
 use App\Models\Goal;
 use Illuminate\Http\Request;
 
@@ -21,18 +23,14 @@ class GoalController extends Controller
         return view('goals.create', compact('slot'));
     }
 
-    public function store(Request $request)
+    public function store(StoreGoalRequest $request)
     {
-        $request->validate([
-            'goal_name' => 'required|string|max:255',
-            'goal_description' => 'required|string',
-            'target_date' => 'required|date'
-        ]);
+        $validated = $request->validated();
 
         $goal = new Goal();
-        $goal->goal_name = $request->goal_name;
-        $goal->goal_description = $request->goal_description;
-        $goal->target_date = $request->target_date;
+        $goal->goal_name = $validated['goal_name'];
+        $goal->goal_description = $validated['goal_description'];
+        $goal->target_date = $validated['target_date'];
         $goal->save();
 
         return redirect()->route('dashboard')->with('success', 'Goal added successfully.');
@@ -45,18 +43,14 @@ class GoalController extends Controller
         return view('goals.edit', compact('goal', 'slot'));
     }
 
-    public function update(Request $request, $id)
+    public function update(UpdateGoalRequest $request, $id)
     {
-        $request->validate([
-            'goal_name' => 'required|string|max:255',
-            'goal_description' => 'required|string',
-            'target_date' => 'required|date'
-        ]);
+        $validated = $request->validated();
 
         $goal = Goal::findOrFail($id);
-        $goal->goal_name = $request->goal_name;
-        $goal->goal_description = $request->goal_description;
-        $goal->target_date = $request->target_date;
+        $goal->goal_name = $validated['goal_name'];
+        $goal->goal_description = $validated['goal_description'];
+        $goal->target_date = $validated['target_date'];
         $goal->save();
 
         return redirect()->route('dashboard')->with('success', 'Goal updated successfully.');
