@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+
+use App\Http\Requests\StoreUserParentStudentRequest;
+use App\Http\Requests\UpdateUserParentStudentRequest;
 use App\Models\User;
 use App\Models\UserParentStudent;
 use Illuminate\Http\Request;
@@ -41,12 +44,10 @@ class UserParentStudentController extends Controller
     }
 
 
-    public function store(Request $request)
+    public function store(StoreUserParentStudentRequest $request)
     {
-        $validatedData = $request->validate([
-            'parent_id' => 'required|exists:users,id',
-            'student_id' => 'required|exists:users,id',
-        ]);
+
+        $validated = $request->validated();
     
         // Check if the connection already exists
         $exists = UserParentStudent::where('parent_id', $validatedData['parent_id'])
@@ -57,10 +58,9 @@ class UserParentStudentController extends Controller
             return redirect()->route('teacher.index')->with('error', 'De ouder is al aan het kind gekoppeld.');
         }
     
-        // Create the new record
         UserParentStudent::create([
-            'parent_id' => $validatedData['parent_id'],
-            'student_id' => $validatedData['student_id'],
+            'parent_id' => $validated['parent_id'],
+            'student_id' => $validated['student_id'],
         ]);
     
         return redirect()->route('teacher.index')->with('success', 'De koppeling is gelukt.');
@@ -78,16 +78,13 @@ class UserParentStudentController extends Controller
     }
 
 
-    public function update(Request $request, $parent_id, $student_id)
+    public function update(UpdateUserParentStudentRequest $request, $parent_id, $student_id)
     {
-        $validatedData = $request->validate([
-            'parent_id' => 'required|exists:users,id',
-            'student_id' => 'required|exists:users,id',
-        ]);
+        $validated = $request->validated();
 
         UserParentStudent::where('parent_id', $parent_id)
-        ->where('student_id', $student_id)
-        ->update($validatedData);
+            ->where('student_id', $student_id)
+            ->update($validated);
 
         return redirect()->route('teacher.index')->with('success', 'Koppeling aangepast.');
     }
