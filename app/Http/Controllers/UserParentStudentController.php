@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Http\Requests\StoreUserParentStudentRequest;
 use App\Http\Requests\UpdateUserParentStudentRequest;
-use App\Models\UserParentStudent;
 use App\Models\User;
+use App\Models\UserParentStudent;
 use Illuminate\Http\Request;
 
 class UserParentStudentController extends Controller
@@ -45,15 +46,26 @@ class UserParentStudentController extends Controller
 
     public function store(StoreUserParentStudentRequest $request)
     {
-        $validated = $request->validated();
 
+        $validated = $request->validated();
+    
+        // Check if the connection already exists
+        $exists = UserParentStudent::where('parent_id', $validatedData['parent_id'])
+                    ->where('student_id', $validatedData['student_id'])
+                    ->exists();
+    
+        if ($exists) {
+            return redirect()->route('teacher.index')->with('error', 'De ouder is al aan het kind gekoppeld.');
+        }
+    
         UserParentStudent::create([
             'parent_id' => $validated['parent_id'],
             'student_id' => $validated['student_id'],
         ]);
-
-        return redirect()->route('teacher.index')->with('success', 'Record created successfully.');
+    
+        return redirect()->route('teacher.index')->with('success', 'De koppeling is gelukt.');
     }
+    
 
 
     public function edit($parent_id, $student_id)
@@ -74,7 +86,7 @@ class UserParentStudentController extends Controller
             ->where('student_id', $student_id)
             ->update($validated);
 
-        return redirect()->route('teacher.index')->with('success', 'Record updated successfully.');
+        return redirect()->route('teacher.index')->with('success', 'Koppeling aangepast.');
     }
 
 

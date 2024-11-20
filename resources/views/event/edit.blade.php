@@ -1,66 +1,58 @@
 <x-app-layout>
   <x-slot name="header">
-    <h2 class="font-semibold text-xl text-[#333333] dark:text-[#E0E0E0] leading-tight">
+    <x-page-title>
       {{ __('Les aanpassen') }}
-    </h2>
+    </x-page-title>
   </x-slot>
 
   <div class="py-12">
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-      <div class="bg-[#79b5ff] dark:bg-[#263238] overflow-hidden shadow-sm sm:rounded-lg">
-        <div class="p-6 text-[#333333] dark:text-[#E0E0E0]">
-          <form action="{{ route('event.update', $event->id) }}" method="POST">
-            @csrf
-            @method('PATCH')
+      <div class="bg-secondaryLightHero dark:bg-secondaryDarkHero overflow-hidden shadow-sm sm:rounded-lg p-6">
+        <form action="{{ route('event.update', $event->id) }}" method="POST">
+          @csrf
+          @method('PATCH')
 
-            <div class="mb-4">
-              <label for="subject_id"
-                class="block text-sm font-medium text-[#333333] dark:text-[#E0E0E0]">{{ __('Vak') }}</label>
-              <select name="subject_id" id="subject_id"
-                class="bg-[#C8E6C9] dark:bg-[#2E3B4E] mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                required>
-                @foreach ($subjects as $subject)
-                  <option value="{{ $subject->id }}" {{ $subject->id == $event->subject_id ? 'selected' : '' }}>{{ $subject->subject_name }}</option>
-                @endforeach
-              </select>
-            </div>
-
-            <div class="mb-4">
-              <label for="subject_date_start"
-                class="block text-sm font-medium text-[#333333] dark:text-[#E0E0E0]">{{ __('Start') }}</label>
-              <input type="date" name="subject_date_start" id="subject_date_start" value="{{ $event->start }}"
-                class="bg-[#C8E6C9] dark:bg-[#2E3B4E] mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                required>
-            </div>
-
-            <div class="mb-4">
-              <label for="subject_date_end"
-                class="block text-sm font-medium text-[#333333] dark:text-[#E0E0E0]">{{ __('Eindigd') }}</label>
-              <input type="date" name="subject_date_end" id="subject_date_end" value="{{ $event->end }}"
-                class="bg-[#C8E6C9] dark:bg-[#2E3B4E] mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                required>
-            </div>
-
-            <div class="mb-4">
-              <label for="subject_status" class="block text-sm font-medium text-[#333333] dark:text-[#E0E0E0]">{{ __('Status') }}</label>
-              <select id="subject_status" name="subject_status" class="bg-[#C8E6C9] dark:bg-[#2E3B4E] mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md" required>
-                  <option value="active" {{ $event->status == 'active' ? 'selected' : '' }}>{{ __('Actief') }}</option>
-                  <option value="inactive" {{ $event->status == 'inactive' ? 'selected' : '' }}>{{ __('Gaat niet door') }}</option>
-              </select>
-              <x-input-error :messages="$errors->get('subject_status')" class="mt-2" />
+          <div class="mb-4">
+            <x-input-label for="subject_id">{{ __('Vak') }}</x-input-label>
+            <x-select name="subject_id" id="subject_id" required>
+              @foreach ($subjects as $subject)
+                <option value="{{ $subject->id }}" {{ $subject->id == $event->subject_id ? 'selected' : '' }}>
+                  {{ $subject->subject_name }}</option>
+              @endforeach
+            </x-select>
           </div>
 
-            <div class="flex justify-end">
-              <a href="{{ route('grades.index') }}"
-                class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-2">
-                {{ __('Annuleren') }}
-              </a>
-              <x-primary-button type="submit" class="font-bold py-2 px-4 rounded">
-                {{ __('Cijfer bijwerken') }}
-              </x-primary-button>
-            </div>
-          </form>
-        </div>
+          <div class="mb-4">
+            <x-input-label for="subject_date_start">{{ __('Start') }}</x-input-label>
+            <x-date-input type="datetime-local" name="subject_date_start" id="subject_date_start"
+              value="{{ $event->start }}" required />
+          </div>
+
+          <div class="mb-4">
+            <x-input-label for="subject_date_end">{{ __('Eindigd') }}</x-input-label>
+            <x-date-input type="datetime-local" name="subject_date_end" id="subject_date_end"
+              value="{{ $event->end }}" required />
+          </div>
+
+          <div class="mb-4">
+            <x-input-label for="subject_status">{{ __('Status') }}</x-input-label>
+            <x-select id="subject_status" name="subject_status" required>
+              <option value="active" {{ $event->status == 'active' ? 'selected' : '' }}>{{ __('Actief') }}</option>
+              <option value="inactive" {{ $event->status == 'inactive' ? 'selected' : '' }}>
+                {{ __('Gaat niet door') }}</option>
+            </x-select>
+            <x-input-error :messages="$errors->get('subject_status')" class="mt-2" />
+          </div>
+
+          <div class="flex justify-end gap-2">
+            <x-cancel-button href="{{ route('dashboard') }}">
+              {{ __('Annuleren') }}
+            </x-cancel-button>
+            <x-accept-button>
+              {{ __('Accepteren') }}
+            </x-accept-button>
+          </div>
+        </form>
       </div>
     </div>
   </div>

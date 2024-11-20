@@ -1,10 +1,10 @@
 <section>
   <header>
-    <h2 class="text-lg font-medium text-[#333333] dark:text-[#E0E0E0]">
+    <h2 class="text-lg font-medium text-secondaryLightText dark:text-primaryDarkText">
       {{ __('Profile Information') }}
     </h2>
 
-    <p class="mt-1 text-sm text-[#333333] dark:text-[#E0E0E0]">
+    <p class="mt-1 text-sm text-secondaryLightText dark:text-primaryDarkText">
       {{ __("Update your account's profile information, email address, and current role.") }}
     </p>
   </header>
@@ -17,25 +17,26 @@
       <!-- Role -->
       <div class="mt-4">
         <x-input-label for="role" :value="__('Current Role')" />
-        <select id="role" name="role" type="text" class="text-[#333333] dark:text-[#E0E0E0] bg-[#C8E6C9] dark:bg-[#2E3B4E] border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm mt-1 block w-full" required autofocus>
+        <x-select id="role" name="role" type="text" required autofocus>
           <option value="student" @if (old('role', $user->role) === 'student') selected @endif>student</option>
           <option value="parent" @if (old('role', $user->role) === 'parent') selected @endif>parent</option>
           <option value="teacher" @if (old('role', $user->role) === 'teacher') selected @endif>teacher</option>
-        </select>
+        </x-select>
         <x-input-error :messages="$errors->get('role')" class="mt-2" />
       </div>
 
-      <div class="flex items-center gap-4 text-[#333333] dark:text-[#E0E0E0]">
+      <div class="flex items-center gap-4 text-secondaryLightText dark:text-primaryDarkText">
         <x-primary-button>{{ __('Save Role') }}</x-primary-button>
 
         @if (session('status') === 'role-updated')
           <p x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 2000)"
-            class="text-sm text-[#333333] dark:text-[#E0E0E0]">{{ __('Role updated.') }}</p>
+            class="text-sm text-secondaryLightText dark:text-primaryDarkText">{{ __('Role updated.') }}</p>
         @endif
       </div>
     </form>
   @else
-    <p class="text-sm text-[#333333] dark:text-[#E0E0E0]">{{ __('You do not have permission to change the role.') }}</p>
+    <p class="text-sm text-secondaryLightText dark:text-primaryDarkText">
+      {{ __('You do not have permission to change the role.') }}</p>
   @endif
 
   <form id="send-verification" method="post" action="{{ route('verification.send') }}">

@@ -13,15 +13,15 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        //call user factory
-        // User::factory(110)->create();
+        // Arrays of random first names and last names
+        $firstNames = ['Alice', 'Bob', 'Charlie', 'David', 'Eva', 'Frank', 'Grace', 'Hannah', 'Ian', 'Jack', 'Liam', 'Mia', 'Noah', 'Olivia', 'Sophia', 'James', 'Ava', 'Isabella', 'Lucas', 'Amelia', 'Ethan', 'Chloe', 'Mason', 'Ella', 'Logan', 'Zoe', 'Jacob', 'Lily', 'Michael', 'Aria', 'Daniel', 'Scarlett', 'Matthew', 'Sofia', 'Henry', 'Victoria', 'Sebastian', 'Nora', 'Alexander', 'Mila'];
+        $lastNames = ['Smith', 'Johnson', 'Williams', 'Jones', 'Brown', 'Davis', 'Miller', 'Wilson', 'Moore', 'Taylor', 'Anderson', 'Thomas', 'Jackson', 'White', 'Harris', 'Martin', 'Thompson', 'Garcia', 'Martinez', 'Robinson', 'Clark', 'Rodriguez', 'Lewis', 'Lee', 'Walker', 'Hall', 'Allen', 'Young', 'Hernandez', 'King', 'Wright', 'Scott', 'Torres', 'Nguyen', 'Hill', 'Flores', 'Green', 'Adams', 'Nelson', 'Baker'];
 
-        //create admin user
-        // Create admin user
+        // Create admin user with random names
         User::create([
             'id' => 1,
-            'first_name' => 'Admin',
-            'last_name' => 'User', 
+            'first_name' => "admin", // Random first name
+            'last_name' => "admin",   // Random last name
             'age' => 30,
             'email' => 'test@example.com',
             'password' => bcrypt('password'),
@@ -30,225 +30,31 @@ class UserSeeder extends Seeder
         ]);
 
         // Create 40 student users
-        User::create([
-            'id' => 2,
-            'first_name' => 'Student',
-            'last_name' => '1',
-            'age' => 12,
-            'email' => 'student1@example.com',
-            'password' => bcrypt('password'),
-            'role' => 'student',
-            'remember_token' => Str::random(10),
-        ]);
-
-        User::create([
-            'id' => 3,
-            'first_name' => 'Student',
-            'last_name' => '2',
-            'age' => 13,
-            'email' => 'student2@example.com',
-            'password' => bcrypt('password'),
-            'role' => 'student',
-            'remember_token' => Str::random(10),
-        ]);
-
-        User::create([
-            'id' => 4,
-            'first_name' => 'Student',
-            'last_name' => '3',
-            'age' => 14,
-            'email' => 'student3@example.com',
-            'password' => bcrypt('password'),
-            'role' => 'student',
-            'remember_token' => Str::random(10),
-        ]);
-
-        User::create([
-            'id' => 5,
-            'first_name' => 'Student',
-            'last_name' => '4',
-            'age' => 15,
-            'email' => 'student4@example.com',
-            'password' => bcrypt('password'),
-            'role' => 'student',
-            'remember_token' => Str::random(10),
-        ]);
-
-        User::create([
-            'id' => 6,
-            'first_name' => 'Student',
-            'last_name' => '5',
-            'age' => 16,
-            'email' => 'student5@example.com',
-            'password' => bcrypt('password'),
-            'role' => 'student',
-            'remember_token' => Str::random(10),
-        ]);
-
-        User::create([
-            'id' => 7,
-            'first_name' => 'Student',
-            'last_name' => '6',
-            'age' => 17,
-            'email' => 'student6@example.com',
-            'password' => bcrypt('password'),
-            'role' => 'student',
-            'remember_token' => Str::random(10),
-        ]);
-
-        User::create([
-            'id' => 8,
-            'first_name' => 'Student',
-            'last_name' => '7',
-            'age' => 18,
-            'email' => 'student7@example.com',
-            'password' => bcrypt('password'),
-            'role' => 'student',
-            'remember_token' => Str::random(10),
-        ]);
-
-        User::create([
-            'id' => 9,
-            'first_name' => 'Student',
-            'last_name' => '8',
-            'age' => 12,
-            'email' => 'student8@example.com',
-            'password' => bcrypt('password'),
-            'role' => 'student',
-            'remember_token' => Str::random(10),
-        ]);
-
-        User::create([
-            'id' => 10,
-            'first_name' => 'Student',
-            'last_name' => '9',
-            'age' => 13,
-            'email' => 'student9@example.com',
-            'password' => bcrypt('password'),
-            'role' => 'student',
-            'remember_token' => Str::random(10),
-        ]);
-
-        User::create([
-            'id' => 11,
-            'first_name' => 'Student',
-            'last_name' => '10',
-            'age' => 14,
-            'email' => 'student10@example.com',
-            'password' => bcrypt('password'),
-            'role' => 'student',
-            'remember_token' => Str::random(10),
-        ]);
-
+        for ($i = 2; $i <= 41; $i++) {
+            User::create([
+                'id' => $i,
+                'first_name' => $firstNames[array_rand($firstNames)], // Random first name
+                'last_name' => $lastNames[array_rand($lastNames)],   // Random last name
+                'age' => rand(12, 18), // Random age between 12 and 18
+                'email' => 'student' . ($i - 1) . '@example.com',
+                'password' => bcrypt('password'),
+                'role' => 'student',
+                'remember_token' => Str::random(10),
+            ]);
+        }
+        
         // Create 40 parent users
-        User::create([
-            'id' => 12,
-            'first_name' => 'Parent',
-            'last_name' => '1',
-            'age' => 35,
-            'email' => 'parent1@example.com',
-            'password' => bcrypt('password'),
-            'role' => 'parent',
-            'remember_token' => Str::random(10),
-        ]);
-
-        User::create([
-            'id' => 13,
-            'first_name' => 'Parent',
-            'last_name' => '2',
-            'age' => 36,
-            'email' => 'parent2@example.com',
-            'password' => bcrypt('password'),
-            'role' => 'parent',
-            'remember_token' => Str::random(10),
-        ]);
-
-        User::create([
-            'id' => 14,
-            'first_name' => 'Parent',
-            'last_name' => '3',
-            'age' => 37,
-            'email' => 'parent3@example.com',
-            'password' => bcrypt('password'),
-            'role' => 'parent',
-            'remember_token' => Str::random(10),
-        ]);
-
-        User::create([
-            'id' => 15,
-            'first_name' => 'Parent',
-            'last_name' => '4',
-            'age' => 38,
-            'email' => 'parent4@example.com',
-            'password' => bcrypt('password'),
-            'role' => 'parent',
-            'remember_token' => Str::random(10),
-        ]);
-
-        User::create([
-            'id' => 16,
-            'first_name' => 'Parent',
-            'last_name' => '5',
-            'age' => 39,
-            'email' => 'parent5@example.com',
-            'password' => bcrypt('password'),
-            'role' => 'parent',
-            'remember_token' => Str::random(10),
-        ]);
-
-        User::create([
-            'id' => 17,
-            'first_name' => 'Parent',
-            'last_name' => '6',
-            'age' => 40,
-            'email' => 'parent6@example.com',
-            'password' => bcrypt('password'),
-            'role' => 'parent',
-            'remember_token' => Str::random(10),
-        ]);
-
-        User::create([
-            'id' => 18,
-            'first_name' => 'Parent',
-            'last_name' => '7',
-            'age' => 41,
-            'email' => 'parent7@example.com',
-            'password' => bcrypt('password'),
-            'role' => 'parent',
-            'remember_token' => Str::random(10),
-        ]);
-
-        User::create([
-            'id' => 19,
-            'first_name' => 'Parent',
-            'last_name' => '8',
-            'age' => 42,
-            'email' => 'parent8@example.com',
-            'password' => bcrypt('password'),
-            'role' => 'parent',
-            'remember_token' => Str::random(10),
-        ]);
-
-        User::create([
-            'id' => 20,
-            'first_name' => 'Parent',
-            'last_name' => '9',
-            'age' => 43,
-            'email' => 'parent9@example.com',
-            'password' => bcrypt('password'),
-            'role' => 'parent',
-            'remember_token' => Str::random(10),
-        ]);
-
-        User::create([
-            'id' => 21,
-            'first_name' => 'Parent',
-            'last_name' => '10',
-            'age' => 44,
-            'email' => 'parent10@example.com',
-            'password' => bcrypt('password'),
-            'role' => 'parent',
-            'remember_token' => Str::random(10),
-        ]);
+        for ($i = 42; $i <= 121; $i++) {
+            User::create([
+                'id' => $i,
+                'first_name' => $firstNames[array_rand($firstNames)], // Random first name
+                'last_name' => $lastNames[array_rand($lastNames)],   // Random last name
+                'age' => rand(35, 45), // Random age between 35 and 45
+                'email' => 'parent' . ($i - 41) . '@example.com',
+                'password' => bcrypt('password'),
+                'role' => 'parent',
+                'remember_token' => Str::random(10),
+            ]);
+        }
     }
 }

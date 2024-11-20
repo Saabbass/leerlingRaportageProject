@@ -1,4 +1,5 @@
-<nav x-data="{ open: false }" class="bg-[#4A90E2] dark:bg-[#3B5998] border-b border-gray-100 dark:border-gray-800">
+<nav x-data="{ open: false }"
+  class="bg-[#4A90E2] dark:bg-[#3B5998] border-b border-gray-100 dark:border-gray-800 drop-shadow-[4px_4px_7px_rgba(0,0,0,0.25)]">
   <!-- Primary Navigation Menu -->
   <div class="px-4 mx-auto max-w-7xl md:px-6 lg:px-8">
     <div class="flex justify-between h-16">
@@ -7,7 +8,7 @@
         <div class="flex items-center shrink-0">
           <a href="/">
             <h4
-              class="w-auto fill-current text-[#333333] hover:text-[#50E3C2] dark:text-[#E0E0E0] hover:dark:text-[#FF6F61]">
+              class="w-auto fill-current text-[#ffffff] hover:text-[#50E3C2] dark:text-[#E0E0E0] hover:dark:text-[#FF6F61] [text-shadow:4px_4px_7px_rgba(0,0,0,0.25)]">
               EduTrack</h4>
           </a>
         </div>
@@ -32,9 +33,9 @@
               {{ __('Berichten') }}
             </x-nav-link>
             @if (auth()->user()->role == 'teacher')
-              <x-nav-link :href="route('teacher.index')" :active="request()->routeIs('teacher.index')">
+              {{-- <x-nav-link :href="route('teacher.index')" :active="request()->routeIs('teacher.index')">
                 {{ __('Leraar') }}
-              </x-nav-link>
+              </x-nav-link> --}}
               <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.index')">
                 {{ __('Gebruikers') }}
               </x-nav-link>
@@ -61,7 +62,7 @@
               @endif
             @endauth
 
-            {{-- <button class="text-[#333333] dark:text-[#E0E0E0]" id="theme-toggle">@</button> --}}
+            {{-- <button class="text-secondaryLightText dark:text-primaryDarkText" id="theme-toggle">@</button> --}}
             <button id="theme-toggle" type="button"
               class="text-[#333333] hover:text-[#50E3C2] dark:text-[#E0E0E0] hover:dark:text-[#FF6F61] text-sm">
               <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 my-auto" fill="currentColor" viewBox="0 -1 20 20"
@@ -86,7 +87,7 @@
           <x-dropdown align="right" width="48">
             <x-slot name="trigger">
               <button
-                class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-[#333333] hover:text-[#50E3C2] dark:text-[#E0E0E0] hover:dark:text-[#FF6F61] bg-white dark:bg-gray-800 focus:outline-none transition ease-in-out duration-150">
+                class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-[#ffffff] hover:text-primaryLightText dark:text-primaryDarkText hover:dark:text-[#FF6F61] bg-blue-500 dark:bg-gray-800 focus:outline-none transition ease-in-out duration-150 drop-shadow-[4px_4px_7px_rgba(0,0,0,0.25)]">
                 <div>{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</div>
 
                 <div class="ms-1">
@@ -116,7 +117,7 @@
               </form>
             </x-slot>
           </x-dropdown>
-          {{-- <button class="text-[#333333] dark:text-[#E0E0E0]" id="theme-toggle">@</button> --}}
+          {{-- <button class="text-secondaryLightText dark:text-primaryDarkText" id="theme-toggle">@</button> --}}
           <button id="theme-toggle" type="button"
             class="text-[#333333] hover:text-[#50E3C2] dark:text-[#E0E0E0] hover:dark:text-[#FF6F61] text-sm">
             <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 my-auto" fill="currentColor" viewBox="0 -1 20 20"
@@ -150,22 +151,36 @@
 
   <!-- Responsive Navigation Menu -->
   <div :class="{ 'block': open, 'hidden': !open }"
-    class="block md:hidden border-t text-[#333333] dark:text-[#E0E0E0] hover:text-[#50E3C2] hover:dark:text-[#FF6F61] border-gray-200 dark:border-gray-600">
+    class="block md:hidden border-t text-secondaryLightText dark:text-primaryDarkText hover:text-[#50E3C2] hover:dark:text-[#FF6F61] border-gray-200 dark:border-gray-600">
     <div class="pt-2 pb-3 space-y-1">
       @auth
         <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
           {{ __('Dashboard') }}
         </x-responsive-nav-link>
         <x-responsive-nav-link :href="route('attendance.index')" :active="request()->routeIs('attendance.index')">
-          {{ __('Attendance') }}
+          {{ __('Aanwezigheid') }}
         </x-responsive-nav-link>
         <x-responsive-nav-link :href="route('subject.index')" :active="request()->routeIs('subject.index')">
-          {{ __('Subject') }}
+          {{ __('Lessen') }}
         </x-responsive-nav-link>
+        <x-responsive-nav-link :href="route('grades.index')" :active="request()->routeIs('grades.index')">
+          {{ __('Cijfers') }}
+        </x-responsive-nav-link>
+        <x-responsive-nav-link :href="route('messages.index')" :active="request()->routeIs('messages.index')">
+          {{ __('Berichten') }}
+        </x-responsive-nav-link>
+        @if (auth()->user()->role == 'teacher')
+          <x-responsive-nav-link :href="route('teacher.index')" :active="request()->routeIs('teacher.index')">
+            {{ __('Leraar') }}
+          </x-responsive-nav-link>
+          <x-responsive-nav-link :href="route('users.index')" :active="request()->routeIs('users.index')">
+            {{ __('Gebruikers') }}
+          </x-responsive-nav-link>
+        @endif
       @else
-      <x-responsive-nav-link href="/" :active="request()->routeIs('/')">
-        {{ __('Homepage') }}
-      </x-responsive-nav-link>
+        <x-responsive-nav-link href="/" :active="request()->routeIs('/')">
+          {{ __('Homepage') }}
+        </x-responsive-nav-link>
         <x-responsive-nav-link href="/login" :active="request()->routeIs('login')">
           {{ __('login') }}
         </x-responsive-nav-link>
@@ -182,12 +197,15 @@
     @auth
       <div class="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">
         <div class="px-4">
-          <div class="font-medium text-base text-[#333333] dark:text-[#E0E0E0]">{{ Auth::user()->firstname }}
+          <div class="font-medium text-base text-secondaryLightText dark:text-primaryDarkText">
+            {{ Auth::user()->firstname }}
             {{ Auth::user()->lastname }}</div>
-          <div class="font-medium text-sm text-[#333333] dark:text-[#E0E0E0]">{{ Auth::user()->email }}</div>
+          <div class="font-medium text-sm text-secondaryLightText dark:text-primaryDarkText">{{ Auth::user()->email }}
+          </div>
         </div>
 
-        <div class="mt-3 space-y-1 text-[#333333] dark:text-[#E0E0E0] hover:text-[#50E3C2] hover:dark:text-[#FF6F61]">
+        <div
+          class="mt-3 space-y-1 text-secondaryLightText dark:text-primaryDarkText hover:text-[#50E3C2] hover:dark:text-[#FF6F61]">
           @auth
             <x-responsive-nav-link :href="route('profile.edit')">
               {{ __('Profile') }}

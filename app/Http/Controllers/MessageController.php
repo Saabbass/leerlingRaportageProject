@@ -64,7 +64,7 @@ public function store(StoreMessageRequest $request)
     $message->sent_by = auth()->id(); // Set the sent_by field
     $message->save();
 
-    return redirect()->route('messages.index')->with('success', 'Message created successfully.');
+    return redirect()->route('messages.index')->with('success', 'Bericht aangemaakt.');
 }
  
 public function edit($id)
@@ -83,11 +83,12 @@ public function update(UpdateMessageRequest $request, $id)
 
     return redirect()->route('messages.index')->with('status', 'Message updated successfully!');
 }
+
     public function destroy($id)
     {
         $message = Announcements::findOrFail($id);
         $message->delete();
 
-        return redirect()->route('messages.index')->with('status', 'Message deleted successfully!');
+        return redirect()->route('messages.index')->with('status', 'Bericht verwijderd!');
     }
 }
