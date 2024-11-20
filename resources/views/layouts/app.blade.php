@@ -29,8 +29,9 @@
     @if(session('info'))
         <meta name="session-info" content="{{ session('info') }}">
     @endif
-  
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js'></script>
+    <script src="{{ asset('assets/js/notification.js') }}" defer></script>
+    
   </head>
   
   <body class="font-sans antialiased light">
