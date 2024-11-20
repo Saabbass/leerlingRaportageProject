@@ -20,14 +20,14 @@ class MessageSeeder extends Seeder
                 $teacherIds = User::where('role', 'teacher')->pluck('id')->toArray();
         $messages = [
             [
-                'title' => 'Hello World',
-                'content' => 'This is a test message.',
+                'title' => 'Cijfers',
+                'content' => 'hey, je cijfers kunnen wel wat verbeteren, kom donderdag op gesprek.',
                 'user_id' => $studentIds[array_rand($studentIds)], // Random student ID
                 'sent_by' => $teacherIds[array_rand($teacherIds)], // Random teacher ID
             ],
             [
-                'title' => 'Hello World 2',
-                'content' => 'This is another test message.',
+                'title' => 'Voortgangsgesprek',
+                'content' => 'hallo student, kom je voor gesprek vrijdag langs.',
                 'user_id' => $studentIds[array_rand($studentIds)], // Random student ID
                 'sent_by' => $teacherIds[array_rand($teacherIds)], // Random teacher ID
             ],
