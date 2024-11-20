@@ -18,18 +18,20 @@ class EventController extends Controller
 
   public function store(StoreEventRequest $request)
   {
-      $validated = $request->validated();
-      $subject = Subject::find($validated['subject_id']);
-  
-      $event = new Event();
-      $event->subject_id = $subject->id;
-      $event->subject_name = $subject->subject_name;
-      $event->start = $validated['subject_date_start'];
-      $event->end = $validated['subject_date_end'];
-      $event->status = $validated['subject_status'];
-      $event->save();
-  
-      return redirect()->route('dashboard')->with('success', 'Subject added to calendar successfully.');
+    $validated = $request->validated();
+    $subject = Subject::find($validated['subject_id']);
+
+    $event = new Event();
+    // $event->subject_id = $subject->id;
+    $event->subject_id = $validated['subject_id'];
+    // $event->subject_name = $subject->subject_name;
+    $event->subject_name = $validated['subject_name'];
+    $event->start = $validated['subject_date_start'];
+    $event->end = $validated['subject_date_end'];
+    $event->status = $validated['subject_status'];
+    $event->save();
+
+    return redirect()->route('dashboard')->with('success', 'Les ingepland.');
   }
 
   public function edit($id)
@@ -44,21 +46,22 @@ class EventController extends Controller
   }
 
   public function update(UpdateEventRequest $request, $id)
-    {
-        $event = Event::findOrFail($id);
-        $subject = Subject::find($request->subject_id);
+  {
+    $event = Event::findOrFail($id);
+    $subject = Subject::find($request->subject_id);
 
-        $validated = $request->validated();
+    $validated = $request->validated();
+    // $event->subject_id = $subject->id;
+    $event->subject_id = $validated['subject_id'];
+    // $event->subject_name = $subject->subject_name;
+    $event->subject_name = $validated['subject_name'];
+    $event->start = $validated['subject_date_start'];
+    $event->end = $validated['subject_date_end'];
+    $event->status = $validated['subject_status'];
+    $event->save();
 
-        $event->subject_id = $subject->id;
-        $event->subject_name = $subject->subject_name;
-        $event->start = $validated['subject_date_start'];
-        $event->end = $validated['subject_date_end'];
-        $event->status = $validated['subject_status'];
-        $event->save();
-
-        return redirect()->route('dashboard')->with('success', 'De les is succesvol aangepast.');
-    }
+    return redirect()->route('dashboard')->with('success', 'De les is succesvol aangepast.');
+  }
 
   public function destroy($id)
   {
