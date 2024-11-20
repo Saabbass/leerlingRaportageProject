@@ -15,20 +15,31 @@
               <x-input-label for="subject_id">{{ __('Vak') }}</x-input-label>
               <x-select name="subject_id" id="subject_id" required>
                 @foreach ($subjects as $subject)
-                  <option value="{{ $subject->id }}">{{ $subject->subject_name }}</option>
+                  <option value="{{ $subject->id }}" data-subject-name="{{ $subject->subject_name }}">
+                    {{ $subject->subject_name }}
+                  </option>
                 @endforeach
               </x-select>
+              <input type="hidden" name="subject_name" id="subject_name" value="{{ $subject->subject_name }}">
             </div>
+
+            <script>
+              document.getElementById('subject_id').addEventListener('change', function() {
+                var selectedOption = this.options[this.selectedIndex];
+                document.getElementById('subject_name').value = selectedOption.getAttribute('data-subject-name');
+              });
+            </script>
 
             <div class="mb-4">
               <x-input-label for="subject_date_start">{{ __('Start') }}</x-input-label>
               <x-date-input type="datetime-local" name="subject_date_start" id="subject_date_start"
-                value="{{ old('start_date') }}" required/>
+                value="{{ old('start_date') }}" required />
             </div>
 
             <div class="mb-4">
               <x-input-label for="subject_date_end">{{ __('Eindigd') }}</x-input-label>
-              <x-date-input type="datetime-local" name="subject_date_end" id="subject_date_end" value="{{ old('end_date') }}" required/>
+              <x-date-input type="datetime-local" name="subject_date_end" id="subject_date_end"
+                value="{{ old('end_date') }}" required />
             </div>
 
             <div class="mb-4">

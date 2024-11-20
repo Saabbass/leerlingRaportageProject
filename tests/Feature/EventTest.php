@@ -11,6 +11,10 @@ beforeEach(function () {
         'id' => 100, // Set a high value for the subject ID to avoid conflicts
         'subject_name' => 'Test Subject'
     ]);
+    $this->subject = Subject::create([
+        'id' => 200, // Set a high value for the subject ID to avoid conflicts
+        'subject_name' => 'Updated Event'
+    ]);
 });
 
 test('can render event creation screen for logged in users', function () {
@@ -79,7 +83,7 @@ test('can update an event', function () {
     $this->assertDatabaseHas('events', [
         'id' => $event->id,
         'subject_id' => (string) $this->subject->id, // Cast to string
-        'subject_name' => 'Updated Event',
+        'subject_name' => (string) $this->subject->subject_name,
         'start' => '2024-01-01 00:00:00', // Updated field name
         'end' => '2024-01-02 00:00:00',   // Updated field name
         'status' => 'completed',
