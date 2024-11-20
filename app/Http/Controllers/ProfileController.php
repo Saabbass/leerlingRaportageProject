@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Http\Requests\StoreUserRequest;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -59,24 +60,18 @@ class ProfileController extends Controller
         return view('users.create');
     }
 
-    public function store_user(Request $request): RedirectResponse
+    public function store_user(StoreUserRequest $request): RedirectResponse
+
     {
-        $request->validate([
-            'first_name' => ['required', 'string', 'max:255'],
-            'last_name' => ['required', 'string', 'max:255'],
-            'age' => ['required', 'integer', 'min:0'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'role' => ['required', 'string', 'max:255'],
-            'password' => ['required', 'string', 'min:8'], // Added password validation
-        ]);
+        $validated = $request->validated();
 
         $user = new User();
-        $user->first_name = $request->input('first_name');
-        $user->last_name = $request->input('last_name');
-        $user->age = $request->input('age');
-        $user->email = $request->input('email');
-        $user->role = $request->input('role');
-        $user->password = bcrypt($request->input('password')); // Added password
+        $user->first_name = $validated['first_name'];
+        $user->last_name = $validated['last_name'];
+        $user->age = $validated['age'];
+        $user->email = $validated['email'];
+        $user->role = $validated['role'];
+        $user->password = bcrypt($validated['password']);
         $user->save();
 
         return redirect()->route('users.index')->with('success', 'Gebruiker toegevoegd.');
