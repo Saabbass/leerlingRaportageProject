@@ -4,7 +4,7 @@
       {{ __('Vakken') }}
     </x-page-title>
 
-    @if (session('error'))
+    {{-- @if (session('error'))
       <x-error-failed>
         {{ session('error') }}
       </x-error-failed>
@@ -14,7 +14,7 @@
       <x-error-succes>
         {{ session('success') }}
       </x-error-succes>
-    @endif
+    @endif --}}
   </x-slot>
 
   <div class="py-12">
@@ -43,7 +43,8 @@
           </div>
           <div class="mt-4">
             @foreach ($subject as $subj)
-              <div class="flex justify-between items-center border-b border-secondaryLightBorder dark:border-primaryDarkBorder py-2">
+              <div
+                class="flex justify-between items-center border-b border-secondaryLightBorder dark:border-primaryDarkBorder py-2">
                 <div>
                   <x-subject-title>
                     {{ $subj->subject_name }}

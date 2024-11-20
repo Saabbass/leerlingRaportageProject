@@ -4,7 +4,7 @@
       {{ __('Dashboard') }}
     </x-page-title>
 
-    @if (session('error'))
+    {{-- @if (session('error'))
       <x-error-failed>
         {{ session('error') }}
       </x-error-failed>
@@ -14,7 +14,7 @@
       <x-error-succes>
         {{ session('success') }}
       </x-error-succes>
-    @endif
+    @endif --}}
   </x-slot>
 
   <div class="py-12">
@@ -65,7 +65,7 @@
         events = events.map(event => {
           if (event.status === 'inactive') {
             event.color = '#d70101';
-            event.title= 'gaat niet door';
+            event.title = 'gaat niet door';
           }
           return event;
         });
