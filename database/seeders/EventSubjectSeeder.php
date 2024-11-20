@@ -14,7 +14,7 @@ class EventSubjectSeeder extends Seeder
   {
     \App\Models\Event::create([
       'subject_id' => '5',
-      'subject_name' => 'hellohello',
+      'subject_name' => 'Test Event',
       'start' => today(),
       'end'=> today(),
       'status'=> 'active',

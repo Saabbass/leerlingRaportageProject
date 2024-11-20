@@ -22,8 +22,7 @@ class EventController extends Controller
     $subject = Subject::find($validated['subject_id']);
 
     $event = new Event();
-    // $event->subject_id = $subject->id;
-    $event->subject_id = $validated['subject_id'];
+    $event->subject_id = $subject->id;
     // $event->subject_name = $subject->subject_name;
     $event->subject_name = $validated['subject_name'];
     $event->start = $validated['subject_date_start'];
@@ -51,8 +50,7 @@ class EventController extends Controller
     $subject = Subject::find($request->subject_id);
 
     $validated = $request->validated();
-    // $event->subject_id = $subject->id;
-    $event->subject_id = $validated['subject_id'];
+    $event->subject_id = $subject->id;
     // $event->subject_name = $subject->subject_name;
     $event->subject_name = $validated['subject_name'];
     $event->start = $validated['subject_date_start'];
