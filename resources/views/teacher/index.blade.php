@@ -3,8 +3,8 @@
     <x-page-title>
       {{ __('Leraar') }}
     </x-page-title>
-    
-    @if (session('error'))
+
+    {{-- @if (session('error'))
       <x-error-failed>
         {{ session('error') }}
       </x-error-failed>
@@ -14,7 +14,7 @@
       <x-error-succes>
         {{ session('success') }}
       </x-error-succes>
-    @endif
+    @endif --}}
   </x-slot>
 
   <div class="py-12">
