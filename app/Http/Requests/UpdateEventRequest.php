@@ -11,7 +11,7 @@ class UpdateEventRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,6 +23,7 @@ class UpdateEventRequest extends FormRequest
     {
         return [
             'subject_id' => 'required|string|max:255',
+            'subject_name' => 'required|string|max:255',
             'subject_date_start' => 'required|date',
             'subject_date_end' => 'required|date',
             'subject_status' => 'required|string',
