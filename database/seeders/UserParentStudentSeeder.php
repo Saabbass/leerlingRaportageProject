@@ -11,18 +11,7 @@ class UserParentStudentSeeder extends Seeder
     {
         DB::table('user_parent_student')->insert([
             // Parent 1 with student 1
-            [
-                'parent_id' => 42,
-                'student_id' => 1,
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                'parent_id' => 43,
-                'student_id' => 1,
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
+           
             // Parent 2 with student 2
             [
                 'parent_id' => 44,
