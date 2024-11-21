@@ -23,7 +23,7 @@
             <p><strong>{{ __('Achternaam:') }}</strong> {{ $student->last_name }}</p>
             {{-- <p><strong>{{ __('id:') }}</strong> {{ $student->id }}</p> --}}
             <p><strong>{{ __('Email:') }}</strong> {{ $student->email }}</p>
-            <p><strong>{{ __('Rol:') }}</strong> {{ __('Student') }}</p>
+            <p><strong>{{ __('Rol:') }}</strong> {{ $student->role }}</p>
             <p><strong>{{ __('Geregistreerd op:') }}</strong> {{ $student->created_at->format('d-m-Y') }}</p>
           </div>
         </div>
