@@ -50,8 +50,8 @@ class UserParentStudentController extends Controller
         $validated = $request->validated();
     
         // Check if the connection already exists
-        $exists = UserParentStudent::where('parent_id', $validatedData['parent_id'])
-                    ->where('student_id', $validatedData['student_id'])
+        $exists = UserParentStudent::where('parent_id', $validated['parent_id'])
+                    ->where('student_id', $validated['student_id'])
                     ->exists();
     
         if ($exists) {
