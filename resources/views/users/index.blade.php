@@ -102,8 +102,8 @@
                     @endif
                   </x-table-td>
                   <td class="px-4 py-2 whitespace-nowrap text-sm font-medium">
+                    <x-link-info href="{{ route('users.studentDetail', $user) }}">{{ __('Details') }}</x-link-info>
                     <x-link-change href="{{ route('users.edit', $user) }}">{{ __('Bewerken') }}</x-link-change>
-                    <a href="{{ route('users.studentDetail', $user) }}">{{ __('Bekijk Student Details') }}</a>
                     <form action="{{ route('users.destroy', $user) }}" method="POST" class="inline">
                       @csrf
                       @method('DELETE')
