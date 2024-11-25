@@ -92,7 +92,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/messages/create',[MessageController::class, 'create'])->name('messages.create');
     Route::post('/messages/store',[MessageController::class, 'store'])->name('messages.store');
     Route::get('/messages/{id}/edit',[MessageController::class, 'edit'])->name('messages.edit');
-    Route::patch('/messages/{id}',[MessageController::class, 'update'])->name('messages.update');
+    Route::put('/messages/{id}',[MessageController::class, 'update'])->name('messages.update');
     Route::delete('/messages/{id}',[MessageController::class, 'destroy'])->name('messages.destroy');
 });
 
