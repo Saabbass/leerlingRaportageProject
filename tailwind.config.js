@@ -40,7 +40,7 @@ export default {
             
             // Text hover colors
             primaryLightTextHover: "#50E3C2",
-            secondaryLightTextHover: "#333333",
+            secondaryLightTextHover: "#FFC107",
 
             primaryDarkTextHover: "#FF6F61",
             secondaryDarkTextHover: "#FFC107",
@@ -53,11 +53,13 @@ export default {
             secondaryDarkDevide: "#FFC107",
 
             // Action text colors
+            infoLightAction: "#50e3c2",
             createLightAction: "#ffc423",
             acceptLightAction: "#00700c",
             changeLightAction: "#001fc5",
             deleteLightAction: "#be1212",
 
+            infoDarkAction: "#ffcb9c",
             createDarkAction: "#FFC107",
             acceptDarkAction: "#00bd1b",
             changeDarkAction: "#4865ff",
@@ -111,11 +113,18 @@ export default {
             primaryDarkNav: "#3B5998",
             secondaryDarkNav: "#263238",
 
+            // Header dropdown colors
+            primaryLightDropdown: "#4A90E2",
+            secondaryLightDropdown: "#79b5ff",
+
+            primaryDarkDropdown: "#2E3B4E",
+            secondaryDarkDropdown: "#263238",
+
             // Backgroundcolors
-            primaryLightMain: "#4A90E2",
+            primaryLightMain: "#F7F8FA",
             secondaryLightMain: "#79b5ff",
 
-            primaryDarkMain: "#2E3B4E",
+            primaryDarkMain: "#1C1C2E",
             secondaryDarkMain: "#263238",
 
             // Hero section colors
@@ -132,7 +141,7 @@ export default {
             acceptLightButton: "#008614",
 
             primaryDarkButton: "#2E3B4E",
-            secondaryDarkButton: "#FFC107",
+            secondaryDarkButton: "#3B5998",
             cancelDarkButton: "#930000",
             acceptDarkButton: "#02580f",
 

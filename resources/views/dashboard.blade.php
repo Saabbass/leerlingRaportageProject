@@ -34,7 +34,7 @@
           <x-hero-nav-link :href="route('attendance.index')" :active="request()->routeIs('attendance.index')">{{ __('Aanwezigheid') }}</x-hero-nav-link>
           {{-- <x-hero-nav-link :href="route('goals.index')" :active="request()->routeIs('goals.index')">{{ __('goals') }}</x-hero-nav-link>
           @if (auth()->user()->role === 'teacher')
-            <x-hero-nav-link :href="route('teacher.index')" :active="request()->routeIs('teacher.index')">{{ __('Leraar') }}</x-hero-nav-link>
+            <x-hero-nav-link :href="route('teacher.index')" :active="request()->routeIs('teacher.index')">{{ __('Docent') }}</x-hero-nav-link>
           @endif --}}
         </div>
 
@@ -56,7 +56,7 @@
     <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.15/index.global.min.js'></script>
     <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@6.1.15/index.global.min.js'></script>
     <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/timegrid@6.1.15/index.global.min.js'></script>
-    <script src='fullcalendar/core/locales/nl.global.js'></script>
+    <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/core/locales/nl.global.js'></script>
     <script>
       document.addEventListener('DOMContentLoaded', function() {
         var calendarEl = document.getElementById('calendar');
