@@ -40,7 +40,7 @@
               </li>
               <li class="flex gap-2 place-items-end">
                 <x-subject-title>{{ __('Rol:') }}</x-subject-title>
-                <x-subject-description>{{ __('Student') }}</x-subject-description>
+                <x-subject-description>{{ $student->role }}</x-subject-description>
               </li>
               <li class="flex gap-2 place-items-end">
                 <x-subject-title>{{ __('Geregistreerd op:') }}</x-subject-title>

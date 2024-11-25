@@ -141,7 +141,7 @@ export default {
             acceptLightButton: "#008614",
 
             primaryDarkButton: "#2E3B4E",
-            secondaryDarkButton: "#FFC107",
+            secondaryDarkButton: "#3B5998",
             cancelDarkButton: "#930000",
             acceptDarkButton: "#02580f",
 
