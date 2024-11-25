@@ -36,7 +36,7 @@
           <div class="mb-4">
             <x-input-label for="role">{{ __('Role') }}</x-input-label>
             <x-select id="role" name="role" required>
-              <option value="teacher">{{ __('Leraar') }}</option>
+              <option value="teacher">{{ __('Docent') }}</option>
               <option value="parent">{{ __('Ouder') }}</option>
               <option value="student">{{ __('Student') }}</option>
             </x-select>

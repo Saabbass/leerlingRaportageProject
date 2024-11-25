@@ -34,7 +34,7 @@
             </x-nav-link>
             @if (auth()->user()->role == 'teacher')
               {{-- <x-nav-link :href="route('teacher.index')" :active="request()->routeIs('teacher.index')">
-                {{ __('Leraar') }}
+                {{ __('Docent') }}
               </x-nav-link> --}}
               <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.index')">
                 {{ __('Gebruikers') }}
@@ -179,7 +179,7 @@
         </x-responsive-nav-link>
         @if (auth()->user()->role == 'teacher')
           <x-responsive-nav-link :href="route('teacher.index')" :active="request()->routeIs('teacher.index')">
-            {{ __('Leraar') }}
+            {{ __('Docent') }}
           </x-responsive-nav-link>
           <x-responsive-nav-link :href="route('users.index')" :active="request()->routeIs('users.index')">
             {{ __('Gebruikers') }}

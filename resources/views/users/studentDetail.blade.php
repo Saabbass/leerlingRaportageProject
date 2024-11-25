@@ -40,7 +40,15 @@
               </li>
               <li class="flex gap-2 place-items-end">
                 <x-subject-title>{{ __('Rol:') }}</x-subject-title>
-                <x-subject-description>{{ $student->role }}</x-subject-description>
+                <x-subject-description>
+                  @if ($student->role === 'teacher')
+                    {{ __('Docent') }}
+                  @elseif($student->role === 'parent')
+                    {{ __('Ouder') }}
+                  @elseif($student->role === 'student')
+                    {{ __('Student') }}
+                  @endif
+                </x-subject-description>
               </li>
               <li class="flex gap-2 place-items-end">
                 <x-subject-title>{{ __('Geregistreerd op:') }}</x-subject-title>
