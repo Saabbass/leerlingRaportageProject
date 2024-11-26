@@ -61,5 +61,9 @@ class User extends Authenticatable
 {
     return UserParentStudent::where('parent_id', $this->id)->where('student_id', $studentId)->exists();
 }
+public function announcements()
+{
+    return $this->belongsToMany(Announcements::class, 'announcement_user');
+}
 
 }
