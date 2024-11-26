@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\User;
-
+use App\Models\Announcements;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -15,33 +15,32 @@ class MessageSeeder extends Seeder
      */
     public function run(): void
     {
-                // Get all users with the role of 'student'
-                $studentIds = User::where('role', 'student')->pluck('id')->toArray();
-                $teacherIds = User::where('role', 'teacher')->pluck('id')->toArray();
+        // Get all users with the role of 'student'
+        $studentIds = User::where('role', 'student')->pluck('id')->toArray();
+        $teacherIds = User::where('role', 'teacher')->pluck('id')->toArray();
+
         $messages = [
             [
                 'title' => 'Cijfers',
                 'content' => 'hey, je cijfers kunnen wel wat verbeteren, kom donderdag op gesprek.',
-                'user_id' => $studentIds[array_rand($studentIds)], // Random student ID
+                'user_ids' => [$studentIds[array_rand($studentIds)]], // Random student ID
                 'sent_by' => $teacherIds[array_rand($teacherIds)], // Random teacher ID
             ],
-            [
-                'title' => 'Voortgangsgesprek',
-                'content' => 'hallo student, kom je voor gesprek vrijdag langs.',
-                'user_id' => $studentIds[array_rand($studentIds)], // Random student ID
-                'sent_by' => $teacherIds[array_rand($teacherIds)], // Random teacher ID
-            ],
+            // Add more messages as needed
         ];
 
-        foreach ($messages as $message) {
-            DB::table('announcements')->insert([
-                'title' => $message['title'],
-                'content' => $message['content'],
-                'user_id' => $message['user_id'], // Include user_id in the insert statemen
-                'sent_by' => $message['sent_by'], // Include sent_by in the insert statement
+        foreach ($messages as $messageData) {
+            // Insert the announcement
+            $announcement = Announcements::create([
+                'title' => $messageData['title'],
+                'content' => $messageData['content'],
+                'sent_by' => $messageData['sent_by'],
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);
+
+            // Attach users to the announcement
+            $announcement->users()->attach($messageData['user_ids']);
         }
     }
 }

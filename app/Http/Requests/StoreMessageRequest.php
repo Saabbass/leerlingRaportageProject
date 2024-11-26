@@ -24,8 +24,9 @@ class StoreMessageRequest extends FormRequest
         return [
             'title' => 'required|string|max:255',
             'content' => 'required|string',
-            'user_id' => 'required|exists:users,id',
-            'recipient_type' => 'required|in:student,parent,teacher',
+            'user_id' => 'required|array|min:1', // Must be an array with at least one user
+            'user_id.*' => 'required|exists:users,id', // Each ID must exist in the users table
+            'recipient_type' => 'required|in:student,parent,teacher', // Ensure recipient type is valid
         ];
     }
 }

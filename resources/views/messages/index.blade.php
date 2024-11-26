@@ -63,31 +63,38 @@
           </x-table-head>
           <x-table-body>
             @forelse($messages as $message)
-              <tr>
-                <x-table-td>
-                  {{ $message->title }}</x-table-td>
-                <x-table-td>
-                  {{ $message->content }}</x-table-td>
-                @if (auth()->user()->role !== 'student')
-                  <x-table-td>
-                    {{ $message->user->first_name }} {{ $message->user->last_name }}</x-table-td>
-                @endif
-                <x-table-td>
-                  {{ $message->sentBy->first_name }} {{ $message->sentBy->last_name }}</x-table-td>
-                <x-table-td>
-                  {{ $message->created_at->format('d-m-Y H:i') }}</x-table-td>
-                <x-table-td-action>
-                  @if (auth()->user()->role == 'teacher' || auth()->user()->role == 'parent')
-                    @if (auth()->user()->id == $message->sent_by)
-                      <x-link-change href="{{ route('messages.edit', $message) }}">
-                        {{ __('Bewerken') }}
-                      </x-link-change>
-                      <form action="{{ route('messages.destroy', $message) }}" method="POST" class="inline">
-                        @csrf
-                        @method('DELETE')
-                        <x-link-delete>
-                          {{ __('Verwijderen') }}
-                        </x-link-delete>
+  <tr>
+    <x-table-td>
+      {{ $message->title }}
+    </x-table-td>
+    <x-table-td>
+      {{ $message->content }}
+    </x-table-td>
+    @if (auth()->user()->role !== 'student')
+      <x-table-td>
+        @foreach ($message->users as $recipient)
+          {{ $recipient->first_name }} {{ $recipient->last_name }}<br>
+        @endforeach
+      </x-table-td>
+    @endif
+    <x-table-td>
+      {{ $message->sentBy->first_name }} {{ $message->sentBy->last_name }}
+    </x-table-td>
+    <x-table-td>
+      {{ $message->created_at->format('d-m-Y H:i') }}
+    </x-table-td>
+    <x-table-td-action>
+      @if (auth()->user()->role == 'teacher' || auth()->user()->role == 'parent')
+        @if (auth()->user()->id == $message->sent_by)
+          <x-link-change href="{{ route('messages.edit', $message) }}">
+            {{ __('Bewerken') }}
+          </x-link-change>
+          <form action="{{ route('messages.destroy', $message) }}" method="POST" class="inline">
+            @csrf
+            @method('DELETE')
+            <x-link-delete>
+              {{ __('Verwijderen') }}
+            </x-link-delete>
                       </form>
                     @endif
                   @endif
