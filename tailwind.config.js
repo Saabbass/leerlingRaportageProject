@@ -26,7 +26,6 @@ export default {
             // Text colors
             primaryLightText: "#FFFFFF",
             secondaryLightText: "#333333",
-
             primaryDarkText: "#E0E0E0",
             secondaryDarkText: "#FFC107",
 
