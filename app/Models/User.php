@@ -55,11 +55,15 @@ class User extends Authenticatable
 
     public function students()
     {
-        return $this->hasMany(UserParentStudent::class, 'parent_id');
+        return $this->hasMany(User::class, 'parent_id');
     }
     public function isParentOf($studentId)
 {
     return UserParentStudent::where('parent_id', $this->id)->where('student_id', $studentId)->exists();
+}
+public function announcements()
+{
+    return $this->belongsToMany(Announcements::class, 'announcement_user');
 }
 
 }

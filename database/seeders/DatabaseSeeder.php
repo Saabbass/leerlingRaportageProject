@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
         $this->call([GradesSeeder::class,]);
         $this->call([AttendanceSeeder::class,]);
         $this->call([EventSubjectSeeder::class,]);
+        $this->call([GoalSeeder::class,]);
         
     }
 }

@@ -15,7 +15,7 @@
           <x-hero-nav-link :href="route('grades.index')" :active="request()->routeIs('grades.index')">{{ __('Cijfers') }}</x-hero-nav-link>
           <x-hero-nav-link :href="route('attendance.index')" :active="request()->routeIs('attendance.index')">{{ __('Aanwezigheid') }}</x-hero-nav-link>
           {{-- @if (auth()->user()->role === 'teacher')
-            <x-hero-nav-link :href="route('teacher.index')" :active="request()->routeIs('teacher.index')">{{ __('Leraar') }}</x-hero-nav-link>
+            <x-hero-nav-link :href="route('teacher.index')" :active="request()->routeIs('teacher.index')">{{ __('Docent') }}</x-hero-nav-link>
           @endif --}}
         </div>
         <div class="flex items-center justify-between p-6 mb-6">
@@ -63,31 +63,38 @@
           </x-table-head>
           <x-table-body>
             @forelse($messages as $message)
-              <tr>
-                <x-table-td>
-                  {{ $message->title }}</x-table-td>
-                <x-table-td>
-                  {{ $message->content }}</x-table-td>
-                @if (auth()->user()->role !== 'student')
-                  <x-table-td>
-                    {{ $message->user->first_name }} {{ $message->user->last_name }}</x-table-td>
-                @endif
-                <x-table-td>
-                  {{ $message->sentBy->first_name }} {{ $message->sentBy->last_name }}</x-table-td>
-                <x-table-td>
-                  {{ $message->created_at->format('d-m-Y H:i') }}</x-table-td>
-                <x-table-td-action>
-                  @if (auth()->user()->role == 'teacher' || auth()->user()->role == 'parent')
-                    @if (auth()->user()->id == $message->sent_by)
-                      <x-link-change href="{{ route('messages.edit', $message) }}">
-                        {{ __('Bewerken') }}
-                      </x-link-change>
-                      <form action="{{ route('messages.destroy', $message) }}" method="POST" class="inline">
-                        @csrf
-                        @method('DELETE')
-                        <x-link-delete>
-                          {{ __('Verwijderen') }}
-                        </x-link-delete>
+  <tr>
+    <x-table-td>
+      {{ $message->title }}
+    </x-table-td>
+    <x-table-td>
+      {{ $message->content }}
+    </x-table-td>
+    @if (auth()->user()->role !== 'student')
+      <x-table-td>
+        @foreach ($message->users as $recipient)
+          {{ $recipient->first_name }} {{ $recipient->last_name }}<br>
+        @endforeach
+      </x-table-td>
+    @endif
+    <x-table-td>
+      {{ $message->sentBy->first_name }} {{ $message->sentBy->last_name }}
+    </x-table-td>
+    <x-table-td>
+      {{ $message->created_at->format('d-m-Y H:i') }}
+    </x-table-td>
+    <x-table-td-action>
+      @if (auth()->user()->role == 'teacher' || auth()->user()->role == 'parent')
+        @if (auth()->user()->id == $message->sent_by)
+          <x-link-change href="{{ route('messages.edit', $message) }}">
+            {{ __('Bewerken') }}
+          </x-link-change>
+          <form action="{{ route('messages.destroy', $message) }}" method="POST" class="inline">
+            @csrf
+            @method('DELETE')
+            <x-link-delete>
+              {{ __('Verwijderen') }}
+            </x-link-delete>
                       </form>
                     @endif
                   @endif

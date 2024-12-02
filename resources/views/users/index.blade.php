@@ -21,7 +21,7 @@
     @if (auth()->user()->role !== 'teacher')
       <div class="text-center">
         <h3 class="text-lg font-semibold text-red-600">
-          {{ __('Access Denied: je bent geen leraar dus kan deze pagina niet in.') }}</h3>
+          {{ __('Access Denied: je bent geen Docent dus kan deze pagina niet in.') }}</h3>
       </div>
     @else
       <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -33,7 +33,7 @@
             <x-hero-nav-link :href="route('grades.index')" :active="request()->routeIs('grades.index')">{{ __('Cijfers') }}</x-hero-nav-link>
             <x-hero-nav-link :href="route('attendance.index')" :active="request()->routeIs('attendance.index')">{{ __('Aanwezigheid') }}</x-hero-nav-link>
             {{-- @if (auth()->user()->role === 'teacher')
-              <x-hero-nav-link :href="route('teacher.index')" :active="request()->routeIs('teacher.index')">{{ __('Leraar') }}</x-hero-nav-link>
+              <x-hero-nav-link :href="route('teacher.index')" :active="request()->routeIs('teacher.index')">{{ __('Docent') }}</x-hero-nav-link>
             @endif --}}
           </div>
           <div class="my-4 px-6">
@@ -94,7 +94,7 @@
                     {{ $user->email }}</x-table-td>
                   <x-table-td>
                     @if ($user->role === 'teacher')
-                      {{ __('Leraar') }}
+                      {{ __('Docent') }}
                     @elseif($user->role === 'parent')
                       {{ __('Ouder') }}
                     @elseif($user->role === 'student')
@@ -102,8 +102,8 @@
                     @endif
                   </x-table-td>
                   <td class="px-4 py-2 whitespace-nowrap text-sm font-medium">
+                    <x-link-info href="{{ route('users.studentDetail', $user) }}">{{ __('Details') }}</x-link-info>
                     <x-link-change href="{{ route('users.edit', $user) }}">{{ __('Bewerken') }}</x-link-change>
-                    <a href="{{ route('users.studentDetail', $user) }}">{{ __('Bekijk Student Details') }}</a>
                     <form action="{{ route('users.destroy', $user) }}" method="POST" class="inline">
                       @csrf
                       @method('DELETE')

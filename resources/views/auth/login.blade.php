@@ -33,13 +33,13 @@
     </div>
 
     <div class="flex items-center justify-end gap-2 mt-4">
-      <a class="underline text-sm text-secondaryLightText dark:text-primaryDarkText hover:text-[#FFC107] dark:hover:text-[#FF6F61] rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+      <a class="underline text-sm text-secondaryLightText dark:text-primaryDarkText hover:text-secondaryLightTextHover dark:hover:text-primaryDarkTextHover rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
         href="{{ route('register') }}">
         {{ __('Register') }}
       </a>
 
       @if (Route::has('password.request'))
-        <a class="underline text-sm text-secondaryLightText dark:text-primaryDarkText hover:text-[#FFC107] dark:hover:text-[#FF6F61] rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+        <a class="underline text-sm text-secondaryLightText dark:text-primaryDarkText hover:text-secondaryLightTextHover dark:hover:text-primaryDarkTextHover rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           href="{{ route('password.request') }}">
           {{ __('Forgot your password?') }}
         </a>

@@ -50,7 +50,7 @@
           <div class="mb-4">
             <x-input-label for="role">{{ __('Rol') }}</x-input-label>
             <x-select id="role" name="role" required>
-              <option value="teacher" {{ $user->role == 'teacher' ? 'selected' : '' }}>{{ __('Leraar') }}</option>
+              <option value="teacher" {{ $user->role == 'teacher' ? 'selected' : '' }}>{{ __('Docent') }}</option>
               <option value="parent" {{ $user->role == 'parent' ? 'selected' : '' }}>{{ __('Ouder') }}</option>
               <option value="student" {{ $user->role == 'student' ? 'selected' : '' }}>{{ __('Student') }}</option>
             </x-select>

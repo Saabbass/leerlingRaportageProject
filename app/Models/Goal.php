@@ -12,7 +12,8 @@ class Goal extends Model
     protected $fillable = [
         'goal_name',
         'goal_description', 
-        'target_date'
+        'target_date',
+        'user_id'
     ];
 
     protected $casts = [

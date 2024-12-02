@@ -4,6 +4,7 @@
       {{ __('Dashboard') }}
     </x-page-title>
 
+    {{-- Uncomment the following section if you want to display error/success messages --}}
     {{-- @if (session('error'))
       <x-error-failed>
         {{ session('error') }}
@@ -32,10 +33,10 @@
           <x-hero-nav-link :href="route('subject.index')" :active="request()->routeIs('subject.index')">{{ __('Vakken') }}</x-hero-nav-link>
           <x-hero-nav-link :href="route('grades.index')" :active="request()->routeIs('grades.index')">{{ __('Cijfers') }}</x-hero-nav-link>
           <x-hero-nav-link :href="route('attendance.index')" :active="request()->routeIs('attendance.index')">{{ __('Aanwezigheid') }}</x-hero-nav-link>
-          {{-- <x-hero-nav-link :href="route('goals.index')" :active="request()->routeIs('goals.index')">{{ __('goals') }}</x-hero-nav-link>
-          @if (auth()->user()->role === 'teacher')
-            <x-hero-nav-link :href="route('teacher.index')" :active="request()->routeIs('teacher.index')">{{ __('Leraar') }}</x-hero-nav-link>
-          @endif --}}
+          <x-hero-nav-link :href="route('goals.index')" :active="request()->routeIs('goals.index')">{{ __('doelen') }}</x-hero-nav-link>
+          {{-- @if (auth()->user()->role === 'teacher')
+            <x-hero-nav-link :href="route('teacher.index')" :active="request()->routeIs('teacher.index')">{{ __('Docent') }}</x-hero-nav-link>
+          @endif  --}}
         </div>
 
         <div class="p-6 text-secondaryLightText dark:text-primaryDarkText">
@@ -56,7 +57,7 @@
     <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.15/index.global.min.js'></script>
     <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@6.1.15/index.global.min.js'></script>
     <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/timegrid@6.1.15/index.global.min.js'></script>
-    <script src='fullcalendar/core/locales/nl.global.js'></script>
+    <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/core/locales/nl.global.js'></script>
     <script>
       document.addEventListener('DOMContentLoaded', function() {
         var calendarEl = document.getElementById('calendar');

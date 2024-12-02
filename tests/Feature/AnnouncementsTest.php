@@ -76,7 +76,7 @@ test('can update an announcement', function () {
         'sent_by' => $user->id,
     ]);
 
-    $response = $this->actingAs($user)->patch("/messages/{$message->id}", [
+    $response = $this->actingAs($user)->put("/messages/{$message->id}", [
         'title' => 'Test Title Updated',
         'content' => 'Test Content Updated',
         'user_id' => $user->id,
