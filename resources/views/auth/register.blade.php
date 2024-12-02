@@ -40,7 +40,6 @@
       <x-select id="role" name="role" class="block mt-1 w-full" required>
         <option value="student">{{ __('Student') }}</option>
         <option value="parent">{{ __('Parent') }}</option>
-        <option value="teacher">{{ __('Teacher') }}</option>
       </x-select>
       <x-input-error :messages="$errors->get('role')" class="mt-2" />
     </div>
