@@ -68,7 +68,7 @@
       {{ $message->title }}
     </x-table-td>
     <x-table-td>
-      {{ $message->content }}
+      {{ Str::words($message->content, 8) }}
     </x-table-td>
     @if (auth()->user()->role !== 'student')
       <x-table-td>

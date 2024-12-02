@@ -2,8 +2,40 @@
 @tailwind components;
 @tailwind utilities;
 
+
 /* @layer base {
   ul, ol {
     list-style: revert;
   }
 } */
+
+@layer utilities {
+  .scrollbar-custom::-webkit-scrollbar {
+    width: 12px;
+  }
+
+  /* Light Theme */
+  .scrollbar-custom::-webkit-scrollbar-track {
+    background: theme("backgroundColor.primaryLightMain"); /* Match light theme background */
+    backdrop-filter: blur(10px); /* Glass effect */
+  }
+
+  .scrollbar-custom::-webkit-scrollbar-thumb {
+    background: theme("colors.scrollbarLight"); /* Light thumb color */
+    border-radius: 10px;
+  }
+
+  .scrollbar-custom:hover::-webkit-scrollbar-thumb {
+    background: rgba(53, 122, 189, 0.9); /* Hover color for light theme */
+  }
+
+  /* Dark Theme */
+  .dark .scrollbar-custom::-webkit-scrollbar-track {
+    background: theme("backgroundColor.primaryDarkMain"); /* Match dark theme background */
+  }
+
+  .dark .scrollbar-custom::-webkit-scrollbar-thumb {
+    background: theme("colors.scrollbarDark"); /* Dark thumb color */
+  }
+
+}
