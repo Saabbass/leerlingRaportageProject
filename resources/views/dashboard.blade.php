@@ -4,6 +4,7 @@
       {{ __('Dashboard') }}
     </x-page-title>
 
+    {{-- Uncomment the following section if you want to display error/success messages --}}
     {{-- @if (session('error'))
       <x-error-failed>
         {{ session('error') }}
@@ -32,10 +33,10 @@
           <x-hero-nav-link :href="route('subject.index')" :active="request()->routeIs('subject.index')">{{ __('Vakken') }}</x-hero-nav-link>
           <x-hero-nav-link :href="route('grades.index')" :active="request()->routeIs('grades.index')">{{ __('Cijfers') }}</x-hero-nav-link>
           <x-hero-nav-link :href="route('attendance.index')" :active="request()->routeIs('attendance.index')">{{ __('Aanwezigheid') }}</x-hero-nav-link>
-          {{-- <x-hero-nav-link :href="route('goals.index')" :active="request()->routeIs('goals.index')">{{ __('goals') }}</x-hero-nav-link>
-          @if (auth()->user()->role === 'teacher')
+          <x-hero-nav-link :href="route('goals.index')" :active="request()->routeIs('goals.index')">{{ __('doelen') }}</x-hero-nav-link>
+          {{-- @if (auth()->user()->role === 'teacher')
             <x-hero-nav-link :href="route('teacher.index')" :active="request()->routeIs('teacher.index')">{{ __('Docent') }}</x-hero-nav-link>
-          @endif --}}
+          @endif  --}}
         </div>
 
         <div class="p-6 text-secondaryLightText dark:text-primaryDarkText">
