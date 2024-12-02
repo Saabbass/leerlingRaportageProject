@@ -14,34 +14,36 @@ use Illuminate\Auth\Events\Validated;
 class MessageController extends Controller
 {
     public function index(Request $request)
-{
-    $query = Announcements::with(['sentBy', 'user']);
-
+    {
+        // Eager load relationships
+        $query = Announcements::with(['sentBy', 'users']); // Note the change to 'users' instead of 'user'
     
-
-    if (auth()->user()->role == 'student') {
-        $query->where('user_id', auth()->id());
-    } else if (auth()->user()->role == 'teacher') {
-        if ($request->has('filter') && $request->filter == 'others') {
-            $query->where('sent_by', '!=', auth()->id());
-        } else {
-            $query->where('sent_by', auth()->id());
+        if (auth()->user()->role == 'student') {
+            // Filter announcements where the current student is a recipient
+            $query->whereHas('users', function ($q) {
+                $q->where('user_id', auth()->id());
+            });
+        } elseif (auth()->user()->role == 'teacher') {
+            if ($request->has('filter') && $request->filter == 'others') {
+                $query->where('sent_by', '!=', auth()->id());
+            } else {
+                $query->where('sent_by', auth()->id());
+            }
+        } elseif (auth()->user()->role == 'parent') {
+            $childIds = auth()->user()->students()->pluck('student_id');
+    
+            $query->where(function ($q) use ($childIds) {
+                $q->whereHas('users', function ($subQuery) use ($childIds) {
+                    $subQuery->whereIn('user_id', $childIds);
+                })->orWhere('sent_by', auth()->id());
+            });
         }
-    } else if (auth()->user()->role == 'parent') {
-        $childIds = auth()->user()->students()->pluck('student_id');
-        $query->where(function($q) use ($childIds) {
-            $q->where('sent_by', auth()->id())
-            ->orWhereIn('user_id', $childIds)
-            ->orWhere('user_id', auth()->id());
-        });
+    
+        $messages = $query->get();
+    
+        return view('messages.index', compact('messages'));
     }
-
-    $messages = $query->get();
-
-
-
-    return view('messages.index', compact('messages'));
-}
+    
 
 public function create()
 {
@@ -57,6 +59,7 @@ public function create()
 
     return view('messages.create', compact('students', 'parents', 'teachers'));
 }
+
 public function store(StoreMessageRequest $request)
 {
     // Create a new announcement with validated data
@@ -64,9 +67,13 @@ public function store(StoreMessageRequest $request)
     $message->sent_by = auth()->id(); // Set the sent_by field
     $message->save();
 
+    if ($request->has('user_id') && is_array($request->user_id)) {
+        $message->users()->attach($request->user_id); // Attach the users
+    }
+
     return redirect()->route('messages.index')->with('success', 'Bericht aangemaakt.');
 }
- 
+
 public function edit($id)
 {
     $message = Announcements::findOrFail($id);

@@ -10,10 +10,15 @@ class Announcements extends Model
     use HasFactory;
     
     protected $fillable = [
+        'first_name',
         'title',
         'content',
-        'user_id',
+        'user_ids',
         'sent_by',
+    ];
+    
+    protected $casts = [
+        'user_ids' => 'array',  // Automatically cast the user_ids to an array
     ];
 
     protected $table = 'announcements';
@@ -27,5 +32,9 @@ class Announcements extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+    public function users()
+{
+    return $this->belongsToMany(User::class, 'announcement_user');
+}
 }
 
