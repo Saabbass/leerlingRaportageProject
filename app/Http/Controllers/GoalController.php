@@ -87,7 +87,7 @@ class GoalController extends Controller
         $goal = Goal::findOrFail($id);
         $goal->delete();
 
-        return redirect()->route('dashboard')->with('success', 'Goal deleted successfully.');
+        return redirect()->route('goals.index')->with('success', 'Goal deleted successfully.');
     }
 
 }
