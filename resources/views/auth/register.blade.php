@@ -39,8 +39,7 @@
       <x-input-label for="role" :value="__('Rol')" />
       <x-select id="role" name="role" class="block mt-1 w-full" required>
         <option value="student">{{ __('Student') }}</option>
-        <option value="parent">{{ __('Ouder') }}</option>
-        <option value="teacher">{{ __('Docent') }}</option>
+        <option value="parent">{{ __('Parent') }}</option>
       </x-select>
       <x-input-error :messages="$errors->get('role')" class="mt-2" />
     </div>

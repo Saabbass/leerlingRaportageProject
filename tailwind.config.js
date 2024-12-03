@@ -17,10 +17,15 @@ export default {
             },
         },
         colors: {
+            // scrollbar colors
+            scrollbarLight: "rgba(74, 144, 226, 0.8)",
+            scrollbarLightTrack: "rgba(255, 255, 255, 0.2)",
+            scrollbarDark: "rgba(59, 89, 152, 0.8)",
+            scrollbarDarkTrack: "rgba(28, 28, 46, 0.2)",
+
             // Text colors
             primaryLightText: "#FFFFFF",
             secondaryLightText: "#333333",
-
             primaryDarkText: "#E0E0E0",
             secondaryDarkText: "#FFC107",
 

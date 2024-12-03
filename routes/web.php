@@ -39,11 +39,11 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::get('/goals', [GoalController::class, 'index'])->name('goals.index');
+    Route::get('/goals/index', [GoalController::class, 'index'])->name('goals.index');
     Route::get('/goals/create', [GoalController::class, 'create'])->name('goals.create');
-    Route::post('/goals/store', [GoalController::class, 'store'])->name('goals.store');
+    Route::post('/goals', [GoalController::class, 'store'])->name('goals.store');
     Route::get('/goals/{id}/edit', [GoalController::class, 'edit'])->name('goals.edit');
-    Route::patch('/goals/{id}', [GoalController::class, 'update'])->name('goals.update');
+    Route::patch('/goals/{id}', [GoalController::class, 'update'])->name('goal.update');
     Route::delete('/goals/{id}', [GoalController::class, 'destroy'])->name('goals.destroy');
 });
 

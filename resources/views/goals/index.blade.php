@@ -1,63 +1,114 @@
-@extends('layouts.app')
+<x-app-layout>
+  <x-slot name="header">
+    <x-page-title>
+      {{ __('Doelen') }}
+    </x-page-title>
+  </x-slot>
 
-@section('content')
-<div class="container">
-        <div class="row justify-content-center">
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-header d-flex justify-content-between align-items-center">
-                    <span>Goals List</span>
-                    <a href="{{ route('goals.create') }}" class="btn btn-primary btn-sm">Create New Goal</a>
-                    <a href="{{ route('goals.index') }}" class="btn btn-secondary btn-sm">View All Goals</a>
-                </div>
-
-                <div class="card-body">
-                    @if (session('success'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('success') }}
-                        </div>
-                    @endif
-
-                    <div class="table-responsive">
-                        <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Description</th>
-                                    <th>Target Date</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @forelse ($goals as $goal)
-                                    <tr>
-                                        <td>{{ $goal->goal_name }}</td>
-                                        <td>{{ Str::limit($goal->goal_description, 50) }}</td>
-                                        <td>{{ $goal->target_date->format('Y-m-d') }}</td>
-                                        <td>
-                                            <a href="{{ route('goals.edit', $goal->id) }}" class="btn btn-primary btn-sm">Edit</a>
-                                            <form action="{{ route('goals.destroy', $goal->id) }}" method="POST" class="d-inline">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</button>
-                                            </form>
-                                        </td>
-                                    </tr>
-                                @empty
-                                    <tr>
-                                        <td colspan="4" class="text-center">No goals found.</td>
-                                    </tr>
-                                @endforelse
-                            </tbody>
-                        </table>
-                    </div>
-
-                    @if($goals->hasPages())
-                        {{ $goals->links() }}
-                    @endif
-                </div>
-            </div>
+  <div class="py-12">
+    <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
+      <div class="bg-secondaryLightHero dark:bg-secondaryDarkHero overflow-hidden drop-shadow-[4px_4px_7px_rgba(0,0,0,0.25)] sm:rounded-lg mt-6">
+        <div class="p-6 flex flex-wrap justify-evenly gap-1 text-primaryLightText dark:text-secondaryDarkText drop-shadow-[4px_4px_7px rgba(0,0,0,0.25)] bg-primaryLightHero dark:bg-primaryDarkHero">
+          <x-hero-nav-link :href="route('subject.index')" :active="request()->routeIs('subject.index')">{{ __('Vakken') }}</x-hero-nav-link>
+          <x-hero-nav-link :href="route('grades.index')" :active="request()->routeIs('grades.index')">{{ __('Cijfers') }}</x-hero-nav-link>
+          <x-hero-nav-link :href="route('attendance.index')" :active="request()->routeIs('attendance.index')">{{ __('Aanwezigheid') }}</x-hero-nav-link>
         </div>
+        <div class="p-6 text-secondaryLightText dark:text-primaryDarkText">
+          <div class="flex flex-col md:flex-row md:justify-between items-center mb-6 gap-4 md:gap-0">
+            <x-hero-title>
+              {{ __('Doelenlijst') }}
+            </x-hero-title>
+            @if (auth()->user()->role === 'teacher')
+              <x-link-create href="{{ route('goals.create') }}">
+                {{ __('Nieuw doel maken') }}
+              </x-link-create>
+            @endif
+          </div>
+
+          <!-- Display User Grades -->
+          {{-- <div class="mt-4">
+            <h2 class="font-bold">{{ __('Jouw Cijfers') }}</h2>
+            @foreach (auth()->user()->role === 'teacher' ? $grades : $grades->where('user_id', auth()->user()->id) as $grade)
+              <div class="flex justify-between items-center border-b border-secondaryLightBorder dark:border-primaryDarkBorder py-2">
+                <div>
+                  <x-subject-title>
+                    {{ $grade->assignment_name }} <span class="text-green-500">↑</span>
+                  </x-subject-title>
+                  <x-subject-description>
+                    {{ __('Cijfer: ') }}{{ $grade->grade }}
+                  </x-subject-description>
+                  <x-subject-description>
+                    {{ __('Datum: ') }}{{ $grade->date }}
+                  </x-subject-description>
+                </div>
+              </div>
+            @endforeach
+          </div>
+
+          <!-- Display All Attendances -->
+          <div class="mt-6">
+            <h2 class="font-bold">{{ __('Aanwezigheid') }}</h2>
+            @foreach ($attendances as $attendance)
+              <div class="flex justify-between items-center border-b border-secondaryLightBorder dark:border-primaryDarkBorder py-2">
+                <div>
+                  <x-subject-title>
+                    {{ $attendance->subject_name }} 
+                  </x-subject-title>
+                  <x-subject-description>
+                    {{ __('Status: ') }}{{ $attendance->status }}
+                  </x-subject-description>
+                  <x-subject-description>
+                    {{ __('Datum: ') }}{{ $attendance->date }}
+                  </x-subject-description>
+                </div>
+              </div>
+            @endforeach
+          </div> --}}
+
+          <!-- Display User Goals -->
+          @if (auth()->user()->role === 'student')
+          <div class="mt-6">
+            <h2 class="font-bold">{{ auth()->user()->first_name }}'s {{ __('Doelen') }}</h2>
+          @elseif (auth()->user()->role === 'parent')
+          <div class="mt-6">
+            <h2 class="font-bold">{{ __('Doelen van de student') }}</h2>
+          @endif
+            @foreach (auth()->user()->role === 'parent' ? $studentGoals : $goals as $goal)
+              <div class="flex justify-between items-center border-b border-secondaryLightBorder dark:border-primaryDarkBorder py-2">
+                <div>
+                  <x-subject-description>
+                    {{ __('User: ') }}{{ $goal->user->first_name }}
+                  </x-subject-description>
+                  <x-subject-title>
+                    {{ $goal->goal_name }} 
+                  </x-subject-title>
+                  <x-subject-description>
+                    {{ __('Goal: ') }}{{ $goal->goal_description }}
+                  </x-subject-description>
+                  <x-subject-description>
+                    {{ __('Datum goal: ') }}{{ $goal->target_date }}
+                  </x-subject-description>
+                  {{-- <x-subject-description>
+                    {{ __('User ID: ') }}{{ $goal->user_id }}
+                  </x-subject-description> --}}
+                </div>
+                <!-- Edit Link -->
+                
+                <form action="{{ route('goals.destroy', $goal->id) }}" method="POST" onsubmit="return confirm('Weet je zeker dat je dit doel wilt verwijderen?');">
+                  @csrf
+                  @method('DELETE')
+                  <button type="submit" class="text-red-500 hover:text-red-700">{{ __('Verwijder') }}</button>
+                </form>
+              </div>
+              <x-link-change href="{{ route('goals.edit', $goal->id) }}">{{ __('Bewerken') }}</x-link-change>
+              @endforeach
+          @if (auth()->user()->role === 'student' || auth()->user()->role === 'parent')
+          </div>
+          @endif
+
+        </div>
+      </div>
     </div>
-</div>
-@endsection
+  </div>
+</x-app-layout>
+
