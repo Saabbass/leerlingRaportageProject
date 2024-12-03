@@ -77,9 +77,11 @@ class GoalController extends Controller
         $goal->goal_name = $validated['goal_name'];
         $goal->goal_description = $validated['goal_description'];
         $goal->target_date = $validated['target_date'];
+        $goal->status = $request->input('goal_status');
+        $goal->user_id = auth()->id();
         $goal->save();
 
-        return redirect()->route('dashboard')->with('success', 'Goal updated successfully.');
+        return redirect()->route('goals.index')->with('success', 'Goal updated successfully.');
     }
 
     public function destroy($id)

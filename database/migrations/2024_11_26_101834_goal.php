@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('goal_name'); // Column for goal name
             $table->text('goal_description'); // Column for goal description
             $table->date('target_date'); // Column for target date
+            $table->date('status'); // Column for target date
             $table->foreignId('user_id')->constrained()->onDelete('cascade'); // Foreign key to users table
             $table->timestamps(); // Created at and updated at timestamps
         });

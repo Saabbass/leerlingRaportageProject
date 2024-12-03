@@ -14,12 +14,17 @@
 
           <div class="mb-4">
             <x-input-label for="goal_name">{{ __('Doelnaam') }}</x-input-label>
-            <input type="text" name="goal_name" id="goal_name" value="{{ $goal->name }}" required class="form-input" />
+            <input type="text" name="goal_name" id="goal_name" value="{{ $goal->goal_name }}" required class="form-input" />
           </div>
 
           <div class="mb-4">
             <x-input-label for="goal_description">{{ __('Beschrijving') }}</x-input-label>
-            <textarea name="goal_description" id="goal_description" required class="form-textarea">{{ $goal->description }}</textarea>
+            <textarea name="goal_description" id="goal_description" required class="form-textarea">{{ $goal->goal_description }}</textarea>
+          </div>
+
+          <div class="mb-4">
+            <x-input-label for="target_date">{{ __('Target Date') }}</x-input-label>
+            <input type="date" name="target_date" id="target_date" value="{{ $goal->target_date }}" required class="form-input" />
           </div>
 
           <div class="mb-4">

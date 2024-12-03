@@ -1,0 +1,2 @@
+<p
+  {{ $attributes->merge(['class' => 'text-lg font-normal lg:text-xl sm:px-20 lg:px-26 text-secondaryLightText dark:text-primaryDarkText [text-shadow:4px_4px_7px_rgba(0,0,0,0.25)]']) }}>{{ $slot }}</p>

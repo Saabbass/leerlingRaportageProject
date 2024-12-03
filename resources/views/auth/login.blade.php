@@ -15,7 +15,7 @@
 
     <!-- Password -->
     <div class="mt-4">
-      <x-input-label for="password" :value="__('Password')" />
+      <x-input-label for="password" :value="__('Wachtwoord')" />
 
       <x-text-input id="password" class="block mt-1 w-full" type="password" name="password" required
         autocomplete="current-password" />
@@ -28,21 +28,21 @@
       <label for="remember_me" class="inline-flex items-center">
         <input id="remember_me" type="checkbox"
           class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
-        <span class="ms-2 text-sm text-secondaryLightText dark:text-primaryDarkText">{{ __('Remember me') }}</span>
+        <span class="ms-2 text-sm text-secondaryLightText dark:text-primaryDarkText">{{ __('Blijf aangemeld') }}</span>
       </label>
     </div>
 
     <div class="flex items-center justify-end gap-2 mt-4">
-      <a class="underline text-sm text-secondaryLightText dark:text-primaryDarkText hover:text-secondaryLightTextHover dark:hover:text-primaryDarkTextHover rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+      <x-link-primary
         href="{{ route('register') }}">
-        {{ __('Register') }}
-      </a>
+        {{ __('Registreer') }}
+      </x-link-primary>
 
       @if (Route::has('password.request'))
-        <a class="underline text-sm text-secondaryLightText dark:text-primaryDarkText hover:text-secondaryLightTextHover dark:hover:text-primaryDarkTextHover rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+        <x-link-primary
           href="{{ route('password.request') }}">
-          {{ __('Forgot your password?') }}
-        </a>
+          {{ __('Wachtwoord vergeten?') }}
+        </x-link-primary>
       @endif
 
       <x-primary-button class="ms-3">
