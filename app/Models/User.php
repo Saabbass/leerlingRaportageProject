@@ -53,10 +53,10 @@ class User extends Authenticatable
         return $this->hasMany(UserParentStudent::class, 'student_id', 'id');
     }
 
-    public function students()
-    {
-        return $this->hasMany(User::class, 'parent_id');
-    }
+    // public function students()
+    // {
+    //     return $this->hasMany(User::class, 'parent_id'); // This is incorrect
+    // }
     public function isParentOf($studentId)
 {
     return UserParentStudent::where('parent_id', $this->id)->where('student_id', $studentId)->exists();
