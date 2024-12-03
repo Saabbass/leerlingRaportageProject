@@ -10,8 +10,8 @@
       class="flex justify-center items-center bg-dots-darker bg-center dark:bg-dots-lighter selection:bg-red-500 selection:text-white h-full">
       <section
         class="relative overflow-hidden max-h-full h-full min-h-screen w-full flex justify-center items-center">
-        <img src="{{ asset('assets/images/nova.png') }}" alt=""
-          class="absolute max-h-full h-full w-full object-cover z-0">
+        <img src="{{ asset('assets/images/nova.png') }}" alt="Nova image"
+          class="absolute max-h-full h-full w-full object-cover blur-sm">
         <div
           class="px-4 mx-auto max-w-screen-lg h-fit text-center #py-24 py-4 #lg:py-56 rounded-xl backdrop-blur-md bg-secondaryLightHero dark:bg-primaryDarkHero">
           <x-hero-title-h1
