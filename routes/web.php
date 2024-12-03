@@ -18,15 +18,19 @@ Route::get('/', function () {
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
 // })->middleware(['auth', 'verified'])->name('dashboard');
-Route::get('/dashboard', \App\Http\Controllers\DashboardController::class)->middleware(['auth', 'verified'])->name('dashboard');
+Route::middleware('auth', 'verified')->group(function () {
+    Route::get('/dashboard', \App\Http\Controllers\DashboardController::class)->name('dashboard');
+});
 
-Route::get('/users', [ProfileController::class, 'index'])->middleware(['auth'])->name('users.index');
-Route::get('/users/{user}/details', [ProfileController::class, 'show_detail'])->middleware(['auth'])->name('users.studentDetail');
-Route::put('/users/{user}', [ProfileController::class, 'update_user'])->middleware(['auth'])->name('users.update');
-Route::get('/users/{user}/edit', [ProfileController::class, 'edit_user'])->middleware(['auth'])->name('users.edit');
-Route::get('/users/create', [ProfileController::class, 'create_user'])->middleware(['auth'])->name('users.create');
-Route::post('/users', [ProfileController::class, 'store_user'])->middleware(['auth'])->name('users.store');
-Route::delete('/users/{user}', [ProfileController::class, 'destroy_user'])->middleware(['auth'])->name('users.destroy');
+Route::middleware('auth')->group(function () {
+    Route::get('/users', [ProfileController::class, 'index'])->name('users.index');
+    Route::get('/users/{user}/details', [ProfileController::class, 'show_detail'])->name('users.studentDetail');
+    Route::put('/users/{user}', [ProfileController::class, 'update_user'])->name('users.update');
+    Route::get('/users/{user}/edit', [ProfileController::class, 'edit_user'])->name('users.edit');
+    Route::get('/users/create', [ProfileController::class, 'create_user'])->name('users.create');
+    Route::post('/users/store', [ProfileController::class, 'store_user'])->name('users.store');
+    Route::delete('/users/{user}', [ProfileController::class, 'destroy_user'])->name('users.destroy');
+});
 
 
 Route::middleware('auth')->group(function () {
@@ -35,9 +39,9 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
+    Route::get('/goals', [GoalController::class, 'index'])->name('goals.index');
     Route::get('/goals/create', [GoalController::class, 'create'])->name('goals.create');
-    Route::get('/goals/index', [GoalController::class, 'create'])->name('goals.index');
-    Route::post('/goals', [GoalController::class, 'store'])->name('goals.store');
+    Route::post('/goals/store', [GoalController::class, 'store'])->name('goals.store');
     Route::get('/goals/{id}/edit', [GoalController::class, 'edit'])->name('goals.edit');
     Route::patch('/goals/{id}', [GoalController::class, 'update'])->name('goals.update');
     Route::delete('/goals/{id}', [GoalController::class, 'destroy'])->name('goals.destroy');
@@ -54,6 +58,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/grades/{id}', [GradesController::class, 'update'])->name('grades.update');
     Route::delete('/grades/{id}', [GradesController::class, 'destroy'])->name('grades.destroy');
 });
+
 Route::middleware('auth')->group(function () {
     Route::get('/attendance', [AttendanceController::class, 'index'])->name('attendance.index');
     Route::get('/attendance/create', [AttendanceController::class, 'create'])->name('attendance.create');
@@ -88,12 +93,12 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
-    Route::get('/messages',[MessageController::class, 'index'])->name('messages.index');
-    Route::get('/messages/create',[MessageController::class, 'create'])->name('messages.create');
-    Route::post('/messages/store',[MessageController::class, 'store'])->name('messages.store');
-    Route::get('/messages/{id}/edit',[MessageController::class, 'edit'])->name('messages.edit');
-    Route::put('/messages/{id}',[MessageController::class, 'update'])->name('messages.update');
-    Route::delete('/messages/{id}',[MessageController::class, 'destroy'])->name('messages.destroy');
+    Route::get('/messages', [MessageController::class, 'index'])->name('messages.index');
+    Route::get('/messages/create', [MessageController::class, 'create'])->name('messages.create');
+    Route::post('/messages/store', [MessageController::class, 'store'])->name('messages.store');
+    Route::get('/messages/{id}/edit', [MessageController::class, 'edit'])->name('messages.edit');
+    Route::put('/messages/{id}', [MessageController::class, 'update'])->name('messages.update');
+    Route::delete('/messages/{id}', [MessageController::class, 'destroy'])->name('messages.destroy');
 });
 
 require __DIR__ . '/auth.php';
