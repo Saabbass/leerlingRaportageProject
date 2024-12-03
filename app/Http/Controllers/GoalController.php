@@ -24,8 +24,11 @@ class GoalController extends Controller
             $attendances = Attendance::with('user')->paginate(10); // Fetch all attendances with user data
         } elseif (auth()->user()->role === 'parent') {
             // Fetch the students associated with the parent
-            $studentIds = User::where('parent_id', auth()->id())->pluck('id'); // Get all student IDs
-            $studentGoals = Goal::whereIn('user_id', $studentIds)->get(); // Fetch goals for all students
+            $childIds = User::whereHas('parents', function ($query) {
+                $query->where('parent_id', auth()->id());
+            })->pluck('id'); // Get all child IDs
+
+            $studentGoals = Goal::whereIn('user_id', $childIds)->get(); // Fetch goals for all children
             $goals = collect(); // Set goals to an empty collection for parents
         } else {
             // Fetch only the goals, grades, and attendances for the authenticated user
@@ -74,9 +77,11 @@ class GoalController extends Controller
         $goal->goal_name = $validated['goal_name'];
         $goal->goal_description = $validated['goal_description'];
         $goal->target_date = $validated['target_date'];
+        $goal->status = $request->input('goal_status');
+        $goal->user_id = auth()->id();
         $goal->save();
 
-        return redirect()->route('dashboard')->with('success', 'Goal updated successfully.');
+        return redirect()->route('goals.index')->with('success', 'Goal updated successfully.');
     }
 
     public function destroy($id)
@@ -84,7 +89,7 @@ class GoalController extends Controller
         $goal = Goal::findOrFail($id);
         $goal->delete();
 
-        return redirect()->route('dashboard')->with('success', 'Goal deleted successfully.');
+        return redirect()->route('goals.index')->with('success', 'Goal deleted successfully.');
     }
 
 }

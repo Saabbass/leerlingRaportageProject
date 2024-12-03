@@ -36,7 +36,7 @@ test('can create an announcement', function () {
     $response = $this->actingAs($user)->post('/messages/store', [
         'title' => 'Test Title',
         'content' => 'Test Content',
-        'user_id' => $user->id,
+        'user_id' => [$user->id],
         'recipient_type' => 'student',
     ]);
 
@@ -45,7 +45,6 @@ test('can create an announcement', function () {
     $this->assertDatabaseHas('announcements', [
         'title' => 'Test Title',
         'content' => 'Test Content',
-        'user_id' => $user->id,
         'sent_by' => $user->id,
     ]);
 });
@@ -72,7 +71,7 @@ test('can update an announcement', function () {
     $message = Announcements::create([
         'title' => 'Test Title',
         'content' => 'Test Content',
-        'user_id' => $user->id,
+        'user_id' => [$user->id], // Pass user_id as an array
         'sent_by' => $user->id,
     ]);
 

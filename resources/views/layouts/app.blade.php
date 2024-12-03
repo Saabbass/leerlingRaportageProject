@@ -34,7 +34,7 @@
     
   </head>
   
-  <body class="font-sans antialiased light">
+  <body class="font-sans scrollbar-custom antialiased light">
       <div class="">
       @include('layouts.navigation')
 

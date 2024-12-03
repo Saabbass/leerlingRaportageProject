@@ -92,8 +92,16 @@
                     {{ __('User ID: ') }}{{ $goal->user_id }}
                   </x-subject-description> --}}
                 </div>
+                <!-- Edit Link -->
+                
+                <form action="{{ route('goals.destroy', $goal->id) }}" method="POST" onsubmit="return confirm('Weet je zeker dat je dit doel wilt verwijderen?');">
+                  @csrf
+                  @method('DELETE')
+                  <button type="submit" class="text-red-500 hover:text-red-700">{{ __('Verwijder') }}</button>
+                </form>
               </div>
-            @endforeach
+              <x-link-change href="{{ route('goals.edit', $goal->id) }}">{{ __('Bewerken') }}</x-link-change>
+              @endforeach
           @if (auth()->user()->role === 'student' || auth()->user()->role === 'parent')
           </div>
           @endif
