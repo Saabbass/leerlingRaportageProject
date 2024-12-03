@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('events', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedBigInteger('subject_id'); // Foreign key to subjects table
-            $table->string('subject_name');
+            // $table->string('subject_name');
+            $table->foreignId('teacher_id')->constrained('users')->onDelete('cascade'); // Foreign key to 'users' table (teachers)
             $table->dateTime('start');
             $table->dateTime('end');
             $table->string('status');

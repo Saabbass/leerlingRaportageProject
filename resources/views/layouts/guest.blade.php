@@ -18,11 +18,23 @@
   </head>
 
   <body class="font-sans text-gray-900 antialiased light">
-    <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-primaryLightMain dark:bg-primaryDarkMain">
-      <div>
+    <div
+      class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-primaryLightMain dark:bg-primaryDarkMain">
+      <div
+        class="flex justify-center gap-4 w-full sm:max-w-md mt-6 px-6 py-4 bg-primaryLightHero dark:bg-primaryDarkHero text-secondaryLightText dark:text-primaryDarkText shadow-md overflow-hidden sm:rounded-lg items-center">
         <a href="/">
-          <x-application-logo class="w-20 h-20 fill-current text-secondaryLightText dark:text-primaryDarkText" />
+          {{-- <x-application-logo class="w-20 h-20 fill-current text-secondaryLightText dark:text-primaryDarkText" /> --}}
+          <x-hero-title-alt
+            class="w-auto fill-current text-primaryLightText hover:text-primaryLightTextHover dark:text-primaryDarkText hover:dark:text-primaryDarkTextHover [text-shadow:4px_4px_7px_rgba(0,0,0,0.25)]">
+            EduTrack
+          </x-hero-title-alt>
         </a>
+        <label class="switch">
+          <span class="moon hidden" id="theme-toggle-dark-icon"></span>
+          <span class="sun hidden" id="theme-toggle-light-icon"> </span>
+          <input type="checkbox" class="input">
+          <span class="slider"></span>
+        </label>
       </div>
 
       <div

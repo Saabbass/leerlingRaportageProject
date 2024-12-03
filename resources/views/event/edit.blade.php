@@ -13,23 +13,35 @@
           @method('PATCH')
 
           <div class="mb-4">
+            <x-input-label for="teacher_id">{{ __('Docent') }}</x-input-label>
+            <x-select name="teacher_id" id="teacher_id" required>
+              @foreach ($teachers as $teacher)
+                <option value="{{ $teacher->id }}">
+                  {{ $teacher->first_name }} {{ $teacher->last_name }}
+                </option>
+              @endforeach
+            </x-select>
+          </div>
+
+          <div class="mb-4">
             <x-input-label for="subject_id">{{ __('Vak') }}</x-input-label>
             <x-select name="subject_id" id="subject_id" required>
-                @foreach ($subjects as $subject)
-                    <option value="{{ $subject->id }}" data-subject-name="{{ $subject->subject_name }}" {{ $subject->id == $event->subject_id ? 'selected' : '' }}>
-                        {{ $subject->subject_name }}
-                    </option>
-                @endforeach
+              @foreach ($subjects as $subject)
+                <option value="{{ $subject->id }}" data-subject-name="{{ $subject->subject_name }}"
+                  {{ $subject->id == $event->subject_id ? 'selected' : '' }}>
+                  {{ $subject->subject_name }}
+                </option>
+              @endforeach
             </x-select>
-            <input type="hidden" name="subject_name" id="subject_name" value="{{ $event->subject_name }}">
-        </div>
-        
-        <script>
+            {{-- <input type="hidden" name="subject_name" id="subject_name" value="{{ $event->subject_name }}"> --}}
+          </div>
+
+          {{-- <script>
             document.getElementById('subject_id').addEventListener('change', function() {
                 var selectedOption = this.options[this.selectedIndex];
                 document.getElementById('subject_name').value = selectedOption.getAttribute('data-subject-name');
             });
-        </script>
+        </script> --}}
 
           <div class="mb-4">
             <x-input-label for="subject_date_start">{{ __('Start') }}</x-input-label>
