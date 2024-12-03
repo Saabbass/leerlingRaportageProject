@@ -12,6 +12,17 @@
           <form action="{{ route('event.store') }}" method="POST">
             @csrf
             <div class="mb-4">
+              <x-input-label for="teacher_id">{{ __('Docent') }}</x-input-label>
+              <x-select name="teacher_id" id="teacher_id" required>
+                @foreach ($teachers as $teacher)
+                  <option value="{{ $teacher->id }}">
+                    {{ $teacher->first_name }} {{ $teacher->last_name }}
+                  </option>
+                @endforeach
+              </x-select>
+            </div>
+
+            <div class="mb-4">
               <x-input-label for="subject_id">{{ __('Vak') }}</x-input-label>
               <x-select name="subject_id" id="subject_id" required>
                 @foreach ($subjects as $subject)
@@ -20,15 +31,15 @@
                   </option>
                 @endforeach
               </x-select>
-              <input type="hidden" name="subject_name" id="subject_name" value="{{ $subject->subject_name }}">
+              {{-- <input type="hidden" name="subject_name" id="subject_name" value="{{ $subject->subject_name }}"> --}}
             </div>
 
-            <script>
+            {{-- <script>
               document.getElementById('subject_id').addEventListener('change', function() {
                 var selectedOption = this.options[this.selectedIndex];
                 document.getElementById('subject_name').value = selectedOption.getAttribute('data-subject-name');
               });
-            </script>
+            </script> --}}
 
             <div class="mb-4">
               <x-input-label for="subject_date_start">{{ __('Start') }}</x-input-label>
