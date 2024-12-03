@@ -13,7 +13,8 @@ class Goal extends Model
         'goal_name',
         'goal_description', 
         'target_date',
-        'user_id'
+        'user_id',
+        'status'
     ];
 
     protected $casts = [
