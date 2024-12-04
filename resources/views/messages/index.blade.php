@@ -65,16 +65,22 @@
             @forelse($messages as $message)
   <tr>
     <x-table-td>
-      {{ $message->title }}
+      {{ Str::limit($message->title, 10, '...') }}
     </x-table-td>
     <x-table-td>
-      {{ Str::words($message->content, 8) }}
+      {{ Str::words($message->content, 8, '...') }}
     </x-table-td>
     @if (auth()->user()->role !== 'student')
       <x-table-td>
-        @foreach ($message->users as $recipient)
-          {{ $recipient->first_name }} {{ $recipient->last_name }}<br>
-        @endforeach
+        @php
+          $max = 3;
+        @endphp
+        @foreach ($message->users->take($max) as $recipient)
+        {{ $recipient->first_name }} {{ $recipient->last_name }}<br>
+      @endforeach
+      @if ($message->users->count() > $max)
+      <span>and {{ $message->users->count() - $max}} more...</span>
+    @endif
       </x-table-td>
     @endif
     <x-table-td>
@@ -109,6 +115,9 @@
             @endforelse
           </x-table-body>
         </x-table>
+        <div class="mt-4">
+          {{ $messages->links() }}
+        </div>
       </div>
     </div>
   </div>

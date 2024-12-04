@@ -40,6 +40,8 @@ class MessageController extends Controller
         }
     
         $messages = $query->get();
+
+        $messages = $query->paginate(20); // Paginate the results, 20 messages per page
     
         return view('messages.index', compact('messages'));
     }
