@@ -65,10 +65,10 @@
             @forelse($messages as $message)
   <tr>
     <x-table-td>
-      {{ $message->title }}
+      {{ Str::limit($message->title, 10, '...') }}
     </x-table-td>
     <x-table-td>
-      {{ Str::words($message->content, 8) }}
+      {{ Str::words($message->content, 8, '...') }}
     </x-table-td>
     @if (auth()->user()->role !== 'student')
       <x-table-td>
@@ -115,6 +115,9 @@
             @endforelse
           </x-table-body>
         </x-table>
+        <div class="mt-4">
+          {{ $messages->links() }}
+        </div>
       </div>
     </div>
   </div>
