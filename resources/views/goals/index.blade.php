@@ -86,7 +86,7 @@
                     {{ __('Goal: ') }}{{ $goal->goal_description }}
                   </x-subject-description>
                   <x-subject-description>
-                    {{ __('Datum goal: ') }}{{ $goal->target_date }}
+                    {{ __('Datum goal: ') }}{{ $goal->target_date->format('Y-m-d') }}
                   </x-subject-description>
                   {{-- <x-subject-description>
                     {{ __('User ID: ') }}{{ $goal->user_id }}
@@ -98,9 +98,10 @@
                   @csrf
                   @method('DELETE')
                   <button type="submit" class="text-red-500 hover:text-red-700">{{ __('Verwijder') }}</button>
+                  <x-link-change href="{{ route('goals.edit', $goal->id) }}">{{ __('Bewerken') }}</x-link-change>
                 </form>
               </div>
-              <x-link-change href="{{ route('goals.edit', $goal->id) }}">{{ __('Bewerken') }}</x-link-change>
+              
               @endforeach
           @if (auth()->user()->role === 'student' || auth()->user()->role === 'parent')
           </div>

@@ -72,9 +72,15 @@
     </x-table-td>
     @if (auth()->user()->role !== 'student')
       <x-table-td>
-        @foreach ($message->users as $recipient)
-          {{ $recipient->first_name }} {{ $recipient->last_name }}<br>
-        @endforeach
+        @php
+          $max = 3;
+        @endphp
+        @foreach ($message->users->take($max) as $recipient)
+        {{ $recipient->first_name }} {{ $recipient->last_name }}<br>
+      @endforeach
+      @if ($message->users->count() > $max)
+      <span>and {{ $message->users->count() - $max}} more...</span>
+    @endif
       </x-table-td>
     @endif
     <x-table-td>
