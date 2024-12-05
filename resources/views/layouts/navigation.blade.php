@@ -1,5 +1,5 @@
 <nav x-data="{ open: false }"
-  class="bg-primaryLightNav dark:bg-primaryDarkNav border-b border-primaryLightBorder dark:border-primaryDarkBorder drop-shadow-[4px_4px_7px_rgba(0,0,0,0.25)]">
+  class="bg-primaryLightNav dark:bg-primaryDarkNav border-b border-primaryLightBorder dark:border-primaryDarkBorder drop-shadow-[4px_4px_7px_rgba(0,0,0,0.25)] z-50 block absolute w-full">
   <!-- Primary Navigation Menu -->
   <div class="px-4 mx-auto max-w-7xl md:px-6 lg:px-8">
     <div class="flex justify-between h-16">

@@ -40,7 +40,7 @@
 
       <!-- Page Heading -->
       @if (isset($header))
-        <header class="bg-primaryLightMain dark:bg-primaryDarkMain shadow">
+        <header class="bg-primaryLightMain dark:bg-primaryDarkMain ">
           <div class="px-4 py-6 mx-auto max-w-7xl sm:px-6 lg:px-8">
             {{ $header }}
           </div>
@@ -48,7 +48,7 @@
       @endif
 
       <!-- Page Content -->
-      <main class="bg-primaryLightMain dark:bg-primaryDarkMain h-fit min-h-screen">
+      <main class="bg-primaryLightMain dark:bg-primaryDarkMain h-fit min-h-screen relative">
         {{ $slot }}
       </main>
 
