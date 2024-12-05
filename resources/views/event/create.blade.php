@@ -57,12 +57,11 @@
               <input type="hidden" name="subject_status" id="subject_status" value="active">
             </div>
 
-            <div class="flex justify-end">
-              <x-cancel-button href="{{ route('dashboard') }}"
-                class="bg-gray-500 hover:bg-gray-700 text-secondaryLightText dark:text-primaryDarkText font-bold py-2 px-4 rounded mr-2">
+            <div class="flex items-center justify-end gap-2 mt-4">
+              <x-cancel-button href="{{ route('dashboard') }}">
                 {{ __('Annuleren') }}
               </x-cancel-button>
-              <x-accept-button type="submit" class="font-bold py-2 px-4 rounded">
+              <x-accept-button type="submit">
                 {{ __('les inplannen') }}
               </x-accept-button>
             </div>

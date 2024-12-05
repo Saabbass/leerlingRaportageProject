@@ -23,7 +23,7 @@ class UpdateEventRequest extends FormRequest
     {
         return [
             'subject_id' => 'required|exists:subjects,id',
-            'subject_name' => 'required|exists:subjects,subject_name',
+            'teacher_id' => 'required|exists:users,id',
             'subject_date_start' => 'required|date',
             'subject_date_end' => 'required|date',
             'subject_status' => 'required|string',
