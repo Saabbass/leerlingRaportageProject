@@ -68,7 +68,7 @@
       {{ Str::limit($message->title, 10, '...') }}
     </x-table-td>
     <x-table-td>
-      {{ Str::words($message->content, 8, '...') }}
+      {{ Str::limit($message->content, 20, '...') }}
     </x-table-td>
     @if (auth()->user()->role !== 'student')
       <x-table-td>
