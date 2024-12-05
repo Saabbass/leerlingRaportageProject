@@ -47,7 +47,7 @@ class EventController extends Controller
     // return view('event.edit', ['event' => $event]);
 
     $event = Event::findOrFail($id);
-    $subjects = Subject::all();
+    $subjects = Subject::select('id', 'subject_name')->get(); // Fetch all subjects
     $teachers = User::select('id', 'first_name', 'last_name')
     ->where('role', 'teacher')
     ->get(); // Fetch only Users with the role 'teacher'
@@ -56,14 +56,15 @@ class EventController extends Controller
 
   public function update(UpdateEventRequest $request, $id)
   {
-    $event = Event::findOrFail($id);
-    $subject = Subject::find($request->subject_id);
-    $teacher = Subject::find($request->teacher_id);
-    
     $validated = $request->validated();
+    $event = Event::findOrFail($id);
+    $subject = Subject::find($validated['subject_id']);
+    $teacher = User::find($validated['teacher_id']);
+    
     $event->subject_id = $subject->id;
     // $event->subject_name = $subject->subject_name;
-    $event->subject_name = $validated['subject_name'];
+    $event->teacher_id = $teacher->id;
+    // $event->subject_name = $validated['subject_name'];
     $event->start = $validated['subject_date_start'];
     $event->end = $validated['subject_date_end'];
     $event->status = $validated['subject_status'];

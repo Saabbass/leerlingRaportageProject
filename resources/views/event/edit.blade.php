@@ -65,11 +65,11 @@
             <x-input-error :messages="$errors->get('subject_status')" class="mt-2" />
           </div>
 
-          <div class="flex justify-end gap-2">
+          <div class="flex items-center justify-end gap-2 mt-4">
             <x-cancel-button href="{{ route('dashboard') }}">
               {{ __('Annuleren') }}
             </x-cancel-button>
-            <x-accept-button>
+            <x-accept-button type="submit">
               {{ __('Accepteren') }}
             </x-accept-button>
           </div>
