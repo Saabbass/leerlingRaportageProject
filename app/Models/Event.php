@@ -11,7 +11,7 @@ class Event extends Model
 
     protected $fillable = [
         'subject_id',
-        'subject_name',
+        'teacher_id',
         'start',
         'end',
         'status',

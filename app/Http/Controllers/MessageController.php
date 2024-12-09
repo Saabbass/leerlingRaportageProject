@@ -30,7 +30,9 @@ class MessageController extends Controller
                 $query->where('sent_by', auth()->id());
             }
         } elseif (auth()->user()->role == 'parent') {
-            $childIds = auth()->user()->students()->pluck('student_id');
+            $childIds = User::whereHas('parents', function ($query) {
+                $query->where('parent_id', auth()->id());
+            })->pluck('id'); // Get all child IDs
     
             $query->where(function ($q) use ($childIds) {
                 $q->whereHas('users', function ($subQuery) use ($childIds) {
