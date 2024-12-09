@@ -5,24 +5,24 @@
 
 
 <x-app-layout>
-  <div class="flex flex-col h-full min-h-screen relative">
+  <div class="flex flex-col h-full min-h-screen">
     <div
-      class="relative flex justify-center items-center bg-dots-darker bg-center dark:bg-dots-lighter selection:bg-red-500 selection:text-white h-full">
+      class="flex justify-center items-center bg-dots-darker bg-center dark:bg-dots-lighter selection:bg-red-500 selection:text-white h-full">
       <section
-        class="container_img relative overflow-hidden max-h-full h-full min-h-screen w-full flex justify-center items-center">
-        <img src="{{ asset('assets/images/nova.png') }}" alt=""
-          class="absolute max-h-full h-full w-full object-cover">
+        class="relative overflow-hidden max-h-full h-full min-h-screen w-full flex justify-center items-center">
+        <img src="{{ asset('assets/images/nova.png') }}" alt="Nova image"
+          class="absolute max-h-full h-full w-full object-cover blur-sm">
         <div
-          class="px-4 mx-auto max-w-screen-lg h-fit text-center #py-24 py-4 #lg:py-56 rounded-xl relative backdrop-blur-md bg-secondaryLightHero dark:bg-primaryDarkHero">
-          <h1
-            class="mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl lg:text-6xl text-secondaryLightText dark:text-primaryDarkText">
+          class="px-4 mx-auto max-w-screen-lg h-fit text-center #py-24 py-4 #lg:py-56 rounded-xl backdrop-blur-md bg-secondaryLightHero dark:bg-primaryDarkHero">
+          <x-hero-title-h1
+            class="mb-4">
             Wij investeren
-            in het potentieel van de wereld</h1>
-          <p
-            class="mb-8 text-lg font-normal lg:text-xl sm:px-16 lg:px-48 text-secondaryLightText dark:text-primaryDarkText">
+            in het potentieel van de wereld</x-hero-title-h1>
+          <x-hero-description
+            class="mb-8 w-full">
             Hier bij
             NovaCollege richten we ons op studenten waar technologie, innovatie en kapitaal langdurige waarde kunnen
-            ontsluiten en economische groei kunnen stimuleren.</p>
+            ontsluiten en economische groei kunnen stimuleren.</x-hero-description>
           <div class="flex flex-row justify-center space-y-0">
             <x-secondary-link-btn href="{{ route('dashboard') }}">
               Ga door

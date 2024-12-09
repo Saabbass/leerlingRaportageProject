@@ -4,7 +4,7 @@
 
     <!-- FirstName -->
     <div>
-      <x-input-label for="first_name" :value="__('Firstname')" />
+      <x-input-label for="first_name" :value="__('Voornaam')" />
       <x-text-input id="first_name" class="block mt-1 w-full" type="text" name="first_name" :value="old('first_name')" required
         autofocus autocomplete="first_name" />
       <x-input-error :messages="$errors->get('first_name')" class="mt-2" />
@@ -12,7 +12,7 @@
 
     <!-- Last Name -->
     <div>
-      <x-input-label for="last_name" :value="__('Lastname')" />
+      <x-input-label for="last_name" :value="__('Achternaam')" />
       <x-text-input id="last_name" class="block mt-1 w-full" type="text" name="last_name" :value="old('last_name')" required
         autofocus autocomplete="last_name" />
       <x-input-error :messages="$errors->get('last_name')" class="mt-2" />
@@ -20,7 +20,7 @@
 
     <!-- Age -->
     <div>
-      <x-input-label for="age" :value="__('Age')" />
+      <x-input-label for="age" :value="__('Leeftijd')" />
       <x-text-input id="age" class="block mt-1 w-full" type="text" name="age" :value="old('age')" required
         autofocus autocomplete="age" />
       <x-input-error :messages="$errors->get('age')" class="mt-2" />
@@ -36,7 +36,7 @@
 
     <!-- Role -->
     <div class="mt-4">
-      <x-input-label for="role" :value="__('Role')" />
+      <x-input-label for="role" :value="__('Rol')" />
       <x-select id="role" name="role" class="block mt-1 w-full" required>
         <option value="student">{{ __('Student') }}</option>
         <option value="parent">{{ __('Parent') }}</option>
@@ -46,7 +46,7 @@
 
     <!-- Password -->
     <div class="mt-4">
-      <x-input-label for="password" :value="__('Password')" />
+      <x-input-label for="password" :value="__('Wachtwoord')" />
 
       <x-text-input id="password" class="block mt-1 w-full" type="password" name="password" required
         autocomplete="new-password" />
@@ -56,7 +56,7 @@
 
     <!-- Confirm Password -->
     <div class="mt-4">
-      <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
+      <x-input-label for="password_confirmation" :value="__('Controleer wachtwoord')" />
 
       <x-text-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation"
         required autocomplete="new-password" />
@@ -65,13 +65,13 @@
     </div>
 
     <div class="flex items-center justify-end mt-4">
-      <a class="underline text-sm text-secondaryLightText dark:text-primaryDarkText hover:text-secondaryLightTextHover dark:hover:text-primaryDarkTextHover rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+      <x-link-primary
         href="{{ route('login') }}">
-        {{ __('Already registered?') }}
-      </a>
+        {{ __('Al een account?') }}
+      </x-link-primary>
 
       <x-primary-button class="ms-4">
-        {{ __('Register') }}
+        {{ __('Registreer') }}
       </x-primary-button>
     </div>
   </form>

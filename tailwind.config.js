@@ -58,12 +58,14 @@ export default {
             secondaryDarkDevide: "#FFC107",
 
             // Action text colors
+            primaryLightAction: "#333333",
             infoLightAction: "#50e3c2",
             createLightAction: "#ffc423",
             acceptLightAction: "#00700c",
             changeLightAction: "#001fc5",
             deleteLightAction: "#be1212",
 
+            primaryDarkAction: "#ffffff",
             infoDarkAction: "#ffcb9c",
             createDarkAction: "#FFC107",
             acceptDarkAction: "#00bd1b",
@@ -71,11 +73,15 @@ export default {
             deleteDarkAction: "#FF6F61",
 
             // Action text hover colors
+            primaryLightActionHover: "#ffffff",
+            infoLightActionHover: "#ffffff",
             createLightActionHover: "#ffffff",
             acceptLightActionHover: "#ffffff",
             changeLightActionHover: "#ffffff",
             deleteLightActionHover: "#ffffff",
 
+            primaryDarkActionHover: "#FF6F61",
+            infoDarkActionHover: "#FF6F61",
             createDarkActionHover: "#FF6F61",
             acceptDarkActionHover: "#FFC107",
             changeDarkActionHover: "#FFC107",
