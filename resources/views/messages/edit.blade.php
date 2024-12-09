@@ -8,6 +8,19 @@
   <div class="py-12">
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
       <div class="bg-secondaryLightHero dark:bg-secondaryDarkHero overflow-hidden shadow-sm sm:rounded-lg p-6">
+
+        <!-- Section to display users the message was already sent to -->
+        <div class="mb-4">
+          <x-input-label>{{ __('Verzonden naar') }}</x-input-label>
+          <div class="flex flex-wrap gap-2 mt-2">
+            @foreach ($message->users as $user)
+              <div class="bg-blue-500 text-white px-3 py-1 rounded-full">
+                {{ $user->first_name }} {{ $user->last_name }}
+              </div>
+            @endforeach
+          </div>
+        </div>
+
         <form method="POST" action="{{ route('messages.update', $message) }}">
           @csrf
           @method('PUT')
@@ -29,13 +42,18 @@
             <div class="mb-4">
               <x-input-label for="recipient_type">{{ __('Type gebruiker') }}</x-input-label>
               <x-select id="recipient_type" name="recipient_type" required>
-                <option value="student">{{ __('Student') }}</option>
-                <option value="parent">{{ __('Parent') }}</option>
+                <option value="student" {{ $recipientType == 'student' ? 'selected' : '' }}>{{ __('Student') }}</option>
+                <option value="parent" {{ $recipientType == 'parent' ? 'selected' : '' }}>{{ __('Parent') }}</option>
               </x-select>
             </div>
           @endif
           @if (auth()->user()->role == 'parent')
-            <input type="hidden" name="recipient_type" value="teacher">
+          <div class="mb-4">
+            <x-input-label for="recipient_type">{{ __('Type gebruiker') }}</x-input-label>
+            <x-select id="recipient_type" name="recipient_type" required>
+              <option value="teacher">{{ __('Docent') }}</option>
+            </x-select>
+          </div>
           @endif
 
           <div class="mb-4">
@@ -87,6 +105,7 @@
         var option = document.createElement('option');
         option.value = '{{ $student->id }}';
         option.text = '{{ $student->first_name }} {{ $student->last_name }}';
+        option.selected = {{ in_array($student->id, $message->users->pluck('id')->toArray()) ? 'true' : 'false' }};
         userSelect.appendChild(option);
       @endforeach
     } else if (recipientType === 'parent') {
@@ -94,6 +113,7 @@
         var option = document.createElement('option');
         option.value = '{{ $parent->id }}';
         option.text = '{{ $parent->first_name }} {{ $parent->last_name }}';
+        option.selected = {{ in_array($parent->id, $message->users->pluck('id')->toArray()) ? 'true' : 'false' }};
         userSelect.appendChild(option);
       @endforeach
     } else {
@@ -102,12 +122,15 @@
         var option = document.createElement('option');
         option.value = '{{ $teacher->id }}';
         option.text = '{{ $teacher->first_name }} {{ $teacher->last_name }}';
+        option.selected = {{ in_array($teacher->id, $message->users->pluck('id')->toArray()) ? 'true' : 'false' }};
         userSelect.appendChild(option);
       @endforeach
     }
 
     // Re-initialize select2 after adding options
-    $('#user_id').select2();
+    $('#user_id').select2({
+      width: '100%'  // Ensure the select box takes the full width
+    });
   });
 
   // Trigger change event on page load to populate the recipient list based on the current recipient type
