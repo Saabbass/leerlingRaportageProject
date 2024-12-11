@@ -21,23 +21,7 @@
               @enderror
             </div>
 
-<<<<<<< HEAD
-            <div class="mb-4">
-              <x-input-label for="goal_description">{{ __('Beschrijving') }}</x-input-label>
-              <x-textarea-input id="goal_description" name="goal_description" rows="3" required>{{ $goal->goal_description }}</x-textarea-input>
-              @error('goal_description')
-                <span class="text-red-500 text-sm">{{ $message }}</span>
-              @enderror
-            </div>
-
-            <div class="mb-4">
-              <x-input-label for="target_date">{{ __('Datum') }}</x-input-label>
-              <x-text-input type="date" name="target_date" id="target_date" value="{{ $goal->target_date }}" required />
-              @error('target_date')
-                <span class="text-red-500 text-sm">{{ $message }}</span>
-              @enderror
-            </div>
-=======
+           
           <div class="mb-4">
             <x-input-label for="goal_description">{{ __('Beschrijving') }}</x-input-label>
             <textarea name="goal_description" id="goal_description" rows="10" cols="50" required class="form-textarea w-full p-2 border rounded-md">{{ $goal->goal_description }}</textarea>
@@ -47,7 +31,6 @@
             <x-input-label for="target_date">{{ __('Target Date') }}</x-input-label>
             <input type="date" name="target_date" id="target_date" value="{{ $goal->target_date->format('Y-m-d') }}" required class="form-input" />
           </div>
->>>>>>> cf9cf9b1b4b2e23eeb1c017fc2f67f83d9cbc13a
 
             <div class="mb-4">
               <p><strong>{{ __('Beschrijving:') }}</strong> {{ $goal->goal_description }}</p>
