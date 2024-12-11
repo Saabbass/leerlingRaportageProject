@@ -30,7 +30,12 @@
             </div>
           @endif
           @if (auth()->user()->role == 'parent')
-            <input type="hidden" name="recipient_type" value="teacher">
+          <div class="mb-4">
+            <x-input-label for="recipient_type">{{ __('Type gebruiker') }}</x-input-label>
+            <x-select id="recipient_type" name="recipient_type" required>
+              <option value="teacher">{{ __('Docent') }}</option>
+            </x-select>
+          </div>
           @endif
 
           <div class="mb-4">
