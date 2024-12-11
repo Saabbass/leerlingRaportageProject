@@ -11,6 +11,8 @@ use App\Http\Controllers\EventController;
 use App\Http\Controllers\GoalController;
 use App\Http\Controllers\UserParentStudentController;
 
+use App\Http\Middleware\RoleMiddleware;
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -18,11 +20,11 @@ Route::get('/', function () {
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
 // })->middleware(['auth', 'verified'])->name('dashboard');
-Route::middleware('auth', 'verified')->group(function () {
+Route::middleware(['auth', RoleMiddleware::class . ':teacher,parent,student'], 'verified')->group(function () {
     Route::get('/dashboard', \App\Http\Controllers\DashboardController::class)->name('dashboard');
 });
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', RoleMiddleware::class . ':teacher'])->group(function () {
     Route::get('/users', [ProfileController::class, 'index'])->name('users.index');
     Route::get('/users/{user}/details', [ProfileController::class, 'show_detail'])->name('users.studentDetail');
     Route::put('/users/{user}', [ProfileController::class, 'update_user'])->name('users.update');
@@ -33,7 +35,7 @@ Route::middleware('auth')->group(function () {
 });
 
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', RoleMiddleware::class . ':teacher,parent,student'])->group(function () {
     Route::patch('/profile/updateRole', [ProfileController::class, 'updateRole'])->name('profile.updateRole');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -50,8 +52,10 @@ Route::middleware('auth')->group(function () {
 // Route::middleware('auth')->group(function () {
 //     Route::get('/attendance', [AttendanceController::class, 'index'])->name('attendance.index');
 // });
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', RoleMiddleware::class . ':teacher,parent,student'])->group(function () {
     Route::get('/grades', [GradesController::class, 'index'])->name('grades.index');
+});
+Route::middleware(['auth', RoleMiddleware::class . ':teacher'])->group(function () {
     Route::get('/grades/create', [GradesController::class, 'create'])->name('grades.create');
     Route::post('/grades/store', [GradesController::class, 'store'])->name('grades.store');
     Route::get('/grades/{id}/edit', [GradesController::class, 'edit'])->name('grades.edit');
@@ -59,7 +63,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/grades/{id}', [GradesController::class, 'destroy'])->name('grades.destroy');
 });
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', RoleMiddleware::class . ':teacher,parent,student'])->group(function () {
     Route::get('/attendance', [AttendanceController::class, 'index'])->name('attendance.index');
     Route::get('/attendance/create', [AttendanceController::class, 'create'])->name('attendance.create');
     Route::post('/attendance/store', [AttendanceController::class, 'store'])->name('attendance.store');
@@ -68,8 +72,12 @@ Route::middleware('auth')->group(function () {
     Route::delete('/attendance/{id}', [AttendanceController::class, 'destroy'])->name('attendance.destroy');
 });
 
-Route::middleware('auth')->group(function () {
+// routes for the subjects and events
+Route::middleware(['auth', RoleMiddleware::class . ':teacher,parent,student'])->group(function () {
     Route::get('/subject', [SubjectController::class, 'index'])->name('subject.index');
+});
+
+Route::middleware(['auth', RoleMiddleware::class . ':teacher'])->group(function () {
     Route::get('/subject/create', [SubjectController::class, 'create'])->name('subject.create');
     Route::post('/subject/store', [SubjectController::class, 'store'])->name('subject.store');
     Route::get('/subject/{id}/edit', [SubjectController::class, 'edit'])->name('subject.edit');
@@ -83,7 +91,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/event/{id}', [EventController::class, 'destroy'])->name('event.destroy');
 });
 
-Route::middleware('auth')->group(function () {
+// Routes for all users overview
+Route::middleware(['auth', RoleMiddleware::class . ':teacher,parent,student'])->group(function () {
     Route::get('/teacher', [UserParentStudentController::class, 'index'])->name('teacher.index');
     Route::get('/teacher/create', [UserParentStudentController::class, 'create'])->name('teacher.create');
     Route::post('/teacher/store', [UserParentStudentController::class, 'store'])->name('teacher.store');
@@ -92,8 +101,11 @@ Route::middleware('auth')->group(function () {
     Route::delete('teacher/{parent_id}/{student_id}', [UserParentStudentController::class, 'destroy'])->name('teacher.destroy');
 });
 
-Route::middleware('auth')->group(function () {
+// Routes for the messages
+Route::middleware(['auth', RoleMiddleware::class . ':teacher,parent,student'])->group(function () {
     Route::get('/messages', [MessageController::class, 'index'])->name('messages.index');
+});
+Route::middleware(['auth', RoleMiddleware::class . ':teacher,parent'])->group(function () {
     Route::get('/messages/create', [MessageController::class, 'create'])->name('messages.create');
     Route::post('/messages/store', [MessageController::class, 'store'])->name('messages.store');
     Route::get('/messages/{id}/edit', [MessageController::class, 'edit'])->name('messages.edit');
