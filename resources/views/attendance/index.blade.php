@@ -34,11 +34,11 @@
           <x-hero-title>
             {{ __('Controleer afwezigheid:') }}
           </x-hero-title>
-          @if (auth()->user()->role === 'teacher')
-            <x-link-create href="{{ route('attendance.create') }}">
-              {{ __('Verander aanwezigheid') }}
-            </x-link-create>
-          @endif
+          {{-- @if (auth()->user()->role === 'teacher') --}}
+          <x-link-create href="{{ route('attendance.create') }}">
+            {{ __('Verander aanwezigheid') }}
+          </x-link-create>
+          {{-- @endif --}}
         </div>
         <x-table>
           <x-table-head>
@@ -55,11 +55,11 @@
               <x-table-th>
                 {{ __('Status') }}
               </x-table-th>
-              @if (auth()->user()->role === 'teacher')
+              {{-- @if (auth()->user()->role === 'teacher') --}}
                 <x-table-th>
                   {{ __('Acties') }}
                 </x-table-th>
-              @endif
+              {{-- @endif --}}
             </tr>
           </x-table-head>
           <x-table-body>
@@ -87,11 +87,11 @@
                       {{ __('Laat') }}
                     @endif
                   </x-table-td>
-                  @if (auth()->user()->role === 'teacher')
-                    <x-table-td-action>
-                      <x-link-change href="{{ route('attendance.edit', $attendance->id) }}">
-                        {{ __('Bewerken') }}
-                      </x-link-change>
+                  <x-table-td-action>
+                    <x-link-change href="{{ route('attendance.edit', $attendance->id) }}">
+                      {{ __('Bewerken') }}
+                    </x-link-change>
+                    @if (auth()->user()->role === 'teacher')
                       <form action="{{ route('attendance.destroy', $attendance->id) }}" method="POST" class="inline">
                         @csrf
                         @method('DELETE')
@@ -99,8 +99,8 @@
                           {{ __('Verwijderen') }}
                         </x-link-delete>
                       </form>
-                    </x-table-td-action>
-                  @endif
+                    @endif
+                  </x-table-td-action>
                 </tr>
               @endif
             @endforeach
