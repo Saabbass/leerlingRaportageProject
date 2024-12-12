@@ -14,10 +14,21 @@
             <div class="mb-4">
               <x-input-label for="user_id">{{ __('Gebruiker') }}</x-input-label>
               <x-select id="user_id" name="user_id" required>
-                @foreach ($users as $user)
-                  <option value="{{ $user->id }}">{{ $user->first_name }} {{ $user->last_name }}</option>
-                @endforeach
+                @if (auth()->user()->role === 'student')
+                  <option value="{{ auth()->user()->id }}">{{ auth()->user()->first_name }}
+                    {{ auth()->user()->last_name }}</option>
+                @elseif (auth()->user()->role === 'parent')
+                  @foreach (auth()->user()->children as $child)
+                    <option value="{{ $child->id }}">{{ $child->first_name }} {{ $child->last_name }}</option>
+                  @endforeach
+                @else
+                  @foreach ($users as $user)
+                    <option value="{{ $user->id }}">{{ $user->first_name }} {{ $user->last_name }}</option>
+                  @endforeach
+                @endif
               </x-select>
+
+
             </div>
 
             <div class="mb-4">
@@ -31,7 +42,7 @@
 
             <div class="mb-4">
               <x-input-label for="date">{{ __('Datum') }}</x-input-label>
-              <x-date-input type="date" id="date" name="date" required/>
+              <x-date-input type="date" id="date" name="date" required />
             </div>
 
             <div class="mb-4">

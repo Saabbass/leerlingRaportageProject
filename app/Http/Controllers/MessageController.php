@@ -84,13 +84,22 @@ public function edit($id)
     $students = User::where('role', 'student')->get();
     $parents = User::where('role', 'parent')->get();
     $teachers = User::where('role', 'teacher')->get();
-    return view('messages.edit', compact('message', 'students', 'parents', 'teachers'));
+    $recipientType = $message->users->pluck('role')->toArray();
+    return view('messages.edit', compact('message', 'students', 'parents', 'teachers', 'recipientType'));
 }
 public function update(UpdateMessageRequest $request, $id)
 {
-    // Update the announcement
+    // Find the message
     $message = Announcements::findOrFail($id);
+    
+    // Update the message details
     $message->update($request->validated());
+
+    // Detach existing users
+    $message->users()->detach();
+
+    // Attach new users
+    $message->users()->attach($request->user_id);
 
     return redirect()->route('messages.index')->with('info', 'Message updated successfully!');
 }

@@ -25,6 +25,13 @@ class User extends Authenticatable
         'role',
     ];
 
+    public function hasAnyRole($roles)
+    {
+        return in_array($this->role, $roles);
+    }
+
+
+
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -58,12 +65,16 @@ class User extends Authenticatable
     //     return $this->hasMany(User::class, 'parent_id'); // This is incorrect
     // }
     public function isParentOf($studentId)
-{
-    return UserParentStudent::where('parent_id', $this->id)->where('student_id', $studentId)->exists();
-}
-public function announcements()
-{
-    return $this->belongsToMany(Announcements::class, 'announcement_user');
-}
+    {
+        return UserParentStudent::where('parent_id', $this->id)->where('student_id', $studentId)->exists();
+    }
+    public function children()
+    {
+        return $this->hasManyThrough(User::class, UserParentStudent::class, 'parent_id', 'id', 'id', 'student_id');
+    }
 
+    public function announcements()
+    {
+        return $this->belongsToMany(Announcements::class, 'announcement_user');
+    }
 }
