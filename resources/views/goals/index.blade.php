@@ -88,6 +88,10 @@
                   <x-subject-description>
                     {{ __('Datum goal: ') }}{{ $goal->target_date->format('Y-m-d') }}
                   </x-subject-description>
+                  <x-subject-description>
+                    {{ __('status: ') }}{{ $goal->status}}
+                  </x-subject-description>
+                  
                   {{-- <x-subject-description>
                     {{ __('User ID: ') }}{{ $goal->user_id }}
                   </x-subject-description> --}}

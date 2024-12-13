@@ -13,6 +13,8 @@
             @csrf
             @method('PATCH')
 
+           
+
             <div class="mb-4">
               <x-input-label for="goal_name">{{ __('Doelnaam') }}</x-input-label>
               <x-text-input type="text" name="goal_name" id="goal_name" value="{{ $goal->goal_name }}" required />
@@ -42,12 +44,11 @@
 
             <div class="mb-4">
               <x-input-label for="goal_status">{{ __('Status') }}</x-input-label>
-              <x-select id="goal_status" name="goal_status" required>
+              <x-select id="goal_status" name="status" required>
                 <option value="active" {{ $goal->status == 'active' ? 'selected' : '' }}>{{ __('Actief') }}</option>
-                <option value="inactive" {{ $goal->status == 'inactive' ? 'selected' : '' }}>
-                  {{ __('Inactief') }}</option>
+                <option value="inactive" {{ $goal->status == 'inactive' ? 'selected' : '' }}>{{ __('Inactief') }}</option>
               </x-select>
-              <x-input-error :messages="$errors->get('goal_status')" class="mt-2" />
+              <x-input-error :messages="$errors->get('status')" class="mt-2" />
             </div>
 
             <div class="flex justify-end gap-2">

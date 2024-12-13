@@ -13,6 +13,7 @@
             @csrf
 
             <input type="hidden" name="user_id" value="{{ auth()->id() ?? '' }}" />
+            <input type="hidden" name="status" value="actief" />
 
             <div class="mb-4">
               <x-input-label for="goal_name">{{ __('Doel Naam') }}</x-input-label>

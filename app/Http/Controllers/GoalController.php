@@ -69,17 +69,26 @@ class GoalController extends Controller
         return view('goals.edit', compact('goal', 'slot'));
     }
 
-    public function update(UpdateGoalRequest $request, $id)
+    public function update(Request $request, $id)
     {
-        $validated = $request->validated();
+        // Validate the incoming request
+        $request->validate([
+            'goal_name' => 'required|string|max:255',
+            'goal_description' => 'required|string',
+            'target_date' => 'required|date',
+            'status' => 'required|string|in:active,inactive', // Ensure status is validated
+        ]);
 
+        // Find the goal by ID
         $goal = Goal::findOrFail($id);
-        $goal->goal_name = $validated['goal_name'];
-        $goal->goal_description = $validated['goal_description'];
-        $goal->target_date = $validated['target_date'];
-        $goal->status = $request->input('goal_status');
-        $goal->user_id = auth()->id();
-        $goal->save();
+
+        // Update the goal with the request data
+        $goal->update([
+            'goal_name' => $request->input('goal_name'),
+            'goal_description' => $request->input('goal_description'),
+            'target_date' => $request->input('target_date'),
+            'status' => $request->input('status'), // Ensure this line is present
+        ]);
 
         return redirect()->route('goals.index')->with('success', 'Goal updated successfully.');
     }
