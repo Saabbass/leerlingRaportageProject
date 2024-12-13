@@ -57,6 +57,9 @@
       @include('layouts.footer')
     </div>
     @stack('scripts')
+    <div id="loading-screen" class="fixed inset-0 flex items-center justify-center bg-white z-50" style="display: none;">
+      <div class="loader"></div>
+  </div>
   </body>
 
 </html>
