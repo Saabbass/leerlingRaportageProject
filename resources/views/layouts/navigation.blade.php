@@ -162,6 +162,9 @@
         <x-responsive-nav-link :href="route('messages.index')" :active="request()->routeIs('messages.index')">
           {{ __('Berichten') }}
         </x-responsive-nav-link>
+        <x-responsive-nav-link :href="route('goals.index')" :active="request()->routeIs('goals.index')">
+          {{ __('Doelen') }}
+        </x-responsive-nav-link>
         @if (auth()->user()->role == 'teacher')
           <x-responsive-nav-link :href="route('users.index')" :active="request()->routeIs('users.index')">
             {{ __('Gebruikers') }}
