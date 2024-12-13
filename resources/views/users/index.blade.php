@@ -87,29 +87,31 @@
                 @foreach ($users as $user)
                   <tr class="flex flex-wrap md:table-row">
                     <x-table-td class="w-full md:w-auto">
-                      <span class="block md:hidden font-bold">{{ __('voornaam') }}:</span>
-                      {{ $user->first_name }}</x-table-td>
+                      <span class="block md:hidden font-bold px-4 py-2 bg-primaryLightHero dark:bg-primaryDarkHero text-left text-sm text-primaryLightText dark:text-primaryDarkText rounded-lg">{{ __('voornaam') }}:</span>
+                      <p class="md:px-0 px-4 md:py-0 py-2">{{ $user->first_name }}</p></x-table-td>
                     <x-table-td class="w-full md:w-auto">
-                      <span class="block md:hidden font-bold">{{ __('Achternaam') }}:</span>
-                      {{ $user->last_name }}</x-table-td>
+                      <span class="block md:hidden font-bold px-4 py-2 bg-primaryLightHero dark:bg-primaryDarkHero text-left text-sm text-primaryLightText dark:text-primaryDarkText rounded-lg">{{ __('Achternaam') }}:</span>
+                      <p class="md:px-0 px-4 md:py-0 py-2">{{ $user->last_name }}</p></x-table-td>
                     <x-table-td class="w-full md:w-auto">
-                      <span class="block md:hidden font-bold">{{ __('Email') }}:</span>
-                      {{ $user->email }}</x-table-td>
+                      <span class="block md:hidden font-bold px-4 py-2 bg-primaryLightHero dark:bg-primaryDarkHero text-left text-sm text-primaryLightText dark:text-primaryDarkText rounded-lg">{{ __('Email') }}:</span>
+                      <p class="md:px-0 px-4 md:py-0 py-2">{{ $user->email }}</p></x-table-td>
                     <x-table-td class="w-full md:w-auto">
-                      <span class="block md:hidden font-bold">{{ __('Rol') }}:</span>
-                      @if ($user->role === 'teacher')
-                        {{ __('Docent') }}
-                      @elseif($user->role === 'parent')
-                        {{ __('Ouder') }}
-                      @elseif($user->role === 'student')
-                        {{ __('Student') }}
-                      @endif
+                      <span class="block md:hidden font-bold px-4 py-2 bg-primaryLightHero dark:bg-primaryDarkHero text-left text-sm text-primaryLightText dark:text-primaryDarkText rounded-lg">{{ __('Rol') }}:</span>
+                      <p class="md:px-0 px-4 md:py-0 py-2">
+                        @if ($user->role === 'teacher')
+                          {{ __('Docent') }}
+                        @elseif($user->role === 'parent')
+                          {{ __('Ouder') }}
+                        @elseif($user->role === 'student')
+                          {{ __('Student') }}
+                        @endif
+                      </p>
                     </x-table-td>
                     <td class="w-full md:w-auto px-4 py-2 whitespace-nowrap text-sm font-medium">
-                      <span class="block md:hidden font-bold">{{ __('Acties') }}:</span>
-                      <x-link-info href="{{ route('users.studentDetail', $user) }}">{{ __('Details') }}</x-link-info>
-                      <x-link-change href="{{ route('users.edit', $user) }}">{{ __('Bewerken') }}</x-link-change>
-                      <form action="{{ route('users.destroy', $user) }}" method="POST" class="inline">
+                      <span class="block md:hidden font-bold px-4 py-2 bg-primaryLightHero dark:bg-primaryDarkHero text-left text-sm text-primaryLightText dark:text-primaryDarkText rounded-lg">{{ __('Acties') }}:</span>
+                      <x-link-info class="md:px-0 px-4 md:py-0 py-2" href="{{ route('users.studentDetail', $user) }}">{{ __('Details') }}</x-link-info>
+                      <x-link-change class="md:px-0 px-4 md:py-0 py-2" href="{{ route('users.edit', $user) }}">{{ __('Bewerken') }}</x-link-change>
+                      <form action="{{ route('users.destroy', $user) }}" method="POST" class="inline md:px-0 px-4 md:py-0 py-2">
                         @csrf
                         @method('DELETE')
                         <x-link-delete type="submit"
