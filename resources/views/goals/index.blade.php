@@ -7,8 +7,10 @@
 
   <div class="py-12">
     <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
-      <div class="bg-secondaryLightHero dark:bg-secondaryDarkHero overflow-hidden drop-shadow-[4px_4px_7px_rgba(0,0,0,0.25)] sm:rounded-lg mt-6">
-        <div class="p-6 flex flex-wrap justify-evenly gap-1 text-primaryLightText dark:text-secondaryDarkText drop-shadow-[4px_4px_7px rgba(0,0,0,0.25)] bg-primaryLightHero dark:bg-primaryDarkHero">
+      <div
+        class="bg-secondaryLightHero dark:bg-secondaryDarkHero overflow-hidden drop-shadow-[4px_4px_7px_rgba(0,0,0,0.25)] sm:rounded-lg mt-6">
+        <div
+          class="p-6 flex flex-wrap justify-evenly gap-1 text-primaryLightText dark:text-secondaryDarkText drop-shadow-[4px_4px_7px rgba(0,0,0,0.25)] bg-primaryLightHero dark:bg-primaryDarkHero">
           <x-hero-nav-link :href="route('subject.index')" :active="request()->routeIs('subject.index')">{{ __('Vakken') }}</x-hero-nav-link>
           <x-hero-nav-link :href="route('grades.index')" :active="request()->routeIs('grades.index')">{{ __('Cijfers') }}</x-hero-nav-link>
           <x-hero-nav-link :href="route('attendance.index')" :active="request()->routeIs('attendance.index')">{{ __('Aanwezigheid') }}</x-hero-nav-link>
@@ -67,12 +69,13 @@
 
           <!-- Display User Goals -->
           @if (auth()->user()->role === 'student')
-          <div class="mt-6">
-            <h2 class="font-bold">{{ auth()->user()->first_name }}'s {{ __('Doelen') }}</h2>
-          @elseif (auth()->user()->role === 'parent')
-          <div class="mt-6">
-            <h2 class="font-bold">{{ __('Doelen van de student') }}</h2>
+            <div class="mt-6">
+              <h2 class="font-bold">{{ auth()->user()->first_name }}'s {{ __('Doelen') }}</h2>
+            @elseif (auth()->user()->role === 'parent')
+              <div class="mt-6">
+                <h2 class="font-bold">{{ __('Doelen van de student') }}</h2>
           @endif
+<<<<<<< HEAD
             @foreach (auth()->user()->role === 'parent' ? $studentGoals : $goals as $goal)
               <div class="flex justify-between items-center border-b border-secondaryLightBorder dark:border-primaryDarkBorder py-2">
                 <div>
@@ -93,27 +96,47 @@
                   </x-subject-description>
                   
                   {{-- <x-subject-description>
+=======
+          @foreach (auth()->user()->role === 'parent' ? $studentGoals : $goals as $goal)
+            <div
+              class="flex flex-row justify-between items-center gap-2 border-b border-secondaryLightBorder dark:border-primaryDarkBorder py-2">
+              <div class="flex flex-col justify-between gap-2">
+                <x-subject-description>
+                  {{ __('User: ') }}{{ $goal->user->first_name }}
+                </x-subject-description>
+                <x-subject-title>
+                  {{ $goal->goal_name }}
+                </x-subject-title>
+                <x-subject-description>
+                  {{ __('Goal: ') }}{{ $goal->goal_description }}
+                </x-subject-description>
+                <x-subject-description>
+                  {{ __('Datum goal: ') }}{{ $goal->target_date->format('Y-m-d') }}
+                </x-subject-description>
+                {{-- <x-subject-description>
+>>>>>>> a432f5fd6ff90c0d031a05a970ae914256377385
                     {{ __('User ID: ') }}{{ $goal->user_id }}
                   </x-subject-description> --}}
-                </div>
-                <!-- Edit Link -->
-                
-                <form action="{{ route('goals.destroy', $goal->id) }}" method="POST" onsubmit="return confirm('Weet je zeker dat je dit doel wilt verwijderen?');">
+              </div>
+              <!-- Edit Link -->
+
+              <div class="flex flex-col justify-center items-center sm:flex-row sm:space-x-4">
+                <x-link-change href="{{ route('goals.edit', $goal->id) }}">{{ __('Bewerken') }}</x-link-change>
+                <form action="{{ route('goals.destroy', $goal->id) }}" method="POST"
+                  onsubmit="return confirm('Weet je zeker dat je dit doel wilt verwijderen?');">
                   @csrf
                   @method('DELETE')
-                  <button type="submit" class="text-red-500 hover:text-red-700">{{ __('Verwijder') }}</button>
-                  <x-link-change href="{{ route('goals.edit', $goal->id) }}">{{ __('Bewerken') }}</x-link-change>
+                  <x-link-delete type="submit">{{ __('Verwijder') }}</x-link-delete>
                 </form>
               </div>
-              
-              @endforeach
+            </div>
+          @endforeach
           @if (auth()->user()->role === 'student' || auth()->user()->role === 'parent')
-          </div>
-          @endif
-
         </div>
+        @endif
+
       </div>
     </div>
   </div>
+  </div>
 </x-app-layout>
-

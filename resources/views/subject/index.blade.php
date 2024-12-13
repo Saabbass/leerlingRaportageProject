@@ -44,9 +44,8 @@
           </div>
           <div class="mt-4">
             @foreach ($subject as $subj)
-              <div
-                class="flex justify-between items-center border-b border-secondaryLightBorder dark:border-primaryDarkBorder py-2">
-                <div>
+            <div class="flex flex-row justify-between items-center gap-2 border-b border-secondaryLightBorder dark:border-primaryDarkBorder py-2">
+              <div class="flex flex-col justify-between gap-2">
                   <x-subject-title>
                     {{ $subj->subject_name }}
                   </x-subject-title>
@@ -54,7 +53,7 @@
                     {{ $subj->description }}
                   </x-subject-description>
                 </div>
-                <div class="flex space-x-4">
+                <div class="flex flex-col justify-center items-center sm:flex-row sm:space-x-4">
                   @if (auth()->user()->role === 'teacher')
                     <x-link-change href="{{ route('subject.edit', $subj->id) }}">
                       {{ __('Bewerken') }}
