@@ -75,7 +75,7 @@
               <div class="mt-6">
                 <h2 class="font-bold">{{ __('Doelen van de student') }}</h2>
           @endif
-<<<<<<< HEAD
+
             @foreach (auth()->user()->role === 'parent' ? $studentGoals : $goals as $goal)
               <div class="flex justify-between items-center border-b border-secondaryLightBorder dark:border-primaryDarkBorder py-2">
                 <div>
@@ -95,28 +95,8 @@
                     {{ __('status: ') }}{{ $goal->status}}
                   </x-subject-description>
                   
-                  {{-- <x-subject-description>
-=======
-          @foreach (auth()->user()->role === 'parent' ? $studentGoals : $goals as $goal)
-            <div
-              class="flex flex-row justify-between items-center gap-2 border-b border-secondaryLightBorder dark:border-primaryDarkBorder py-2">
-              <div class="flex flex-col justify-between gap-2">
-                <x-subject-description>
-                  {{ __('User: ') }}{{ $goal->user->first_name }}
-                </x-subject-description>
-                <x-subject-title>
-                  {{ $goal->goal_name }}
-                </x-subject-title>
-                <x-subject-description>
-                  {{ __('Goal: ') }}{{ $goal->goal_description }}
-                </x-subject-description>
-                <x-subject-description>
-                  {{ __('Datum goal: ') }}{{ $goal->target_date->format('Y-m-d') }}
-                </x-subject-description>
-                {{-- <x-subject-description>
->>>>>>> a432f5fd6ff90c0d031a05a970ae914256377385
-                    {{ __('User ID: ') }}{{ $goal->user_id }}
-                  </x-subject-description> --}}
+              
+
               </div>
               <!-- Edit Link -->
 
