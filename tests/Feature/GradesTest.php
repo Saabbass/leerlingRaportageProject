@@ -23,7 +23,9 @@ test('cannot render grades overview screen for not logged in users', function(){
 });
 
 test('can render grade creation screen for logged in users', function () {
-    $user = User::factory()->create();
+    $user = User::factory()->create([
+        'role' => 'teacher', // Assign the required role to the test user
+    ]);
 
     $this->actingAs($user)->assertAuthenticated();
 
@@ -33,7 +35,9 @@ test('can render grade creation screen for logged in users', function () {
 });
 
 test('can create a grade', function () {
-    $user = User::factory()->create();
+    $user = User::factory()->create([
+        'role' => 'teacher', // Assign the required role to the test user
+    ]);
 
     $this->actingAs($user)->assertAuthenticated();
 
@@ -47,7 +51,9 @@ test('can create a grade', function () {
 });
 
 test('can render grade edit screen for logged in users', function () {
-    $user = User::factory()->create(); // Create the user
+    $user = User::factory()->create([
+        'role' => 'teacher', // Assign the required role to the test user
+    ]);
     $this->actingAs($user)->assertAuthenticated();
 
     // Create a Subject record with the required fields
@@ -70,7 +76,9 @@ test('can render grade edit screen for logged in users', function () {
 
 
 test('can update a grade', function () {
-    $user = User::factory()->create(); // Create the user
+    $user = User::factory()->create([
+        'role' => 'teacher', // Assign the required role to the test user
+    ]);
     $this->actingAs($user)->assertAuthenticated();
 
     // Create a Subject record with the required fields
@@ -99,7 +107,9 @@ test('can update a grade', function () {
 });
 
 test('can delete a grade', function () {
-    $user = User::factory()->create(); // Create the user
+    $user = User::factory()->create([
+        'role' => 'teacher', // Assign the required role to the test user
+    ]);
     $this->actingAs($user)->assertAuthenticated();
 
     // Create a Subject record with the required fields
