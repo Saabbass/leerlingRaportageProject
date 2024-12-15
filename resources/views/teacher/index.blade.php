@@ -27,9 +27,6 @@
           <x-hero-nav-link :href="route('grades.index')" :active="request()->routeIs('grades.index')">{{ __('Cijfers') }}</x-hero-nav-link>
           <x-hero-nav-link :href="route('attendance.index')" :active="request()->routeIs('attendance.index')">{{ __('Aanwezigheid') }}</x-hero-nav-link>
           <x-hero-nav-link :href="route('goals.index')" :active="request()->routeIs('goals.index')">{{ __('Doelen') }}</x-hero-nav-link>
-          @if (auth()->user()->role === 'teacher')
-            <x-hero-nav-link :href="route('teacher.index')" :active="request()->routeIs('teacher.index')">{{ __('Docent') }}</x-hero-nav-link>
-          @endif
         </div>
         <div class="flex justify-between items-center mb-6 p-6">
           <x-hero-title>
@@ -41,45 +38,50 @@
             </x-link-create>
           @endif
         </div>
-        <x-table>
-          <x-table-head>
-            <tr>
-              <x-table-th>
-                {{ __('Naam van de Ouder') }}
-              </x-table-th>
-              <x-table-th>
-                {{ __('Naam van de Student') }}
-              </x-table-th>
-              <x-table-th>
-                {{ __('Acties') }}
-              </x-table-th>
-            </tr>
-          </x-table-head>
-          <x-table-body>
-            @foreach ($data as $item)
+        <div class="overflow-x-auto">
+          <table class="min-w-full divide-y divide-primaryLightDevide dark:divide-primaryDarkDevide mt-4">
+            <thead class="hidden md:table-header-group">
               <tr>
-                <x-table-td>
-                  {{ $item->parent->first_name }} {{ $item->parent->last_name }} ({{ $item->parent->email }})
-                </x-table-td>
-                <x-table-td>
-                  {{ $item->student->first_name }} {{ $item->student->last_name }} ({{ $item->student->email }})
-                </x-table-td>
-                <x-table-td-action>
-                  <x-link-change
-                    href="{{ route('teacher.edit', ['parent_id' => $item->parent_id, 'student_id' => $item->student_id]) }}">{{ __('Bewerken') }}</x-link-change>
-                  <form
-                    action="{{ route('teacher.destroy', ['parent_id' => $item->parent_id, 'student_id' => $item->student_id]) }}"
-                    method="POST" class="inline">
-                    @csrf
-                    @method('DELETE')
-                    <x-link-delete
-                      onclick="return confirm('Are you sure you want to delete this record?');">{{ __('Verwijderen') }}</x-link-delete>
-                  </form>
-                </x-table-td-action>
+                <th scope="col"
+                  class="px-4 py-2 bg-primaryLightHero dark:bg-primaryDarkHero text-left text-sm font-medium text-primaryLightText dark:text-primaryDarkText">
+                  {{ __('Naam van de Ouder') }}
+                </th>
+                <th scope="col"
+                  class="px-4 py-2 bg-primaryLightHero dark:bg-primaryDarkHero text-left text-sm font-medium text-primaryLightText dark:text-primaryDarkText">
+                  {{ __('Naam van de Student') }}
+                </th>
+                <th scope="col"
+                  class="px-4 py-2 bg-primaryLightHero dark:bg-primaryDarkHero text-left text-sm font-medium text-primaryLightText dark:text-primaryDarkText">
+                  {{ __('Acties') }}
+                </th>
               </tr>
-            @endforeach
-          </x-table-body>
-        </x-table>
+            </thead>
+            <tbody
+              class="bg-secondaryLightHero dark:bg-secondaryDarkHero divide-y divide-primaryLightDevide dark:divide-primaryDarkDevide text-sm">
+              @foreach ($data as $item)
+                <tr class="flex flex-wrap md:table-row">
+                  <x-table-td class="w-full md:w-auto">
+                    <span class="block md:hidden font-bold px-4 py-2 bg-primaryLightHero dark:bg-primaryDarkHero text-left text-sm text-primaryLightText dark:text-primaryDarkText rounded-lg">{{ __('Naam van de Ouder') }}:</span>
+                    <p class="md:px-0 px-4 md:py-0 py-2">{{ $item->parent->first_name }} {{ $item->parent->last_name }} ({{ $item->parent->email }})</p>
+                  </x-table-td>
+                  <x-table-td class="w-full md:w-auto">
+                    <span class="block md:hidden font-bold px-4 py-2 bg-primaryLightHero dark:bg-primaryDarkHero text-left text-sm text-primaryLightText dark:text-primaryDarkText rounded-lg">{{ __('Naam van de Student') }}:</span>
+                    <p class="md:px-0 px-4 md:py-0 py-2">{{ $item->student->first_name }} {{ $item->student->last_name }} ({{ $item->student->email }})</p>
+                  </x-table-td>
+                  <x-table-td-action class="w-full md:w-auto">
+                    <span class="block md:hidden font-bold px-4 py-2 bg-primaryLightHero dark:bg-primaryDarkHero text-left text-sm text-primaryLightText dark:text-primaryDarkText rounded-lg">{{ __('Acties') }}:</span>
+                    <x-link-change class="md:px-0 px-4 md:py-0 py-2" href="{{ route('teacher.edit', ['parent_id' => $item->parent_id, 'student_id' => $item->student_id]) }}">{{ __('Bewerken') }}</x-link-change>
+                    <form action="{{ route('teacher.destroy', ['parent_id' => $item->parent_id, 'student_id' => $item->student_id]) }}" method="POST" class="inline md:px-0 px-4 md:py-0 py-2">
+                      @csrf
+                      @method('DELETE')
+                      <x-link-delete type="submit" onclick="return confirm('Are you sure you want to delete this record?');">{{ __('Verwijderen') }}</x-link-delete>
+                    </form>
+                  </x-table-td-action>
+                </tr>
+              @endforeach
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </div>
