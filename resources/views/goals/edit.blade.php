@@ -13,8 +13,6 @@
             @csrf
             @method('PATCH')
 
-           
-
             <div class="mb-4">
               <x-input-label for="goal_name">{{ __('Doelnaam') }}</x-input-label>
               <x-text-input type="text" name="goal_name" id="goal_name" value="{{ $goal->goal_name }}" 
@@ -37,6 +35,14 @@
             <input type="date" name="target_date" id="target_date" value="{{ $goal->target_date->format('Y-m-d') }}" 
               required class="form-input bg-primaryLightHero dark:bg-primaryDarkHero mt-1 block w-full pl-3 pr-10 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500" />
           </div>
+
+            <div class="mb-4">
+              <p><strong>{{ __('Beschrijving:') }}</strong> {{ $goal->goal_description }}</p>
+            </div>
+
+            <div class="mb-4">
+              <p><strong>{{ __('Datum:') }}</strong> {{ $goal->target_date }}</p>
+            </div>
 
             <div class="mb-4">
               <x-input-label for="goal_status">{{ __('Status') }}</x-input-label>
