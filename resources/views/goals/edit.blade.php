@@ -39,14 +39,6 @@
           </div>
 
             <div class="mb-4">
-              <p><strong>{{ __('Beschrijving:') }}</strong> {{ $goal->goal_description }}</p>
-            </div>
-
-            <div class="mb-4">
-              <p><strong>{{ __('Datum:') }}</strong> {{ $goal->target_date }}</p>
-            </div>
-
-            <div class="mb-4">
               <x-input-label for="goal_status">{{ __('Status') }}</x-input-label>
               <x-select id="goal_status" name="status" required>
                 <option value="active" {{ $goal->status == 'active' ? 'selected' : '' }}>{{ __('Actief') }}</option>
