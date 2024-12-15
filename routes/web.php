@@ -92,7 +92,7 @@ Route::middleware(['auth', RoleMiddleware::class . ':teacher'])->group(function 
 });
 
 // Routes for all users overview
-Route::middleware(['auth', RoleMiddleware::class . ':teacher,parent,student'])->group(function () {
+Route::middleware(['auth', RoleMiddleware::class . ':teacher'])->group(function () {
     Route::get('/teacher', [UserParentStudentController::class, 'index'])->name('teacher.index');
     Route::get('/teacher/create', [UserParentStudentController::class, 'create'])->name('teacher.create');
     Route::post('/teacher/store', [UserParentStudentController::class, 'store'])->name('teacher.store');
