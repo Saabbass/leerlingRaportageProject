@@ -13,8 +13,6 @@
             @csrf
             @method('PATCH')
 
-           
-
             <div class="mb-4">
               <x-input-label for="goal_name">{{ __('Doelnaam') }}</x-input-label>
               <x-text-input type="text" name="goal_name" id="goal_name" value="{{ $goal->goal_name }}" 

@@ -106,7 +106,7 @@
                   onsubmit="return confirm('Weet je zeker dat je dit doel wilt verwijderen?');">
                   @csrf
                   @method('DELETE')
-                  <x-link-delete type="submit">{{ __('Verwijder') }}</x-link-delete>
+                  <x-link-delete type="submit">{{ __('Verwijderen') }}</x-link-delete>
                 </form>
               </div>
             </div>
