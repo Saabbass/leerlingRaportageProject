@@ -50,12 +50,15 @@ class GoalController extends Controller
 
     public function store(StoreGoalRequest $request)
     {
+      
+
         $validated = $request->validated();
 
         $goal = new Goal();
         $goal->goal_name = $validated['goal_name'];
         $goal->goal_description = $validated['goal_description'];
         $goal->target_date = $validated['target_date'];
+        $goal->status = $validated['status'];
         $goal->user_id = auth()->id();
         $goal->save();
 

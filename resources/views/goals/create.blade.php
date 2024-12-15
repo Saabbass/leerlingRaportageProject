@@ -39,6 +39,17 @@
               @enderror
             </div>
 
+            <div class="mb-4">
+              <x-input-label for="goal_status">{{ __('Status') }}</x-input-label>
+              <x-select id="goal_status" name="status" required>
+                <option value="active">{{ __('Actief') }}</option>
+                <option value="inactive">{{ __('Inactief') }}</option>
+              </x-select>
+              @error('status')
+                <span class="text-red-500 text-sm">{{ $message }}</span>
+              @enderror
+            </div>
+
             <div class="flex justify-end gap-2">
               <x-cancel-button href="{{ route('goals.index') }}">
                 {{ __('Annuleren') }}

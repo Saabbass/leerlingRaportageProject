@@ -92,7 +92,7 @@
                     {{ __('Datum goal: ') }}{{ $goal->target_date->format('Y-m-d') }}
                   </x-subject-description>
                   <x-subject-description>
-                    {{ __('status: ') }}{{ $goal->status}}
+                    {{ __('status: ') }}{{ $goal->status === 'active' ? 'Actief' : 'Inactief' }}
                   </x-subject-description>
                   
               
