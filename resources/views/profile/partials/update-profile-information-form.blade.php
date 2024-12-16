@@ -9,7 +9,7 @@
     </p>
   </header>
 
-  @if (auth()->user()->role === 'teacher' || auth()->user()->role === 'parent')
+  @if (auth()->user()->role === 'teacher')
     <form method="post" action="{{ route('profile.updateRole') }}" class="mt-6 space-y-6">
       @csrf
       @method('patch')
