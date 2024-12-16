@@ -25,7 +25,7 @@ class UpdateGoalRequest extends FormRequest
             'goal_name' => 'required|string|max:255',
             'goal_description' => 'required|string',
             'target_date' => 'required|date',
-            'goal_status' => 'required|in:active,inactive',
+            'status' => 'required|string|in:active,inactive',
         ];
     }
 }

@@ -72,16 +72,8 @@ class GoalController extends Controller
         return view('goals.edit', compact('goal', 'slot'));
     }
 
-    public function update(Request $request, $id)
+    public function update(UpdateGoalRequest $request, $id)
     {
-        // Validate the incoming request
-        $request->validate([
-            'goal_name' => 'required|string|max:255',
-            'goal_description' => 'required|string',
-            'target_date' => 'required|date',
-            'status' => 'required|string|in:active,inactive', // Ensure status is validated
-        ]);
-
         // Find the goal by ID
         $goal = Goal::findOrFail($id);
 
