@@ -32,10 +32,13 @@
             <x-nav-link :href="route('messages.index')" :active="request()->routeIs('messages.index')">
               {{ __('Berichten') }}
             </x-nav-link>
+            <x-nav-link :href="route('goals.index')" :active="request()->routeIs('goals.index')">
+              {{ __('Doelen') }}
+            </x-nav-link>
             @if (auth()->user()->role == 'teacher')
-              {{-- <x-nav-link :href="route('teacher.index')" :active="request()->routeIs('teacher.index')">
-                {{ __('Docent') }}
-              </x-nav-link> --}}
+              <x-nav-link :href="route('teacher.index')" :active="request()->routeIs('teacher.index')">
+                {{ __('Ouder&Kind') }}
+              </x-nav-link>
               <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.index')">
                 {{ __('Gebruikers') }}
               </x-nav-link>
@@ -162,7 +165,13 @@
         <x-responsive-nav-link :href="route('messages.index')" :active="request()->routeIs('messages.index')">
           {{ __('Berichten') }}
         </x-responsive-nav-link>
+        <x-responsive-nav-link :href="route('goals.index')" :active="request()->routeIs('goals.index')">
+          {{ __('Doelen') }}
+        </x-responsive-nav-link>
         @if (auth()->user()->role == 'teacher')
+          <x-responsive-nav-link :href="route('teacher.index')" :active="request()->routeIs('teacher.index')">
+            {{ __('Ouder&Kind') }}
+          </x-responsive-nav-link>
           <x-responsive-nav-link :href="route('users.index')" :active="request()->routeIs('users.index')">
             {{ __('Gebruikers') }}
           </x-responsive-nav-link>

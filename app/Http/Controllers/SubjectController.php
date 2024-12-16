@@ -24,7 +24,6 @@ class SubjectController extends Controller
     public function edit($id)
     {
         $subject = Subject::findOrFail($id);
-
         return view('subject.edit', ['subject' => $subject]);
     }
     public function store(StoreSubjectRequest $request)

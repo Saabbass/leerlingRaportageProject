@@ -47,9 +47,8 @@
               @if (auth()->user()->role === 'teacher')
                 <x-subject-title>{{ __('Student: ') }}{{ $users->firstWhere('id', $grade->user_id)->first_name }}</x-subject-title>
               @endif
-              <div
-                class="flex justify-between items-center border-b border-secondaryLightBorder dark:border-primaryDarkBorder py-2">
-                <div>
+              <div class="flex flex-row justify-between items-center gap-2 border-b border-secondaryLightBorder dark:border-primaryDarkBorder py-2">
+                <div class="flex flex-col justify-between gap-2">
                   <x-subject-title>
                     {{ $grade->assignment_name }}
                   </x-subject-title>

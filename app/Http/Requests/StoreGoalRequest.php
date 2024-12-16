@@ -25,6 +25,7 @@ class StoreGoalRequest extends FormRequest
             'goal_name' => 'required|string|max:255',
             'goal_description' => 'required|string',
             'target_date' => 'required|date',
+            'status' => 'required|string|in:active,inactive',
         ];
     }
 }

@@ -38,7 +38,9 @@ beforeEach(function () {
 });
 
 test('can render event creation screen for logged in users', function () {
-    $user = User::factory()->create();
+    $user = User::factory()->create([
+        'role' => 'teacher', // Assign the required role to the test user
+    ]);
 
     $response = $this->actingAs($user)->get('/event/create');
 
@@ -46,7 +48,9 @@ test('can render event creation screen for logged in users', function () {
 });
 
 test('can create an event', function () {
-    $user = User::factory()->create();
+    $user = User::factory()->create([
+        'role' => 'teacher', // Assign the required role to the test user
+    ]);
 
     $response = $this->actingAs($user)->post('/event/store', [
         'subject_id' => (string) $this->subject->id, // Cast to string
@@ -67,7 +71,9 @@ test('can create an event', function () {
 });
 
 test('can render event edit screen for logged in users', function () {
-    $user = User::factory()->create();
+    $user = User::factory()->create([
+        'role' => 'teacher', // Assign the required role to the test user
+    ]);
     $event = Event::create([
         'subject_id' => (string) $this->subject->id, // Cast to string
         'teacher_id' => (string) $this->teacher->id, // Match the teacher id created by the seeder
@@ -82,7 +88,9 @@ test('can render event edit screen for logged in users', function () {
 });
 
 test('can update an event', function () {
-    $user = User::factory()->create();
+    $user = User::factory()->create([
+        'role' => 'teacher', // Assign the required role to the test user
+    ]);
     $event = Event::create([
         'subject_id' => (string) $this->subject->id, // Cast to string
         'teacher_id' => (string) $this->teacher->id, // Match the teacher id created by the seeder
@@ -111,7 +119,9 @@ test('can update an event', function () {
 });
 
 test('can delete an event', function () {
-    $user = User::factory()->create();
+    $user = User::factory()->create([
+        'role' => 'teacher', // Assign the required role to the test user
+    ]);
     $event = Event::create([
         'subject_id' => (string) $this->subject->id, // Cast to string
         'teacher_id' => (string) $this->teacher->id, // Match the teacher id created by the seeder

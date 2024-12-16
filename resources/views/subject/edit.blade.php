@@ -21,7 +21,7 @@
           <div class="mb-4">
             <x-input-label for="description">{{ __('Beschrijving') }}</x-input-label>
             <x-textarea-input name="description"
-              id="description">{{ old('description', $subject->description) }}</x-textarea-input>
+              id="description" value="{{$subject->description}}"></x-textarea-input>
           </div>
 
           <div class="flex justify-end gap-2">

@@ -6,7 +6,9 @@ use App\Models\User;
 test('can render announcement overview screen for loggen in users', function () {
     $response = $this->get('/messages');
 
-    $user = User::factory()->create();
+    $user = User::factory()->create([
+        'role' => 'teacher', // Assign the required role to the test user
+    ]);
 
     $this->actingAs($user)->assertAuthenticated();
 
@@ -23,7 +25,9 @@ test('cannot render messages overview screen for not logged in users', function(
 });
 
 test('can render announcement creation screen for logged in users', function () {
-    $user = User::factory()->create();
+    $user = User::factory()->create([
+        'role' => 'teacher', // Assign the required role to the test user
+    ]);
 
     $response = $this->actingAs($user)->get('/messages/create');
 
@@ -31,7 +35,9 @@ test('can render announcement creation screen for logged in users', function () 
 });
 
 test('can create an announcement', function () {
-    $user = User::factory()->create();
+    $user = User::factory()->create([
+        'role' => 'teacher', // Assign the required role to the test user
+    ]);
 
     $response = $this->actingAs($user)->post('/messages/store', [
         'title' => 'Test Title',
@@ -51,7 +57,9 @@ test('can create an announcement', function () {
 
 test('can render announcement edit screen for logged in users', function () {
 
-    $user = User::factory()->create();
+    $user = User::factory()->create([
+        'role' => 'teacher', // Assign the required role to the test user
+    ]);
 
     $message = Announcements::create([
         'title' => 'Test Title',
@@ -67,7 +75,9 @@ test('can render announcement edit screen for logged in users', function () {
 });
 
 test('can update an announcement', function () {
-    $user = User::factory()->create();
+    $user = User::factory()->create([
+        'role' => 'teacher', // Assign the required role to the test user
+    ]);
     $message = Announcements::create([
         'title' => 'Test Title',
         'content' => 'Test Content',
@@ -91,7 +101,9 @@ test('can update an announcement', function () {
 });
 
 test('can delete an announcement', function () {
-    $user = User::factory()->create();
+    $user = User::factory()->create([
+        'role' => 'teacher', // Assign the required role to the test user
+    ]);
     $message = Announcements::create([
         'title' => 'Test Title',
         'content' => 'Test Content',

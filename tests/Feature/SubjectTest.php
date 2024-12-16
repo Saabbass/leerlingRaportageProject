@@ -21,7 +21,9 @@ test('cannot render subject overview screen for not logged in users', function()
 });
 
 test('can render subject creation screen for logged in users', function () {
-    $user = User::factory()->create();
+    $user = User::factory()->create([
+        'role' => 'teacher', // Assign the required role to the test user
+    ]);
 
     $this->actingAs($user)->assertAuthenticated();
 
@@ -30,8 +32,11 @@ test('can render subject creation screen for logged in users', function () {
     $response->assertStatus(200);
 });
 
+
 test('can create a subject', function () {
-    $user = User::factory()->create();
+    $user = User::factory()->create([
+        'role' => 'teacher', // Assign the required role to the test user
+    ]);
 
     $this->actingAs($user)->assertAuthenticated();
 

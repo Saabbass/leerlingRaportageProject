@@ -13,6 +13,7 @@
             @csrf
 
             <input type="hidden" name="user_id" value="{{ auth()->id() ?? '' }}" />
+            <input type="hidden" name="status" value="actief" />
 
             <div class="mb-4">
               <x-input-label for="goal_name">{{ __('Doel Naam') }}</x-input-label>
@@ -34,6 +35,17 @@
               <x-input-label for="target_date">{{ __('Doel Datum') }}</x-input-label>
               <x-date-input type="date" name="target_date" id="target_date" value="{{ old('target_date') }}" required />
               @error('target_date')
+                <span class="text-red-500 text-sm">{{ $message }}</span>
+              @enderror
+            </div>
+
+            <div class="mb-4">
+              <x-input-label for="goal_status">{{ __('Status') }}</x-input-label>
+              <x-select id="goal_status" name="status" required>
+                <option value="active">{{ __('Actief') }}</option>
+                <option value="inactive">{{ __('Inactief') }}</option>
+              </x-select>
+              @error('status')
                 <span class="text-red-500 text-sm">{{ $message }}</span>
               @enderror
             </div>
